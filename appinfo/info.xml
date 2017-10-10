@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<info>
+	<id>files_primary_s3</id>
+	<name>Primary S3 Object Storage Support</name>
+	<summary>Backend to integrate object storages via S3 as primary storage</summary>
+	<description>Backend to integrate object storages via S3 as primary storage</description>
+	<category>storage</category>
+	<screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/objectstorage/owncloud-app-object_storage.jpg</screenshot>
+	<licence>GPVv2</licence>
+	<author>ownCloud GmbH</author>
+	<version>0.1</version>
+	<dependencies>
+		<owncloud min-version="10.0" max-version="10.0" />
+	</dependencies>
+	<types>
+		<filesystem/>
+	</types>
+</info>
