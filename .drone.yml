@@ -1,0 +1,118 @@
+workspace:
+  base: /drone
+  path: src
+
+pipeline:
+  restore:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_server, cache_s3_access_key, cache_s3_secret_key ]
+    restore: true
+    when:
+      local: false
+
+  composer:
+    image: owncloudci/php:7.1
+    pull: true
+    environment:
+      - COMPOSER_CACHE_DIR=/drone/src/composer
+    commands:
+      - composer install -n --no-progress
+
+  install-server:
+    image: owncloudci/php:7.1
+    pull: true
+    environment:
+      - DATABASE_HOST=mariadb
+      - DATABASE_NAME=owncloud
+      - DATABASE_USER=owncloud
+      - DATABASE_PASSWORD=owncloud
+      - COMPOSER_CACHE_DIR=/drone/src/composer
+    commands:
+      - git clone -b master --depth 1 https://github.com/owncloud/core.git /drone/server
+      - rm -rf /drone/server/tests/lib/Files/ObjectStore/SwiftTest.php
+      - mv /drone/src /drone/server/apps/files_primary_s3
+      - mkdir -p /drone/src
+      - cd /drone/server
+      - pwd
+      - /drone/server/tests/drone/composer-install.sh
+      - /drone/server/tests/drone/npm-install.sh
+      - /drone/server/tests/drone/bower-install.sh
+      - cd /drone/server; php ./occ maintenance:install -vvv --database=sqlite --database-name=owncloud --database-table-prefix=oc_ --admin-user=admin --admin-pass=admin --data-dir=/drone/server/data
+      - cd /drone/server; php ./occ a:l
+      - cd /drone/server; php ./occ a:e files_primary_s3
+      - cd /drone/server; php ./occ a:l
+      - cp /drone/server/apps/files_primary_s3/tests/drone/scality.config.php /drone/server/config
+
+  test-phpunit:
+    image: owncloudci/php:7.1
+    pull: true
+    environment:
+      - DATABASE_HOST=mariadb
+      - DATABASE_NAME=owncloud
+      - DATABASE_USER=owncloud
+      - DATABASE_PASSWORD=owncloud
+      - COMPOSER_CACHE_DIR=/drone/src/composer
+      - RUN_OBJECTSTORE_TESTS=1
+    commands:
+      - wait-for-it scality:8000
+      - cd /drone/server
+      - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
+
+  print-log:
+    image: owncloudci/php:7.1
+    pull: true
+    commands:
+      - cat /drone/server/data/owncloud.log
+    when:
+      status:  [ failure ]
+
+  rebuild:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_server, cache_s3_access_key, cache_s3_secret_key ]
+    rebuild: true
+    mount:
+      - composer
+      - vendor
+    when:
+      local: false
+      event: [ push ]
+      branch: [ master ]
+
+  flush:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_server, cache_s3_access_key, cache_s3_secret_key ]
+    flush: true
+    flush_age: 14
+    when:
+      local: false
+      event: [ push ]
+      branch: [ master ]
+
+  slack:
+    image: plugins/slack:1
+    pull: true
+    secrets: [ slack_webhook ]
+    channel: objectstore-team
+    when:
+      local: false
+      event: [ push, pull_request ]
+      status: [ changed, failure ]
+
+services:
+  scality:
+    image: scality/s3server
+    pull: true
+    environment:
+      - HOST_NAME=scality
+
+  mariadb:
+    image: webhippie/mariadb:latest
+    pull: true
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_USERNAME=owncloud
+      - MARIADB_PASSWORD=owncloud
+      - MARIADB_DATABASE=owncloud
