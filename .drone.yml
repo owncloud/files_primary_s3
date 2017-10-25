@@ -1,6 +1,21 @@
 workspace:
   base: /drone
-  path: src
+  path: server/apps/files_primary_s3
+
+branches: [ master ]
+
+clone:
+  core:
+    image: plugins/git:1
+    pull: true
+    remote: https://github.com/owncloud/core.git
+    path: /drone/server
+    ref: refs/heads/master
+    recursive: true
+
+  git:
+    image: plugins/git:1
+    pull: true
 
 pipeline:
   restore:
@@ -15,7 +30,7 @@ pipeline:
     image: owncloudci/php:7.1
     pull: true
     environment:
-      - COMPOSER_CACHE_DIR=/drone/src/composer
+      - COMPOSER_CACHE_DIR=composer
     commands:
       - composer install -n --no-progress
 
@@ -27,22 +42,19 @@ pipeline:
       - DATABASE_NAME=owncloud
       - DATABASE_USER=owncloud
       - DATABASE_PASSWORD=owncloud
-      - COMPOSER_CACHE_DIR=/drone/src/composer
+      - COMPOSER_CACHE_DIR=composer
     commands:
-      - git clone -b master --depth 1 https://github.com/owncloud/core.git /drone/server
-      - rm -rf /drone/server/tests/lib/Files/ObjectStore/SwiftTest.php
-      - mv /drone/src /drone/server/apps/files_primary_s3
-      - mkdir -p /drone/src
       - cd /drone/server
-      - pwd
-      - /drone/server/tests/drone/composer-install.sh
-      - /drone/server/tests/drone/npm-install.sh
-      - /drone/server/tests/drone/bower-install.sh
-      - cd /drone/server; php ./occ maintenance:install -vvv --database=sqlite --database-name=owncloud --database-table-prefix=oc_ --admin-user=admin --admin-pass=admin --data-dir=/drone/server/data
-      - cd /drone/server; php ./occ a:l
-      - cd /drone/server; php ./occ a:e files_primary_s3
-      - cd /drone/server; php ./occ a:l
-      - cp /drone/server/apps/files_primary_s3/tests/drone/scality.config.php /drone/server/config
+      - ls -l
+      - rm -rf tests/lib/Files/ObjectStore/SwiftTest.php
+      - bash tests/drone/composer-install.sh
+      - bash tests/drone/npm-install.sh
+      - bash tests/drone/bower-install.sh
+      - php ./occ maintenance:install -vvv --database=sqlite --database-name=owncloud --database-table-prefix=oc_ --admin-user=admin --admin-pass=admin --data-dir=/drone/server/data
+      - php ./occ a:l
+      - php ./occ a:e files_primary_s3
+      - php ./occ a:l
+      - cp apps/files_primary_s3/tests/drone/scality.config.php config
 
   test-phpunit:
     image: owncloudci/php:7.1
@@ -98,12 +110,11 @@ pipeline:
     channel: objectstore-team
     when:
       local: false
-      event: [ push, pull_request ]
       status: [ changed, failure ]
 
 services:
   scality:
-    image: scality/s3server
+    image: scality/s3server:d75a5612
     pull: true
     environment:
       - HOST_NAME=scality
