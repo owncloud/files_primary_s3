@@ -9,7 +9,6 @@ clone:
     image: owncloudci/php:7.1
     commands:
       - cd /drone/server
-      - ls -l
       - git init
       - git remote add origin https://github.com/owncloud/core.git
       - git fetch --no-tags origin +refs/heads/master
@@ -57,22 +56,36 @@ pipeline:
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
       - php ./occ a:l
-      - cp apps/files_primary_s3/tests/drone/scality.config.php config
 
-  test-phpunit:
+  test-scality:
     image: owncloudci/php:7.1
     pull: true
     environment:
-      - DATABASE_HOST=mariadb
-      - DATABASE_NAME=owncloud
-      - DATABASE_USER=owncloud
-      - DATABASE_PASSWORD=owncloud
       - COMPOSER_CACHE_DIR=/drone/src/composer
       - RUN_OBJECTSTORE_TESTS=1
     commands:
+      - cp tests/drone/scality.config.php /drone/server/config
       - wait-for-it scality:8000
       - cd /drone/server
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
+    when:
+      matrix:
+        STORAGE: scality
+
+  test-ceph:
+    image: owncloudci/php:7.1
+    pull: true
+    environment:
+      - COMPOSER_CACHE_DIR=/drone/composer
+      - RUN_OBJECTSTORE_TESTS=1
+    commands:
+      - cp tests/drone/ceph.config.php /drone/server/config
+      - wait-for-it ceph:80
+      - cd /drone/server
+      - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
+    when:
+      matrix:
+        STORAGE: ceph
 
   print-log:
     image: owncloudci/php:7.1
@@ -121,12 +134,25 @@ services:
     pull: true
     environment:
       - HOST_NAME=scality
+    when:
+      matrix:
+        STORAGE: scality
 
-  mariadb:
-    image: webhippie/mariadb:latest
+  ceph:
+    image: ceph/demo:tag-build-master-jewel-ubuntu-16.04
     pull: true
     environment:
-      - MARIADB_ROOT_PASSWORD=root
-      - MARIADB_USERNAME=owncloud
-      - MARIADB_PASSWORD=owncloud
-      - MARIADB_DATABASE=owncloud
+      - NETWORK_AUTO_DETECT=4
+      - RGW_NAME=ceph
+      - CEPH_DEMO_UID=owncloud
+      - CEPH_DEMO_ACCESS_KEY=owncloud123456 
+      - CEPH_DEMO_SECRET_KEY=secret123456
+    when:
+      matrix:
+        STORAGE: ceph
+
+
+matrix:
+  include:
+    - STORAGE: ceph
+    - STORAGE: scality
