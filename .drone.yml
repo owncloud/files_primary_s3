@@ -52,7 +52,7 @@ pipeline:
       - DATABASE_NAME=owncloud
       - DATABASE_USER=owncloud
       - DATABASE_PASSWORD=owncloud
-      - COMPOSER_CACHE_DIR=/drone/src/composer
+      - COMPOSER_CACHE_DIR=/drone/composer
       - RUN_OBJECTSTORE_TESTS=1
     commands:
       - wait-for-it scality:8000
@@ -73,8 +73,7 @@ pipeline:
     secrets: [ cache_s3_server, cache_s3_access_key, cache_s3_secret_key ]
     rebuild: true
     mount:
-      - composer
-      - vendor
+      - /drone/composer
     when:
       local: false
       event: [ push ]
