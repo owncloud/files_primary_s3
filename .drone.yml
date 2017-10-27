@@ -12,6 +12,7 @@ clone:
     path: /drone/server
     ref: refs/heads/master
     recursive: true
+    sha:
 
   git:
     image: plugins/git:1
