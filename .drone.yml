@@ -6,13 +6,15 @@ branches: [ master ]
 
 clone:
   core:
-    image: plugins/git:1
+    image: owncloudci/php:7.1
+    commands:
+      - cd /drone/server
+      - ls -l
+      - git init
+      - git remote add origin https://github.com/owncloud/core.git
+      - git fetch --no-tags origin +refs/heads/master
+      - git checkout -qf FETCH_HEAD
     pull: true
-    remote: https://github.com/owncloud/core.git
-    path: /drone/server
-    ref: refs/heads/master
-    recursive: true
-    sha:
 
   git:
     image: plugins/git:1
