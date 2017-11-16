@@ -24,9 +24,12 @@
 
 namespace OCA\Files_Primary_S3;
 
+use Aws\Handler\GuzzleV5\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
+use GuzzleHttp\Event\BeforeEvent;
+use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
 
@@ -44,6 +47,12 @@ class S3Storage implements IObjectStore {
 	 */
 	private $params;
 
+	/**
+	 * S3Storage constructor.
+	 *
+	 * @param $params
+	 * @throws \Exception
+	 */
 	public function __construct($params) {
 
 		if (!isset($params['options']) || !isset($params['bucket']) ) {
@@ -57,7 +66,27 @@ class S3Storage implements IObjectStore {
 		if ($this->connection) {
 			return;
 		}
-		$this->connection = S3Client::factory($this->params['options']);
+		$config = $this->params['options'];
+		$client = new \GuzzleHttp\Client(['handler' => new StreamHandler()]);
+		$emitter = $client->getEmitter();
+		$emitter->on('before', function (BeforeEvent $event) {
+			$request = $event->getRequest();
+			if ($request->getMethod() !== 'PUT') {
+				return;
+			}
+			$body = $request->getBody();
+			if ($body !== null && $body->getSize() !== 0) {
+				return;
+			}
+			if ($request->hasHeader('Content-Length')) {
+				return;
+			}
+			// force content length header on empty body
+			$request->setHeader('Content-Length', 0);
+		});
+		$h = new GuzzleHandler($client);
+		$config['http_handler'] = $h;
+		$this->connection = S3Client::factory($config);
 		try {
 			$this->connection->listBuckets();
 		} catch(S3Exception $exception) {
