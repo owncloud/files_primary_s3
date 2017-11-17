@@ -52,7 +52,14 @@ class ls extends Command {
 		$bucketName = $input->getArgument('bucket');
 		if ($bucketName === null) {
 			$result = $client->listBuckets();
-			$this->printValue($output, $result['Buckets'], ['Name']);
+			$buckets = array_map(function($bucket) use ($client) {
+				$versionStatus = $client->getBucketVersioning([
+					'Bucket' => $bucket['Name'],
+				]);
+				$bucket['Versioning'] = $versionStatus['Status'];
+				return $bucket;
+			}, $result['Buckets']);
+			$this->printValue($output, $buckets, ['Name', 'Versioning']);
 		} else {
 			$object = $input->getArgument('object');
 			if ($object == null) {
@@ -65,7 +72,17 @@ class ls extends Command {
 					'Bucket' => $bucketName,
 					'Prefix' => $object
 				]);
-				$this->printValue($output, $result['Versions'], ['Key', 'LastModified', 'ETag', 'Size', 'VersionId', 'IsLatest']);
+				$versions = array_filter($result['Versions'], function ($version) use ($object) {
+					return $version['Key'] === $object;
+				});
+				$this->printValue($output, $versions, ['Key', 'LastModified', 'ETag', 'Size', 'VersionId', 'IsLatest']);
+
+				$output->writeln('Delete Markers:');
+				$output->writeln('----------------------------------------');
+				$markers = array_filter(isset($result['DeleteMarkers']) ? $result['DeleteMarkers'] :  [], function ($marker) use ($object) {
+					return $marker['Key'] === $object;
+				});
+				$this->printValue($output, $markers, ['Key', 'LastModified', 'VersionId', 'IsLatest']);
 			}
 		}
 
@@ -85,7 +102,7 @@ class ls extends Command {
 	protected function printValue(OutputInterface $output, array $results, array $keys) {
 		foreach ($results as $result) {
 			foreach ($keys as $key) {
-				$value = isset($result[$key]) ? (string)$result[$key] : '---';
+				$value = isset($result[$key]) ? json_encode($result[$key]) : '---';
 				$output->writeln("$key: $value");
 			}
 			$output->writeln('----------------------------------------');
