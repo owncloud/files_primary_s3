@@ -32,10 +32,11 @@ use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
+use OCP\Files\ObjectStore\IVersionedObjectStorage;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class S3Storage implements IObjectStore {
+class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 	/**
 	 * @var S3Client
@@ -60,6 +61,8 @@ class S3Storage implements IObjectStore {
 		}
 
 		$this->params = $params;
+		$this->params['autocreate'] = isset($this->params['autocreate']) ? $this->params['autocreate'] : false;
+
 	}
 
 	protected function init() {
@@ -94,21 +97,31 @@ class S3Storage implements IObjectStore {
 			throw new ServiceUnavailableException("No S3 ObjectStore available");
 		}
 
-		$this->connection->registerStreamWrapper();
+		// TODO: update aws sdk once https://github.com/aws/aws-sdk-php/pull/1424 is merged
+//		$this->connection->registerStreamWrapper();
+		StreamWrapper::register($this->connection);
 
-		if ($this->params['autocreate'] && !$this->connection->doesBucketExist($this->params['bucket'])) {
+		if ($this->params['autocreate'] && !$this->connection->doesBucketExist($this->getBucket())) {
 			try {
 				$this->connection->createBucket([
-					'Bucket' => $this->params['bucket']
+					'Bucket' => $this->getBucket()
 				]);
 				// scality does not support waitUntilBucketExists()
 				if ($this->connection->getApi()->hasOperation('waitUntilBucketExists')) {
 					$this->connection->waitUntilBucketExists([
-						'Bucket' => $this->params['bucket'],
+						'Bucket' => $this->getBucket(),
 						'waiter.interval' => 1,
 						'waiter.max_attempts' => 15
 					]);
 				}
+
+				// enabled versioning on the bucket
+				$this->connection->putBucketVersioning([
+					'Bucket' => $this->getBucket(),
+					'VersioningConfiguration' => [
+						'Status' => 'Enabled',
+						'MFADelete' => 'Disabled' ]
+				]);
 			} catch (S3Exception $e) {
 				\OC::$server->getLogger()->logException($e, ['app' => 'objectstore']);
 				throw new \Exception('Creation of bucket failed. '.$e->getMessage());
@@ -134,7 +147,7 @@ class S3Storage implements IObjectStore {
 			$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
 		}
 
-		$uploader = new ObjectUploader($this->connection, $this->params['bucket'], $urn, $stream, 'private', $opt);
+		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
 		$uploader->upload();
 		if (is_resource($stream)) {
 			fclose($stream);
@@ -147,7 +160,7 @@ class S3Storage implements IObjectStore {
 	public function deleteObject($urn) {
 		$this->init();
 		$this->connection->deleteObject([
-			'Bucket' => $this->params['bucket'],
+			'Bucket' => $this->getBucket(),
 			'Key' => $urn,
 		]);
 	}
@@ -160,7 +173,111 @@ class S3Storage implements IObjectStore {
 		return fopen($this->getUrl($urn), 'r');
 	}
 
-	public function getUrl($urn) {
-		return 's3://'.$this->params['bucket'].'/'.$urn;
+	public function getUrl($urn, $versionId = null) {
+		$v = ($versionId !== null) ?  "?versionId=$versionId": '';
+		return 's3://'.$this->getBucket().'/'.$urn.$v;
+	}
+
+	private function getBucket() {
+		return $this->params['bucket'];
+	}
+
+	/**
+	 * List all versions for the given file
+	 *
+	 * @param string $urn the unified resource name used to identify the object
+	 * @return array
+	 * @since 10.0.5
+	 */
+	public function getVersions($urn) {
+		$this->init();
+		$list = $this->connection->listObjectVersions([
+			'Bucket' => $this->getBucket(),
+			'Prefix'    => $urn
+		]);
+		$versions = array_filter($list['Versions'], function($v) use ($urn) {
+			return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
+		});
+		return array_map(function ($version) {
+			return [
+				'version' => $version['VersionId'],
+				'timestamp' => $version['LastModified']->getTimestamp(),
+				'oid' => $version['Key'],
+				'etag' => $version['ETag'],
+				'size' => $version['Size'],
+			];
+		}, $versions);
+	}
+
+	/**
+	 * Get one explicit version for the given file
+	 *
+	 * @param string $urn the unified resource name used to identify the object
+	 * @param string $versionId
+	 * @return array
+	 * @since 10.0.5
+	 */
+	public function getVersion($urn, $versionId) {
+		$this->init();
+		$list = $this->connection->listObjectVersions([
+			'Bucket' => $this->getBucket(),
+			'Prefix' => $urn,
+			'VersionIdMarker' => $versionId
+		]);
+		$versions = array_filter($list['Versions'], function($v) use ($urn, $versionId) {
+			return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
+		});
+		$version = array_values($versions)[0];
+		return [
+			'version' => $version['VersionId'],
+			'timestamp' => $version['LastModified']->getTimestamp(),
+			'oid' => $version['Key'],
+			'etag' => $version['ETag'],
+			'size' => $version['Size'],
+		];
+	}
+
+	/**
+	 * Get the content of a given version of a given file as stream resource
+	 *
+	 * @param string $urn the unified resource name used to identify the object
+	 * @param string $versionId
+	 * @return resource
+	 * @since 10.0.5
+	 */
+	public function getContentOfVersion($urn, $versionId) {
+		$this->init();
+		return fopen($this->getUrl($urn, $versionId), 'r');
+	}
+
+	/**
+	 * Restore the given version of a given file
+	 *
+	 * @param string $urn the unified resource name used to identify the object
+	 * @param string $versionId
+	 * @return boolean
+	 * @since 10.0.5
+	 */
+	public function restoreVersion($urn, $versionId) {
+		$this->init();
+		$this->connection->copyObject([
+			'Bucket' => $this->getBucket(),
+			'Key' => $urn,
+			'CopySource' => "/{$this->getBucket()}/".rawurlencode($urn)."?versionId=$versionId"
+		]);
+
+		return true;
+	}
+
+	/**
+	 * Tells the storage to explicitly create a version of a given file
+	 *
+	 * @return boolean
+	 * @since 10.0.5
+	 */
+	public function saveVersion($internalPath) {
+		// There is no need in any explicit operations.
+		// In a versioned bucket the versions are created automatically
+		return true;
 	}
 }
