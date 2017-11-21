@@ -31,6 +31,8 @@ use Aws\S3\S3Client;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
+use OCA\DAV\Connector\Sabre\Node;
+use OCA\DAV\Upload\AssemblyStream;
 use OCP\Files\ObjectStore\IObjectStore;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -67,7 +69,11 @@ class S3Storage implements IObjectStore {
 			return;
 		}
 		$config = $this->params['options'];
-		$client = new \GuzzleHttp\Client(['handler' => new StreamHandler()]);
+		$client = new \GuzzleHttp\Client(['handler' => new StreamHandler([
+			'client' => [
+				'proxy' => '127.0.0.1:8080'
+			]
+		])]);
 		$emitter = $client->getEmitter();
 		$emitter->on('before', function (BeforeEvent $event) {
 			$request = $event->getRequest();
@@ -129,13 +135,57 @@ class S3Storage implements IObjectStore {
 	public function writeObject($urn, $stream) {
 		$this->init();
 
-		$opt = [];
-		if (isset($this->params['serversideencryption'])) {
-			$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
-		}
+		$context = stream_get_meta_data($stream);
+		if (isset($context['wrapper_data']) && $context['wrapper_data'] instanceof AssemblyStream) {
+			/** @var AssemblyStream $assemblyStream */
+			$assemblyStream = $context['wrapper_data'];
+			// initialize multipart upload, see http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadInitiate.html
+			$result = $this->connection->createMultipartUpload([
+				'Bucket' => $this->params['bucket'],
+				'Key' => $urn,
+			]);
 
-		$uploader = new ObjectUploader($this->connection, $this->params['bucket'], $urn, $stream, 'private', $opt);
-		$uploader->upload();
+			$uploadID = $result['UploadId'];
+			$partNo = 1; // PartNumbers start at 1, go up to 10000
+			$parts = [];
+
+			// upload chunks via upload part copy, see http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadUploadPartCopy.html
+			foreach ($assemblyStream->getNodes() as $node) {
+				/** @var Node $node */
+				$source =  '/'.$this->params['bucket'].'/urn:oid:'.$node->getId(); // TODO use configurable prefix as ObjectStoreStorage
+				$result = $this->connection->uploadPartCopy([
+					'Bucket' => $this->params['bucket'],
+					'CopySource' => $source,
+					'Key' => $urn,
+					'PartNumber' => $partNo,
+					'UploadId' => $uploadID,
+				]);
+				$parts[] = [
+					'ETag' => $result['CopyPartResult']['ETag'],
+					'PartNumber' => $partNo
+				];
+				$partNo++;
+			}
+
+			// complete multipart upload, see http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html
+			$result = $this->connection->completeMultipartUpload([
+				'Bucket' => $this->params['bucket'],
+				'Key' => $urn,
+				'MultipartUpload' => [
+					'Parts' => $parts
+				],
+				'UploadId' => $uploadID,
+			]);
+		} else {
+			// do normal upload
+			$opt = [];
+			if (isset($this->params['serversideencryption'])) {
+				$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
+			}
+
+			$uploader = new ObjectUploader($this->connection, $this->params['bucket'], $urn, $stream, 'private', $opt);
+			$uploader->upload();
+		}
 		if (is_resource($stream)) {
 			fclose($stream);
 		}
