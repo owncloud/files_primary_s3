@@ -148,10 +148,15 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
-		$uploader->upload();
+		$result = $uploader->upload();
 		if (is_resource($stream)) {
 			fclose($stream);
 		}
+
+		return [
+			'etag' => $result['ETag'],
+			'versionId' => $result['VersionId']
+		];
 	}
 
 	/**
