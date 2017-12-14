@@ -11,7 +11,7 @@ clone:
       - cd /drone/server
       - git init
       - git remote add origin https://github.com/owncloud/core.git
-      - git fetch --no-tags origin +refs/heads/master
+      - git fetch --no-tags origin +refs/heads/direct-write
       - git checkout -qf FETCH_HEAD
     pull: true
 
