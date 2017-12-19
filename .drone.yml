@@ -6,12 +6,12 @@ branches: [ master ]
 
 clone:
   core:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     commands:
       - cd /drone/server
       - git init
       - git remote add origin https://github.com/owncloud/core.git
-      - git fetch --no-tags origin +refs/heads/master
+      - git fetch --no-tags origin +refs/heads/preview-via-dav
       - git checkout -qf FETCH_HEAD
     pull: true
 
@@ -29,7 +29,7 @@ pipeline:
       local: false
 
   composer:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
       - COMPOSER_CACHE_DIR=composer
@@ -37,7 +37,7 @@ pipeline:
       - composer install -n --no-progress
 
   install-server:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
       - DATABASE_HOST=mariadb
@@ -58,7 +58,7 @@ pipeline:
       - php ./occ a:l
 
   test-scality:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
       - COMPOSER_CACHE_DIR=/drone/src/composer
@@ -73,7 +73,7 @@ pipeline:
         STORAGE: scality
 
   test-ceph:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
       - COMPOSER_CACHE_DIR=/drone/composer
@@ -88,7 +88,7 @@ pipeline:
         STORAGE: ceph
 
   print-log:
-    image: owncloudci/php:7.1
+    image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
       - cat /drone/server/data/owncloud.log
@@ -156,5 +156,23 @@ services:
 
 matrix:
   include:
+    # 5.6
     - STORAGE: ceph
+      PHP_VERSION: 5.6
     - STORAGE: scality
+      PHP_VERSION: 5.6
+    # 7.0
+    - STORAGE: ceph
+      PHP_VERSION: 7.0
+    - STORAGE: scality
+      PHP_VERSION: 7.0
+    # 7.1
+    - STORAGE: ceph
+      PHP_VERSION: 7.1
+    - STORAGE: scality
+      PHP_VERSION: 7.1
+    # 7.2
+    - STORAGE: ceph
+      PHP_VERSION: 7.2
+    - STORAGE: scality
+      PHP_VERSION: 7.2
