@@ -50,8 +50,9 @@ pipeline:
       - ls -l
       - rm -rf tests/lib/Files/ObjectStore/SwiftTest.php
       - bash tests/drone/composer-install.sh
-      - bash tests/drone/npm-install.sh
-      - bash tests/drone/bower-install.sh
+      - bash tests/drone/npm-install.sh || true
+      - bash tests/drone/bower-install.sh || true
+      - bash tests/drone/yarn-install.sh || true
       - php ./occ maintenance:install -vvv --database=sqlite --database-name=owncloud --database-table-prefix=oc_ --admin-user=admin --admin-pass=admin --data-dir=/drone/server/data
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
