@@ -4,21 +4,6 @@ workspace:
 
 branches: [ master ]
 
-clone:
-  core:
-    image: owncloudci/php:${PHP_VERSION}
-    commands:
-      - cd /drone/server
-      - git init
-      - git remote add origin https://github.com/owncloud/core.git
-      - git fetch --no-tags origin +refs/heads/master
-      - git checkout -qf FETCH_HEAD
-    pull: true
-
-  git:
-    image: plugins/git:1
-    pull: true
-
 pipeline:
   restore:
     image: plugins/s3-cache:1
@@ -28,6 +13,11 @@ pipeline:
     when:
       local: false
 
+  install-server:
+    image: owncloudci/core
+    pull: true
+    git_reference: master
+
   composer:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
@@ -36,24 +26,12 @@ pipeline:
     commands:
       - composer install -n --no-progress
 
-  install-server:
+  prepare-app:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
-    environment:
-      - DATABASE_HOST=mariadb
-      - DATABASE_NAME=owncloud
-      - DATABASE_USER=owncloud
-      - DATABASE_PASSWORD=owncloud
-      - COMPOSER_CACHE_DIR=composer
     commands:
       - cd /drone/server
-      - ls -l
       - rm -rf tests/lib/Files/ObjectStore/SwiftTest.php
-      - bash tests/drone/composer-install.sh
-      - bash tests/drone/npm-install.sh || true
-      - bash tests/drone/bower-install.sh || true
-      - bash tests/drone/yarn-install.sh || true
-      - php ./occ maintenance:install -vvv --database=sqlite --database-name=owncloud --database-table-prefix=oc_ --admin-user=admin --admin-pass=admin --data-dir=/drone/server/data
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
       - php ./occ a:l
@@ -62,7 +40,6 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - COMPOSER_CACHE_DIR=/drone/src/composer
       - RUN_OBJECTSTORE_TESTS=1
     commands:
       - cp tests/drone/scality.config.php /drone/server/config
@@ -77,7 +54,6 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - COMPOSER_CACHE_DIR=/drone/composer
       - RUN_OBJECTSTORE_TESTS=1
     commands:
       - cp tests/drone/ceph.config.php /drone/server/config
@@ -148,7 +124,7 @@ services:
       - NETWORK_AUTO_DETECT=4
       - RGW_NAME=ceph
       - CEPH_DEMO_UID=owncloud
-      - CEPH_DEMO_ACCESS_KEY=owncloud123456 
+      - CEPH_DEMO_ACCESS_KEY=owncloud123456
       - CEPH_DEMO_SECRET_KEY=secret123456
     when:
       matrix:
