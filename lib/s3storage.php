@@ -28,6 +28,7 @@ use Aws\Handler\GuzzleV5\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
+use GuzzleHttp\Client;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
@@ -65,12 +66,16 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 	}
 
+	/**
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
+	 */
 	protected function init() {
 		if ($this->connection) {
 			return;
 		}
 		$config = $this->params['options'];
-		$client = new \GuzzleHttp\Client(['handler' => new StreamHandler()]);
+		$client = new Client(['handler' => new StreamHandler()]);
 		$emitter = $client->getEmitter();
 		$emitter->on('before', function (BeforeEvent $event) {
 			$request = $event->getRequest();
@@ -94,7 +99,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$this->connection->listBuckets();
 		} catch(S3Exception $exception) {
 			\OC::$server->getLogger()->logException($exception);
-			throw new ServiceUnavailableException("No S3 ObjectStore available");
+			throw new ServiceUnavailableException('No S3 ObjectStore available');
 		}
 
 		// TODO: update aws sdk once https://github.com/aws/aws-sdk-php/pull/1424 is merged
@@ -108,7 +113,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				]);
 				// scality does not support waitUntilBucketExists()
 				if ($this->connection->getApi()->hasOperation('waitUntilBucketExists')) {
-					$this->connection->waitUntilBucketExists([
+					$this->connection->waitUntil('BucketExists', [
 						'Bucket' => $this->getBucket(),
 						'waiter.interval' => 1,
 						'waiter.max_attempts' => 15
@@ -123,7 +128,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 						'MFADelete' => 'Disabled' ]
 				]);
 			} catch (S3Exception $e) {
-				\OC::$server->getLogger()->logException($e, ['app' => 'objectstore']);
+				\OC::$server->getLogger()->logException($e, ['app' => 'files_primary_s3']);
 				throw new \Exception('Creation of bucket failed. '.$e->getMessage());
 			}
 		}
@@ -151,10 +156,12 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
-		$uploader->upload();
+		$result = $uploader->upload();
 		if (is_resource($stream)) {
 			fclose($stream);
 		}
+
+		return ['etag' => $result['ETag']];
 	}
 
 	/**
@@ -190,6 +197,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 *
 	 * @param string $urn the unified resource name used to identify the object
 	 * @return array
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
 	 * @since 10.0.5
 	 */
 	public function getVersions($urn) {
@@ -218,6 +227,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return array
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
 	 * @since 10.0.5
 	 */
 	public function getVersion($urn, $versionId) {
@@ -246,6 +257,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return resource
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
 	 * @since 10.0.5
 	 */
 	public function getContentOfVersion($urn, $versionId) {
@@ -259,6 +272,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return boolean
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
 	 * @since 10.0.5
 	 */
 	public function restoreVersion($urn, $versionId) {
@@ -275,6 +290,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	/**
 	 * Tells the storage to explicitly create a version of a given file
 	 *
+	 * @param $internalPath
 	 * @return boolean
 	 * @since 10.0.5
 	 */
@@ -282,5 +298,24 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		// There is no need in any explicit operations.
 		// In a versioned bucket the versions are created automatically
 		return true;
+	}
+
+	/**
+	 * @param string $urn
+	 * @return string mixed
+	 * @throws ServiceUnavailableException
+	 * @throws \Exception
+	 * @since 10.1.0
+	 */
+	public function getDirectDownload($urn) {
+		$this->init();
+		// TODO: add version id
+		$cmd = $this->connection->getCommand('GetObject', [
+			'Bucket' => $this->getBucket(),
+			'Key'    => $urn
+		]);
+		$request = $this->connection->createPresignedRequest($cmd, '+20 minutes');
+		// Get the actual presigned-url
+		return (string) $request->getUri();
 	}
 }
