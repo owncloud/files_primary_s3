@@ -160,14 +160,14 @@ matrix:
     # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: direct-download-handling
     - STORAGE: scality
       PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: direct-download-handling
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
-      CORE_BRANCH: master
+      CORE_BRANCH: direct-download-handling
     - STORAGE: scality
       PHP_VERSION: 7.2
-      CORE_BRANCH: master
+      CORE_BRANCH: direct-download-handling
