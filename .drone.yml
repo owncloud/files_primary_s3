@@ -16,7 +16,7 @@ pipeline:
   install-server:
     image: owncloudci/core
     pull: true
-    git_reference: master
+    git_reference: ${CORE_BRANCH}
 
   composer:
     image: owncloudci/php:${PHP_VERSION}
@@ -133,23 +133,45 @@ services:
 
 matrix:
   include:
-    # 5.6
-    - STORAGE: ceph
-      PHP_VERSION: 5.6
-    - STORAGE: scality
-      PHP_VERSION: 5.6
-    # 7.0
-    - STORAGE: ceph
-      PHP_VERSION: 7.0
-    - STORAGE: scality
-      PHP_VERSION: 7.0
+#    # 5.6
+#    - STORAGE: ceph
+#      PHP_VERSION: 5.6
+#      CORE_BRANCH: stable10
+#    - STORAGE: scality
+#      PHP_VERSION: 5.6
+#      CORE_BRANCH: stable10
+#    # 7.0
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.0
+#      CORE_BRANCH: stable10
+#    - STORAGE: scality
+#      PHP_VERSION: 7.0
+#      CORE_BRANCH: stable10
+#    # 7.1
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.1
+#      CORE_BRANCH: stable10
+#    - STORAGE: scality
+#      PHP_VERSION: 7.1
+#      CORE_BRANCH: stable10
+#    # 7.2
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.2
+#      CORE_BRANCH: stable10
+#    - STORAGE: scality
+#      PHP_VERSION: 7.2
+#      CORE_BRANCH: stable10
     # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
+      CORE_BRANCH: master
     - STORAGE: scality
       PHP_VERSION: 7.1
+      CORE_BRANCH: master
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
+      CORE_BRANCH: master
     - STORAGE: scality
       PHP_VERSION: 7.2
+      CORE_BRANCH: master
