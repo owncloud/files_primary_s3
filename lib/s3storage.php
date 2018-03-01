@@ -161,7 +161,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			fclose($stream);
 		}
 
-		return ['etag' => $result['ETag']];
+		return [
+			'etag' => $result['ETag'],
+			'versionId' => $result['VersionId']
+		];
 	}
 
 	/**
@@ -307,12 +310,12 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @throws \Exception
 	 * @since 10.1.0
 	 */
-	public function getDirectDownload($urn) {
+	public function getDirectDownload($urn, $versionId = null) {
 		$this->init();
-		// TODO: add version id
 		$cmd = $this->connection->getCommand('GetObject', [
-			'Bucket' => $this->getBucket(),
-			'Key'    => $urn
+			'Bucket'    => $this->getBucket(),
+			'Key'       => $urn,
+            'VersionId' => $versionId
 		]);
 		$request = $this->connection->createPresignedRequest($cmd, '+20 minutes');
 		// Get the actual presigned-url
