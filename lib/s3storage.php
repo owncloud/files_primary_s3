@@ -315,7 +315,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$cmd = $this->connection->getCommand('GetObject', [
 			'Bucket'    => $this->getBucket(),
 			'Key'       => $urn,
-            'VersionId' => $versionId
+			'VersionId' => $versionId,
+			'ResponseContentType' => 'application/octet-stream'
 		]);
 		$request = $this->connection->createPresignedRequest($cmd, '+20 minutes');
 		// Get the actual presigned-url
