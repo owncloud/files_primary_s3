@@ -30,7 +30,7 @@ $(composer_deps): $(COMPOSER) composer.json composer.lock
 	php $(COMPOSER) install --no-dev && touch $@
 
 $(composer_dev_deps): $(COMPOSER) composer.json composer.lock
-	php $(COMPOSER) install && touch $@
+	php $(COMPOSER) install -n --no-progress
 
 .PHONY: update-composer
 update-composer:

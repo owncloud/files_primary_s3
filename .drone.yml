@@ -24,7 +24,7 @@ pipeline:
     environment:
       - COMPOSER_CACHE_DIR=composer
     commands:
-      - composer install -n --no-progress
+      - make dev-deps
 
   prepare-app:
     image: owncloudci/php:${PHP_VERSION}
