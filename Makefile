@@ -11,7 +11,7 @@ build_dir=$(CURDIR)/build
 # these can be extended by included files
 # to add for example generated files
 doc_files=README.md CHANGELOG.md
-src_dirs=appinfo lib 
+src_dirs=appinfo lib vendor
 all_src=$(src_files) $(src_dirs) $(doc_files)
 
 # rules to be extended by included files
