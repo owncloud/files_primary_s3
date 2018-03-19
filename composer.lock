@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.52.20",
+            "version": "3.52.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "299ac47ff5171d6a25f788dc333c0a3c8db40f69"
+                "reference": "4b8286d243ad9eeaaa1fccf312c1d9f920ef7cd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/299ac47ff5171d6a25f788dc333c0a3c8db40f69",
-                "reference": "299ac47ff5171d6a25f788dc333c0a3c8db40f69",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4b8286d243ad9eeaaa1fccf312c1d9f920ef7cd0",
+                "reference": "4b8286d243ad9eeaaa1fccf312c1d9f920ef7cd0",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-03-01T20:18:42+00:00"
+            "time": "2018-03-16T20:40:34+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
