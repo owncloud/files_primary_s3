@@ -305,18 +305,21 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 	/**
 	 * @param string $urn
+	 * @param string $versionId
+	 * @param string $fileName
 	 * @return string mixed
 	 * @throws ServiceUnavailableException
 	 * @throws \Exception
-	 * @since 10.1.0
+	 * @since 11.0.0
 	 */
-	public function getDirectDownload($urn, $versionId = null) {
+	public function getDirectDownload($urn, $versionId, $fileName) {
 		$this->init();
 		$cmd = $this->connection->getCommand('GetObject', [
 			'Bucket'    => $this->getBucket(),
 			'Key'       => $urn,
 			'VersionId' => $versionId,
-			'ResponseContentType' => 'application/octet-stream'
+			'ResponseContentType' => 'application/octet-stream',
+			'ResponseContentDisposition' => 'attachment; filename="' . $fileName . '"'
 		]);
 		$request = $this->connection->createPresignedRequest($cmd, '+20 minutes');
 		// Get the actual presigned-url
