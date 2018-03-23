@@ -32,6 +32,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
+use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
 
@@ -64,6 +65,16 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->params = $params;
 		$this->params['autocreate'] = isset($this->params['autocreate']) ? $this->params['autocreate'] : false;
 
+
+		// to expensive here .... need to find a better place
+		$policy = new EmptyContentSecurityPolicy();
+		$urlParts = parse_url($this->params['options']['endpoint']);
+		$s3Host = $urlParts['host'];
+		if (isset($urlParts['port'])) {
+			$s3Host .= ":{$urlParts['port']}";
+		}
+		$policy->addAllowedConnectDomain($s3Host);
+		\OC::$server->getContentSecurityPolicyManager()->addDefaultPolicy($policy);
 	}
 
 	/**
