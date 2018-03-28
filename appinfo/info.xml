@@ -31,6 +31,7 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 	</types>
 	<commands>
 		<command>OCA\Files_Primary_S3\Command\ls</command>
+		<command>OCA\Files_Primary_S3\Command\createBucket</command>
 	</commands>
 
 </info>

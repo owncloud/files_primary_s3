@@ -53,6 +53,7 @@ pipeline:
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
       - php ./occ a:l
+      - php ./occ s3:create-bucket owncloud --accept-warning
 
   test-scality:
     image: owncloudci/php:${PHP_VERSION}
@@ -60,6 +61,7 @@ pipeline:
     commands:
       - wait-for-it scality:8000
       - cd /drone/server
+      - php ./occ s3:create-bucket owncloud --accept-warning
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
@@ -72,6 +74,7 @@ pipeline:
     commands:
       - wait-for-it ceph:80
       - cd /drone/server
+      - php ./occ s3:create-bucket OWNCLOUD --accept-warning
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
