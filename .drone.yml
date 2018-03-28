@@ -39,8 +39,6 @@ pipeline:
   test-scality:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
-    environment:
-      - RUN_OBJECTSTORE_TESTS=1
     commands:
       - cp tests/drone/scality.config.php /drone/server/config
       - wait-for-it scality:8000
@@ -53,8 +51,6 @@ pipeline:
   test-ceph:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
-    environment:
-      - RUN_OBJECTSTORE_TESTS=1
     commands:
       - cp tests/drone/ceph.config.php /drone/server/config
       - wait-for-it ceph:80
