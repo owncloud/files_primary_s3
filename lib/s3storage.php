@@ -4,7 +4,9 @@
  *
  * @author Jörn Friedrich Dreyer <jfd@owncloud.com>
  * @author Thomas Müller <thomas.mueller@tmit.eu>
+ *
  * @copyright (C) 2014-2017 ownCloud, GmbH.
+ * @license GPL-2.0
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +19,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -60,7 +61,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$this->params = $params;
-		$this->params['autocreate'] = isset($this->params['autocreate']) ? $this->params['autocreate'] : false;
 	}
 
 	protected function init() {
@@ -99,31 +99,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 //		$this->connection->registerStreamWrapper();
 		StreamWrapper::register($this->connection);
 
-		if ($this->params['autocreate'] && !$this->connection->doesBucketExist($this->getBucket())) {
-			try {
-				$this->connection->createBucket([
-					'Bucket' => $this->getBucket()
-				]);
-				// scality does not support waitUntilBucketExists()
-				if ($this->connection->getApi()->hasOperation('waitUntilBucketExists')) {
-					$this->connection->waitUntilBucketExists([
-						'Bucket' => $this->getBucket(),
-						'waiter.interval' => 1,
-						'waiter.max_attempts' => 15
-					]);
-				}
-
-				// enabled versioning on the bucket
-				$this->connection->putBucketVersioning([
-					'Bucket' => $this->getBucket(),
-					'VersioningConfiguration' => [
-						'Status' => 'Enabled',
-						'MFADelete' => 'Disabled' ]
-				]);
-			} catch (S3Exception $e) {
-				\OC::$server->getLogger()->logException($e, ['app' => 'objectstore']);
-				throw new \Exception('Creation of bucket failed. '.$e->getMessage());
-			}
+		if (!$this->connection->doesBucketExist($this->getBucket())) {
+			throw new \Exception('Bucket does not exist.');
 		}
 	}
 
