@@ -57,12 +57,16 @@ class ls extends Command {
 					'Bucket' => $bucket['Name'],
 				]);
 				$bucket['Versioning'] = $versionStatus['Status'];
+				$corsConfig = $client->getBucketCors([
+					'Bucket' => $bucket['Name'],
+				]);
+				$bucket['CORS'] = $corsConfig['CORSRules'];
 				return $bucket;
 			}, $result['Buckets']);
-			$this->printValue($output, $buckets, ['Name', 'Versioning']);
+			$this->printValue($output, $buckets, ['Name', 'Versioning', 'CORS']);
 		} else {
 			$object = $input->getArgument('object');
-			if ($object == null) {
+			if ($object === null) {
 				$result = $client->listObjects([
 					'Bucket' => $bucketName,
 				]);
@@ -95,8 +99,8 @@ class ls extends Command {
 
 	/**
 	 * @param OutputInterface $output
-	 * @param $results
-	 * @param $key
+	 * @param array $results
+	 * @param array $keys
 	 * @internal param $bucket
 	 */
 	protected function printValue(OutputInterface $output, array $results, array $keys) {

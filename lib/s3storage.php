@@ -63,8 +63,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$this->params = $params;
-		$this->params['autocreate'] = isset($this->params['autocreate']) ? $this->params['autocreate'] : false;
-
 
 		// to expensive here .... need to find a better place
 		$policy = new EmptyContentSecurityPolicy();
@@ -117,31 +115,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 //		$this->connection->registerStreamWrapper();
 		StreamWrapper::register($this->connection);
 
-		if ($this->params['autocreate'] && !$this->connection->doesBucketExist($this->getBucket())) {
-			try {
-				$this->connection->createBucket([
-					'Bucket' => $this->getBucket()
-				]);
-				// scality does not support waitUntilBucketExists()
-				if ($this->connection->getApi()->hasOperation('waitUntilBucketExists')) {
-					$this->connection->waitUntil('BucketExists', [
-						'Bucket' => $this->getBucket(),
-						'waiter.interval' => 1,
-						'waiter.max_attempts' => 15
-					]);
-				}
-
-				// enabled versioning on the bucket
-				$this->connection->putBucketVersioning([
-					'Bucket' => $this->getBucket(),
-					'VersioningConfiguration' => [
-						'Status' => 'Enabled',
-						'MFADelete' => 'Disabled' ]
-				]);
-			} catch (S3Exception $e) {
-				\OC::$server->getLogger()->logException($e, ['app' => 'files_primary_s3']);
-				throw new \Exception('Creation of bucket failed. '.$e->getMessage());
-			}
+		if (!$this->connection->doesBucketExist($this->getBucket())) {
+			throw new \Exception('Bucket does not exist.');
 		}
 	}
 

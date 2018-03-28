@@ -43,6 +43,7 @@ pipeline:
       - cp tests/drone/scality.config.php /drone/server/config
       - wait-for-it scality:8000
       - cd /drone/server
+      - php ./occ s3:create-bucket owncloud
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
@@ -55,6 +56,7 @@ pipeline:
       - cp tests/drone/ceph.config.php /drone/server/config
       - wait-for-it ceph:80
       - cd /drone/server
+      - php ./occ s3:create-bucket OWNCLOUD
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
