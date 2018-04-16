@@ -146,6 +146,9 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		if (isset($this->params['serversideencryption'])) {
 			$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
 		}
+		if (isset($this->params['part_size'])) {
+			$opt['part_size'] = $this->params['part_size'];
+		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
 		$uploader->upload();
