@@ -13,11 +13,6 @@ pipeline:
     when:
       local: false
 
-  install-server:
-    image: owncloudci/core
-    pull: true
-    git_reference: ${CORE_BRANCH}
-
   composer:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
@@ -26,12 +21,21 @@ pipeline:
     commands:
       - composer install -n --no-progress
 
+  install-core:
+    image: owncloudci/core
+    pull: true
+    db_type: ${DB_TYPE}
+    db_host: ${DB_HOST}
+    git_reference: ${CORE_BRANCH}
+
   prepare-app:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
+    environment:
+      - STORAGE=${STORAGE}
     commands:
+      - cp tests/drone/$${STORAGE}.config.php /drone/server/config
       - cd /drone/server
-      - rm -rf tests/lib/Files/ObjectStore/SwiftTest.php
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
       - php ./occ a:l
@@ -40,25 +44,80 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - cp tests/drone/scality.config.php /drone/server/config
       - wait-for-it scality:8000
       - cd /drone/server
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
+        TEST_SUITE: phpunit
         STORAGE: scality
 
   test-ceph:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - cp tests/drone/ceph.config.php /drone/server/config
       - wait-for-it ceph:80
       - cd /drone/server
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
+        TEST_SUITE: phpunit
         STORAGE: ceph
+
+  configure-server:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+      - cd /drone/server
+      - php occ a:l
+      - php occ a:e testing
+      - php occ a:l
+      - php occ config:system:set trusted_domains 1 --value=server
+      - php occ config:system:set trusted_domains 2 --value=federated
+      - php occ log:manage --level 0
+      - php occ config:list
+      - chown -R www-data. /drone/server
+    when:
+      matrix:
+        PREPARE_ACCEPTANCE: true
+
+
+  api-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - TEST_SERVER_URL=http://server/
+      - TEST_SERVER_FED_URL=http://federated/
+    commands:
+    - cd /drone/server
+    - chmod +x ./tests/drone/test-api-acceptance.sh
+    - chmod +x ./tests/acceptance/run.sh
+    - ./tests/drone/test-api-acceptance.sh
+    when:
+      matrix:
+        TEST_SUITE: api
+
+  webui-acceptance-tests:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - BROWSER=chrome
+      - SELENIUM_HOST=selenium
+      - SRV_HOST_NAME=server
+      - SRV_HOST_PORT=80
+      - REMOTE_FED_SRV_HOST_NAME=federated
+      - REMOTE_FED_SRV_HOST_PORT=80
+      - SKELETON_DIR=/drone/server/tests/acceptance/webUISkeleton
+      - SELENIUM_PORT=4444
+      - PLATFORM=Linux
+    commands:
+      - cd /drone/server
+      - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
+      - bash tests/travis/start_ui_tests.sh --remote
+    when:
+      matrix:
+        TEST_SUITE: selenium
+
 
   print-log:
     image: owncloudci/php:${PHP_VERSION}
@@ -126,6 +185,44 @@ services:
       matrix:
         STORAGE: ceph
 
+  server:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - APACHE_WEBROOT=/drone/server
+    command: [ "/usr/local/bin/apachectl", "-e", "debug" , "-D", "FOREGROUND" ]
+    when:
+      matrix:
+        USE_SERVER: true
+
+  federated:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - APACHE_WEBROOT=/drone/server
+    command: [ "/usr/local/bin/apachectl", "-e", "debug" , "-D", "FOREGROUND" ]
+    when:
+      matrix:
+        USE_FEDERATED_SERVER: true
+
+  selenium:
+    image: selenium/standalone-chrome-debug:latest
+    pull: true
+    when:
+      matrix:
+        TEST_SUITE: selenium
+
+  mysql:
+    image: mysql:5.7
+    pull: true
+    environment:
+      - MYSQL_USER=owncloud
+      - MYSQL_PASSWORD=owncloud
+      - MYSQL_DATABASE=owncloud
+      - MYSQL_ROOT_PASSWORD=owncloud
+    when:
+      matrix:
+        DB_HOST: mysql
 
 matrix:
   include:
@@ -133,9 +230,13 @@ matrix:
 #    - STORAGE: ceph
 #      PHP_VERSION: 5.6
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    - STORAGE: scality
 #      PHP_VERSION: 5.6
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    # 7.0
 #    - STORAGE: ceph
 #      PHP_VERSION: 7.0
@@ -143,31 +244,91 @@ matrix:
 #    - STORAGE: scality
 #      PHP_VERSION: 7.0
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    # 7.1
 #    - STORAGE: ceph
 #      PHP_VERSION: 7.1
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    - STORAGE: scality
 #      PHP_VERSION: 7.1
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    # 7.2
 #    - STORAGE: ceph
 #      PHP_VERSION: 7.2
 #      CORE_BRANCH: stable10
+#      TEST_SUITE: phpunit
+#
 #    - STORAGE: scality
 #      PHP_VERSION: 7.2
 #      CORE_BRANCH: stable10
-    # 7.1
-    - STORAGE: ceph
-      PHP_VERSION: 7.1
+#      TEST_SUITE: phpunit
+#    # 7.1
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.1
+#      CORE_BRANCH: master
+#      TEST_SUITE: phpunit
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.1
+#      CORE_BRANCH: master
+#      TEST_SUITE: phpunit
+#
+#    # 7.2
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.2
+#      CORE_BRANCH: master
+#      TEST_SUITE: phpunit
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.2
+#      CORE_BRANCH: master
+#      TEST_SUITE: phpunit
+#
+#    # ACCEPTANCE TEST
+#
+    - PHP_VERSION: 7.1
       CORE_BRANCH: master
-    - STORAGE: scality
-      PHP_VERSION: 7.1
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+
+    - PHP_VERSION: 7.1
       CORE_BRANCH: master
-    # 7.2
-    - STORAGE: ceph
-      PHP_VERSION: 7.2
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+
+    - PHP_VERSION: 7.1
       CORE_BRANCH: master
-    - STORAGE: scality
-      PHP_VERSION: 7.2
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+
+    - PHP_VERSION: 7.1
       CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+
+
