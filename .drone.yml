@@ -300,6 +300,128 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
+      BEHAT_SUITE: webUILogin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIFavorites
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIPersonalSettings
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIFiles
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIMoveFilesFolders
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIRenameFiles
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIRenameFolders
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUITrashbin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUISharingInternalGroups
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUISharingInternalUsers
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUISharingExternal
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: webUIRestrictSharing
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
@@ -310,6 +432,128 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: scality
+      BEHAT_SUITE: webUILogin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIFavorites
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIPersonalSettings
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIFiles
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIMoveFilesFolders
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIRenameFiles
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIRenameFolders
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUITrashbin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUISharingInternalGroups
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUISharingInternalUsers
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUISharingExternal
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: webUIRestrictSharing
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
