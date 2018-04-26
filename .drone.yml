@@ -292,7 +292,7 @@ matrix:
 #    # ACCEPTANCE TEST
 #
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -302,7 +302,7 @@ matrix:
       STORAGE: ceph
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -312,7 +312,7 @@ matrix:
       STORAGE: scality
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -322,7 +322,7 @@ matrix:
       STORAGE: ceph
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
