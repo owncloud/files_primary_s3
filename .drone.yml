@@ -110,6 +110,7 @@ pipeline:
       - SKELETON_DIR=/drone/server/tests/acceptance/webUISkeleton
       - SELENIUM_PORT=4444
       - PLATFORM=Linux
+      - MAILHOG_HOST=email
     commands:
       - cd /drone/server
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
@@ -224,6 +225,13 @@ services:
       matrix:
         DB_HOST: mysql
 
+  email:
+    image: mailhog/mailhog
+    pull: true
+    when:
+      matrix:
+        USE_EMAIL: true
+
 matrix:
   include:
 #    # 5.6
@@ -300,6 +308,7 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
+      USE_EMAIL: true
       BEHAT_SUITE: webUILogin
 
     - PHP_VERSION: 7.1
@@ -432,6 +441,7 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: scality
+      USE_EMAIL: true
       BEHAT_SUITE: webUILogin
 
     - PHP_VERSION: 7.1
