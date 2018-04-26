@@ -574,6 +574,84 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
+      BEHAT_SUITE: apiMain
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiCapabilities
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiFederation
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiProvisioning
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiSharees
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiSharing
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiTrashbin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiWebdav
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: use-filesystem-to-delete-user-data-folder
@@ -584,5 +662,82 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: scality
+      BEHAT_SUITE: apiMain
 
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiCapabilities
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiFederation
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiProvisioning
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiSharees
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiSharing
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiTrashbin
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiWebdav
 
