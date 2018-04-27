@@ -312,7 +312,7 @@ matrix:
       BEHAT_SUITE: webUILogin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -323,7 +323,7 @@ matrix:
       BEHAT_SUITE: webUIFavorites
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -334,7 +334,7 @@ matrix:
       BEHAT_SUITE: webUIPersonalSettings
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -345,7 +345,7 @@ matrix:
       BEHAT_SUITE: webUIFiles
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -356,7 +356,7 @@ matrix:
       BEHAT_SUITE: webUIMoveFilesFolders
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -367,7 +367,7 @@ matrix:
       BEHAT_SUITE: webUIRenameFiles
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -378,7 +378,7 @@ matrix:
       BEHAT_SUITE: webUIRenameFolders
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -389,7 +389,7 @@ matrix:
       BEHAT_SUITE: webUITrashbin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -400,7 +400,7 @@ matrix:
       BEHAT_SUITE: webUISharingInternalGroups
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -411,7 +411,7 @@ matrix:
       BEHAT_SUITE: webUISharingInternalUsers
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -422,7 +422,7 @@ matrix:
       BEHAT_SUITE: webUISharingExternal
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -433,7 +433,7 @@ matrix:
       BEHAT_SUITE: webUIRestrictSharing
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -445,7 +445,7 @@ matrix:
       BEHAT_SUITE: webUILogin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -456,7 +456,7 @@ matrix:
       BEHAT_SUITE: webUIFavorites
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -467,7 +467,7 @@ matrix:
       BEHAT_SUITE: webUIPersonalSettings
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -478,7 +478,7 @@ matrix:
       BEHAT_SUITE: webUIFiles
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -489,7 +489,7 @@ matrix:
       BEHAT_SUITE: webUIMoveFilesFolders
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -500,7 +500,7 @@ matrix:
       BEHAT_SUITE: webUIRenameFiles
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -511,7 +511,7 @@ matrix:
       BEHAT_SUITE: webUIRenameFolders
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -522,7 +522,7 @@ matrix:
       BEHAT_SUITE: webUITrashbin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -533,7 +533,7 @@ matrix:
       BEHAT_SUITE: webUISharingInternalGroups
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -544,7 +544,7 @@ matrix:
       BEHAT_SUITE: webUISharingInternalUsers
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -577,7 +577,7 @@ matrix:
       BEHAT_SUITE: apiMain
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -588,7 +588,7 @@ matrix:
       BEHAT_SUITE: apiCapabilities
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -599,7 +599,7 @@ matrix:
       BEHAT_SUITE: apiFederation
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -610,7 +610,7 @@ matrix:
       BEHAT_SUITE: apiProvisioning
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -621,7 +621,7 @@ matrix:
       BEHAT_SUITE: apiSharees
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -632,7 +632,7 @@ matrix:
       BEHAT_SUITE: apiSharing
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -643,7 +643,7 @@ matrix:
       BEHAT_SUITE: apiTrashbin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -665,7 +665,7 @@ matrix:
       BEHAT_SUITE: apiMain
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -676,7 +676,7 @@ matrix:
       BEHAT_SUITE: apiCapabilities
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -687,7 +687,7 @@ matrix:
       BEHAT_SUITE: apiFederation
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -698,7 +698,7 @@ matrix:
       BEHAT_SUITE: apiProvisioning
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -709,7 +709,7 @@ matrix:
       BEHAT_SUITE: apiSharees
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -720,7 +720,7 @@ matrix:
       BEHAT_SUITE: apiSharing
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -731,7 +731,7 @@ matrix:
       BEHAT_SUITE: apiTrashbin
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
