@@ -607,7 +607,18 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
-      BEHAT_SUITE: apiProvisioning
+      BEHAT_SUITE: apiProvisioning-v1
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      BEHAT_SUITE: apiProvisioning-v2
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: use-filesystem-to-delete-user-data-folder
@@ -695,7 +706,18 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: scality
-      BEHAT_SUITE: apiProvisioning
+      BEHAT_SUITE: apiProvisioning-v1
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: use-filesystem-to-delete-user-data-folder
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: scality
+      BEHAT_SUITE: apiProvisioning-v2
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: use-filesystem-to-delete-user-data-folder
