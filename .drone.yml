@@ -88,6 +88,7 @@ pipeline:
     environment:
       - TEST_SERVER_URL=http://server/
       - TEST_SERVER_FED_URL=http://federated/
+      - OC_TEST_ON_OBJECTSTORE=1
     commands:
     - cd /drone/server
     - chmod +x ./tests/drone/test-api-acceptance.sh
