@@ -10,16 +10,16 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- * 
+ *
  */
 
 namespace OCA\Files_Primary_S3;
@@ -55,14 +55,12 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @throws \Exception
 	 */
 	public function __construct($params) {
-
-		if (!isset($params['options']) || !isset($params['bucket']) ) {
+		if (!isset($params['options']) || !isset($params['bucket'])) {
 			throw new \Exception('Connection options and bucket must be configured.');
 		}
 
 		$this->params = $params;
 		$this->params['autocreate'] = isset($this->params['autocreate']) ? $this->params['autocreate'] : false;
-
 	}
 
 	protected function init() {
@@ -92,7 +90,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->connection = S3Client::factory($config);
 		try {
 			$this->connection->listBuckets();
-		} catch(S3Exception $exception) {
+		} catch (S3Exception $exception) {
 			\OC::$server->getLogger()->logException($exception);
 			throw new ServiceUnavailableException("No S3 ObjectStore available");
 		}
@@ -152,8 +150,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
 		$uploader->upload();
-		if (is_resource($stream)) {
-			fclose($stream);
+		if (\is_resource($stream)) {
+			\fclose($stream);
 		}
 	}
 
@@ -173,7 +171,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 */
 	public function readObject($urn) {
 		$this->init();
-		return fopen($this->getUrl($urn), 'r');
+		return \fopen($this->getUrl($urn), 'r');
 	}
 
 	public function getUrl($urn, $versionId = null) {
@@ -198,10 +196,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			'Bucket' => $this->getBucket(),
 			'Prefix'    => $urn
 		]);
-		$versions = array_filter($list['Versions'], function($v) use ($urn) {
+		$versions = \array_filter($list['Versions'], function ($v) use ($urn) {
 			return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
 		});
-		return array_map(function ($version) {
+		return \array_map(function ($version) {
 			return [
 				'version' => $version['VersionId'],
 				'timestamp' => $version['LastModified']->getTimestamp(),
@@ -227,10 +225,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			'Prefix' => $urn,
 			'VersionIdMarker' => $versionId
 		]);
-		$versions = array_filter($list['Versions'], function($v) use ($urn, $versionId) {
+		$versions = \array_filter($list['Versions'], function ($v) use ($urn, $versionId) {
 			return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
 		});
-		$version = array_values($versions)[0];
+		$version = \array_values($versions)[0];
 		return [
 			'version' => $version['VersionId'],
 			'timestamp' => $version['LastModified']->getTimestamp(),
@@ -250,7 +248,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 */
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
-		return fopen($this->getUrl($urn, $versionId), 'r');
+		return \fopen($this->getUrl($urn, $versionId), 'r');
 	}
 
 	/**
@@ -266,7 +264,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->connection->copyObject([
 			'Bucket' => $this->getBucket(),
 			'Key' => $urn,
-			'CopySource' => "/{$this->getBucket()}/".rawurlencode($urn)."?versionId=$versionId"
+			'CopySource' => "/{$this->getBucket()}/".\rawurlencode($urn)."?versionId=$versionId"
 		]);
 
 		return true;
