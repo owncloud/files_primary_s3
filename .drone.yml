@@ -641,7 +641,7 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
-      BEHAT_SUITE: apiSharing
+      BEHAT_SUITE: apiSharing-v1
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
@@ -740,7 +740,7 @@ matrix:
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: scality
-      BEHAT_SUITE: apiSharing
+      BEHAT_SUITE: apiSharing-v1
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
