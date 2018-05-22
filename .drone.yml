@@ -164,9 +164,7 @@ pipeline:
 
 services:
   scality:
-#    image: scality/s3server:d75a5612
-    # own build of scality/s3server which fixes https://github.com/scality/S3/issues/1012
-    image: deepdiver/s3server:7.1
+    image: owncloudci/scality-s3server
     pull: true
     environment:
       - HOST_NAME=scality
