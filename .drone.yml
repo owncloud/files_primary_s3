@@ -26,7 +26,8 @@ pipeline:
     pull: true
     db_type: ${DB_TYPE}
     db_host: ${DB_HOST}
-    git_reference: ${CORE_BRANCH}
+    version: ${CORE_VERSION}
+    #git_reference: ${CORE_BRANCH}
 
   prepare-app:
     image: owncloudci/php:${PHP_VERSION}
@@ -282,28 +283,28 @@ matrix:
     - STORAGE: ceph
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
 
     - STORAGE: scality
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
 
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
 
     - STORAGE: scality
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
 
   # acceptance tests
     # UI
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -313,7 +314,7 @@ matrix:
       STORAGE: scality
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -324,7 +325,7 @@ matrix:
 
     # API
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -334,7 +335,7 @@ matrix:
       STORAGE: scality
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
