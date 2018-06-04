@@ -28,6 +28,17 @@ pipeline:
     db_host: ${DB_HOST}
     git_reference: ${CORE_BRANCH}
 
+  php-cs-fixer:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - COMPOSER_CACHE_DIR=composer
+    commands:
+      -  vendor/bin/php-cs-fixer fix -v --diff --dry-run --allow-risky yes
+    when:
+      matrix:
+        TEST_SUITE: phpunit
+
   prepare-app:
     image: owncloudci/php:${PHP_VERSION}
     pull: true

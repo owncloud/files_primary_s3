@@ -52,7 +52,7 @@ class ls extends Command {
 		$bucketName = $input->getArgument('bucket');
 		if ($bucketName === null) {
 			$result = $client->listBuckets();
-			$buckets = array_map(function($bucket) use ($client) {
+			$buckets = \array_map(function ($bucket) use ($client) {
 				$versionStatus = $client->getBucketVersioning([
 					'Bucket' => $bucket['Name'],
 				]);
@@ -72,20 +72,19 @@ class ls extends Command {
 					'Bucket' => $bucketName,
 					'Prefix' => $object
 				]);
-				$versions = array_filter($result['Versions'], function ($version) use ($object) {
+				$versions = \array_filter($result['Versions'], function ($version) use ($object) {
 					return $version['Key'] === $object;
 				});
 				$this->printValue($output, $versions, ['Key', 'LastModified', 'ETag', 'Size', 'VersionId', 'IsLatest']);
 
 				$output->writeln('Delete Markers:');
 				$output->writeln('----------------------------------------');
-				$markers = array_filter(isset($result['DeleteMarkers']) ? $result['DeleteMarkers'] :  [], function ($marker) use ($object) {
+				$markers = \array_filter(isset($result['DeleteMarkers']) ? $result['DeleteMarkers'] :  [], function ($marker) use ($object) {
 					return $marker['Key'] === $object;
 				});
 				$this->printValue($output, $markers, ['Key', 'LastModified', 'VersionId', 'IsLatest']);
 			}
 		}
-
 	}
 
 	private function getClient() {
@@ -102,7 +101,7 @@ class ls extends Command {
 	protected function printValue(OutputInterface $output, array $results, array $keys) {
 		foreach ($results as $result) {
 			foreach ($keys as $key) {
-				$value = isset($result[$key]) ? json_encode($result[$key]) : '---';
+				$value = isset($result[$key]) ? \json_encode($result[$key]) : '---';
 				$output->writeln("$key: $value");
 			}
 			$output->writeln('----------------------------------------');
