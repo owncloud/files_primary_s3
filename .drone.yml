@@ -80,8 +80,14 @@ pipeline:
     pull: true
     commands:
       - cd /drone/server
+      - git clone https://github.com/owncloud/notifications.git apps/notifications
       - php occ a:l
       - php occ a:e testing
+      # Need to enable/disable to init the app OK, so that enable/disable
+      # actions via the provisioning API will then work.
+      # See issue https://github.com/owncloud/core/pull/31670
+      - php occ a:e notifications
+      - php occ a:d notifications
       - php occ a:l
       - php occ config:system:set trusted_domains 1 --value=server
       - php occ config:system:set trusted_domains 2 --value=federated
@@ -91,7 +97,6 @@ pipeline:
     when:
       matrix:
         PREPARE_ACCEPTANCE: true
-
 
   api-acceptance-tests:
     image: owncloudci/php:${PHP_VERSION}
