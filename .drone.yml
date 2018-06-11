@@ -27,6 +27,8 @@ pipeline:
     db_type: ${DB_TYPE}
     db_host: ${DB_HOST}
     git_reference: ${CORE_BRANCH}
+    environment:
+      - COMPOSER_CACHE_DIR=composer
 
   php-cs-fixer:
     image: owncloudci/php:${PHP_VERSION}
