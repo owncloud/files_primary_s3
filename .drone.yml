@@ -100,6 +100,7 @@ pipeline:
       - TEST_SERVER_URL=http://server/
       - TEST_SERVER_FED_URL=http://federated/
       - OC_TEST_ON_OBJECTSTORE=1
+      - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@masterkey_encryption
     commands:
     - cd /drone/server
     - chmod +x ./tests/drone/test-api-acceptance.sh
@@ -126,7 +127,7 @@ pipeline:
     commands:
       - cd /drone/server
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
-      - bash tests/travis/start_ui_tests.sh --remote --all-suites
+      - bash tests/travis/start_ui_tests.sh --tags "~@app-required&&~@skip" --remote --all-suites
     when:
       matrix:
         TEST_SUITE: selenium
