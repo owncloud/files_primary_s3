@@ -296,28 +296,28 @@ matrix:
     - STORAGE: ceph
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
 
     - STORAGE: scality
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
 
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
 
     - STORAGE: scality
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
 
   # acceptance tests
     # UI
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -327,7 +327,7 @@ matrix:
       STORAGE: scality
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -338,7 +338,7 @@ matrix:
 
     # API
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -348,7 +348,7 @@ matrix:
       STORAGE: scality
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: bugfix/failing-files_primary_s3-tests
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
