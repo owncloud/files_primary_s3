@@ -270,28 +270,28 @@ matrix:
 #      PHP_VERSION: 7.0
 #      TEST_SUITE: phpunit
 #      CORE_BRANCH: stable10
-#
-#    # 7.1
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.1
-#      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.1
-#      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
-#
-#    # 7.2
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.2
-#      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.2
-#      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
+
+    # 7.1
+    - STORAGE: ceph
+      PHP_VERSION: 7.1
+      TEST_SUITE: phpunit
+      CORE_BRANCH: stable10
+
+    - STORAGE: scality
+      PHP_VERSION: 7.1
+      TEST_SUITE: phpunit
+      CORE_BRANCH: stable10
+
+    # 7.2
+    - STORAGE: ceph
+      PHP_VERSION: 7.2
+      TEST_SUITE: phpunit
+      CORE_BRANCH: stable10
+
+    - STORAGE: scality
+      PHP_VERSION: 7.2
+      TEST_SUITE: phpunit
+      CORE_BRANCH: stable10
     # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
@@ -317,14 +317,14 @@ matrix:
   # acceptance tests
     # UI
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
       TEST_SUITE: selenium
       DB_TYPE: mysql
       DB_HOST: mysql
-      STORAGE: scality
+      STORAGE: ceph
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
@@ -338,14 +338,14 @@ matrix:
 
     # API
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
       TEST_SUITE: api
       DB_TYPE: mysql
       DB_HOST: mysql
-      STORAGE: scality
+      STORAGE: ceph
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
