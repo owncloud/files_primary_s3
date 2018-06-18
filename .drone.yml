@@ -2,7 +2,7 @@ workspace:
   base: /drone
   path: server/apps/files_primary_s3
 
-branches: [ master ]
+branches: [ master, release, release/* ]
 
 pipeline:
   restore:
@@ -167,14 +167,14 @@ pipeline:
       event: [ push ]
       branch: [ master ]
 
-  slack:
+  notify:
     image: plugins/slack:1
     pull: true
     secrets: [ slack_webhook ]
-    channel: objectstore-team
+    channel: builds
     when:
-      local: false
-      status: [ changed, failure ]
+      status: [ failure, changed ]
+      event: [ push, tag ]
 
 services:
   scality:
