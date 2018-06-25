@@ -1,14 +1,27 @@
 <?xml version="1.0"?>
 <info>
 	<id>files_primary_s3</id>
-	<name>Primary S3 Object Storage Support</name>
-	<summary>Backend to integrate object storages via S3 as primary storage</summary>
-	<description>Backend to integrate object storages via S3 as primary storage</description>
+	<name>S3 Object Storage Support</name>
+	<summary>Leverage object storage via S3 as primary storage</summary>
+	<description>
+For it's benefits over traditional file system storage, object storage has become more and more popular. Speaking simply object storages split files into parts of the same size and store them including the metadata to assemble these objects to files. In contrast to file system storage this enables infinite scalability to cope for an exponentially growing amount of data. Furthermore object storage systems like CEPH or Scality RING provide built-in features for automatic data replication, redundancy/high availability and even geo-distribution which are necessities for professional production environments. For enterprises object storage systems can reduce maintenance efforts significantly and offer huge cost savings compared to other storage systems. 
+
+This extension is the successor of the [ownCloud Objectstore App](https://marketplace.owncloud.com/apps/objectstore). It enables ownCloud Server to communicate with the widely spread S3 protocol (S3 HTTP API) to use object storage as it's primary storage location.
+
+**Supported features**
+- S3 Multi-part upload (enables uploading files > 5 GB)
+- S3 Versioning</description>
 	<category>storage</category>
 	<screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/objectstorage/owncloud-app-object_storage.jpg</screenshot>
-	<licence>GPVv2</licence>
+	<licence>GPLv2</licence>
+	<website>https://github.com/owncloud/files_primary_s3</website>
+	<bugs>https://github.com/owncloud/files_primary_s3/issues</bugs>
+	<repository type="git">https://github.com/owncloud/files_primary_s3.git</repository>
 	<author>ownCloud GmbH</author>
 	<version>0.1</version>
+	<documentation>
+		<admin>https://doc.owncloud.com/server/latest/admin_manual/enterprise/external_storage/s3_swift_as_primary_object_store_configuration.html</admin>
+	</documentation>
 	<dependencies>
 		<php min-version="7.0" />
 		<owncloud min-version="10.0" max-version="10.1" />
