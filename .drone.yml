@@ -17,7 +17,7 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - COMPOSER_CACHE_DIR=composer
+      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.composer
     commands:
       - composer install -n --no-progress
 
@@ -28,13 +28,12 @@ pipeline:
     db_host: ${DB_HOST}
     git_reference: ${CORE_BRANCH}
     environment:
-      - COMPOSER_CACHE_DIR=composer
+      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.composer
+      - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.npm
 
   php-cs-fixer:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
-    environment:
-      - COMPOSER_CACHE_DIR=composer
     commands:
       -  vendor/bin/php-cs-fixer fix -v --diff --dry-run --allow-risky yes
     when:
@@ -149,8 +148,8 @@ pipeline:
     secrets: [ cache_s3_server, cache_s3_access_key, cache_s3_secret_key ]
     rebuild: true
     mount:
-      - composer
-      - vendor
+      - .composer
+      - .npm
     when:
       local: false
       event: [ push ]
