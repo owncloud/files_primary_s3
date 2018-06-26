@@ -6,6 +6,7 @@ $config
     ->setUsingCache(true)
     ->getFinder()
 	->exclude('vendor')
+	->exclude('.composer')
     ->in(__DIR__);
 
 return $config;
