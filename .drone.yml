@@ -36,8 +36,14 @@ pipeline:
   php-cs-fixer:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
+    environment:
+      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
+      - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
+      - YARN_CACHE_FOLDER=/drone/server/apps/files_primary_s3/.cache/yarn
+      - bower_storage__packages=/drone/server/apps/files_primary_s3/.cache/bower
     commands:
-      -  vendor/bin/php-cs-fixer fix -v --diff --dry-run --allow-risky yes
+      - composer bin owncloud-codestyle install
+      - vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer fix -v --diff --dry-run --allow-risky yes
     when:
       matrix:
         TEST_SUITE: phpunit
