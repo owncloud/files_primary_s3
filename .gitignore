@@ -3,3 +3,4 @@ vendor
 composer
 .composer
 .npm
+/vendor-bin/**/vendor
