@@ -12,13 +12,13 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 - S3 Multi-part upload (enables uploading files > 5 GB)
 - S3 Versioning</description>
 	<category>storage</category>
-	<screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/objectstorage/owncloud-app-object_storage.jpg</screenshot>
+	<screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/objectstorage/ownCloud-app-s3-primary-objectstorage.jpg</screenshot>
 	<licence>GPLv2</licence>
 	<website>https://github.com/owncloud/files_primary_s3</website>
 	<bugs>https://github.com/owncloud/files_primary_s3/issues</bugs>
 	<repository type="git">https://github.com/owncloud/files_primary_s3.git</repository>
 	<author>ownCloud GmbH</author>
-	<version>0.1</version>
+	<version>1.0.0</version>
 	<documentation>
 		<admin>https://doc.owncloud.com/server/latest/admin_manual/enterprise/external_storage/s3_swift_as_primary_object_store_configuration.html</admin>
 	</documentation>
@@ -33,5 +33,4 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 		<command>OCA\Files_Primary_S3\Command\ls</command>
 		<command>OCA\Files_Primary_S3\Command\createBucket</command>
 	</commands>
-
 </info>
