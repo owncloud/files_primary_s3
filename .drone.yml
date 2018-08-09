@@ -199,7 +199,6 @@ pipeline:
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
       - TEST_SERVER_URL=http://server
-      - SKELETON_DIR=/drone/server/tests/acceptance/webUISkeleton
       - PLATFORM=Linux
       - MAILHOG_HOST=email
     commands:
