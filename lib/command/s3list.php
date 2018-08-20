@@ -31,7 +31,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-class ls extends Command {
+class s3List extends Command {
 
 	/** @var IConfig */
 	private $config;
@@ -43,7 +43,7 @@ class ls extends Command {
 
 	protected function configure() {
 		$this
-			->setName('s3:ls')
+			->setName('s3:list')
 			->setDescription('List objects, buckets or versions of an object')
 			->addArgument('bucket', InputArgument::OPTIONAL, 'Name of the bucket; it`s objects will be listed')
 			->addArgument('object', InputArgument::OPTIONAL, 'Key of the object; it`s versions will be listed');
