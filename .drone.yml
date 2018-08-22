@@ -69,9 +69,9 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - wait-for-it ceph:80
+      - wait-for-it owncloud.ceph:8080
       - cd /drone/server
-      - php ./occ s3:create-bucket OWNCLOUD --accept-warning
+      - php ./occ s3:ls owncloud
     when:
       matrix:
         STORAGE: ceph
@@ -92,7 +92,7 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      - wait-for-it ceph:80
+      - wait-for-it owncloud.ceph:8080
       - cd /drone/server
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
@@ -214,7 +214,7 @@ services:
       matrix:
         STORAGE: scality
 
-  ceph:
+  owncloud.ceph:
     image: ceph/daemon:v3.0.7-stable-3.0-luminous-centos-7
     pull: true
     environment:
@@ -223,8 +223,9 @@ services:
       - CEPH_DEMO_UID=owncloud
       - CEPH_DEMO_ACCESS_KEY=owncloud123456
       - CEPH_DEMO_SECRET_KEY=secret123456
+      - CEPH_DEMO_BUCKET=owncloud
       - DEBUG=verbose
-      - RGW_CIVETWEB_PORT=80
+      - RGW_CIVETWEB_PORT=8080
     when:
       matrix:
         STORAGE: ceph
