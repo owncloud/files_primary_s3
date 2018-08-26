@@ -273,10 +273,11 @@ services:
         STORAGE: scality
 
   ceph:
-    image: ceph/demo:tag-build-master-jewel-ubuntu-16.04
+    image: ceph/daemon:v3.0.7-stable-3.0-jewel-ubuntu-16.04-x86_64
     pull: true
     environment:
       - NETWORK_AUTO_DETECT=4
+      - CEPH_DAEMON=demo
       - RGW_NAME=ceph
       - CEPH_DEMO_UID=owncloud
       - CEPH_DEMO_ACCESS_KEY=owncloud123456
