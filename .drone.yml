@@ -61,6 +61,9 @@ pipeline:
     pull: true
     db_type: ${DB_TYPE}
     db_host: ${DB_HOST}
+    db_name: owncloud
+    db_username: owncloud
+    db_password: owncloud
     git_reference: ${CORE_BRANCH}
     environment:
       - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
