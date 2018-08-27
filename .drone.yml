@@ -211,7 +211,7 @@ pipeline:
       - cd /drone/server/tests/acceptance
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
       - chmod +x run.sh
-      - su-exec www-data ./run.sh --remote --type webUI --tags "~@app-required&&~@skip"
+      - ./run.sh --remote --type webUI --tags "~@app-required&&~@skip"
     when:
       matrix:
         TEST_SUITE: selenium
