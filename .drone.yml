@@ -273,7 +273,7 @@ services:
         STORAGE: scality
 
   ceph:
-    image: ceph/demo:tag-build-master-jewel-ubuntu-16.04
+    image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
     pull: true
     environment:
       - NETWORK_AUTO_DETECT=4
