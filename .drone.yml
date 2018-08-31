@@ -5,6 +5,41 @@ workspace:
 branches: [ master, release, release/* ]
 
 pipeline:
+  install-fed-server:
+    image: owncloudci/core
+    pull: true
+    version: ${FEDERATION_OC_VERSION}
+    core_path: /drone/fed-server
+    when:
+      matrix:
+        USE_FEDERATED_SERVER: true
+
+  configure-federation-server:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+      - cd /drone/fed-server
+      - php occ a:l
+      - php occ a:e testing
+      - php occ a:l
+      - php occ config:system:set trusted_domains 1 --value=server
+      - php occ config:system:set trusted_domains 2 --value=federated
+      - php occ log:manage --level 0
+      - php occ config:list
+      - echo "export TEST_SERVER_FED_URL=http://federated" > /drone/saved-settings.sh
+    when:
+      matrix:
+        USE_FEDERATED_SERVER: true
+
+  fix-permissions-federation-server:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+      - chown www-data /drone/fed-server -R
+    when:
+      matrix:
+        USE_FEDERATED_SERVER: true
+
   restore:
     image: plugins/s3-cache:1
     pull: true
@@ -71,7 +106,7 @@ pipeline:
     commands:
       - wait-for-it owncloud.ceph:8080
       - cd /drone/server
-      - php ./occ s3:ls owncloud
+      - php ./occ s3:list owncloud
     when:
       matrix:
         STORAGE: ceph
@@ -119,20 +154,43 @@ pipeline:
       matrix:
         PREPARE_ACCEPTANCE: true
 
+  owncloud-log:
+    image: owncloud/ubuntu:16.04
+    detach: true
+    pull: true
+    commands:
+     - tail -f /drone/server/data/owncloud.log
+    when:
+      matrix:
+        OWNCLOUD_LOG: true
+
+  federated-log:
+    image: owncloud/ubuntu:16.04
+    detach: true
+    pull: true
+    commands:
+     - tail -f /drone/fed-server/data/owncloud.log
+    when:
+      matrix:
+        OWNCLOUD_LOG: true
+        USE_FEDERATED_SERVER: true
 
   api-acceptance-tests:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
       - TEST_SERVER_URL=http://server/
-      - TEST_SERVER_FED_URL=http://federated/
       - OC_TEST_ON_OBJECTSTORE=1
       - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@masterkey_encryption
+      - DIVIDE_INTO_NUM_PARTS=5
+      - RUN_PART=${PART}
     commands:
-    - cd /drone/server
-    - chmod +x ./tests/drone/test-api-acceptance.sh
-    - chmod +x ./tests/acceptance/run.sh
-    - ./tests/drone/test-api-acceptance.sh
+      - touch /drone/saved-settings.sh
+      - . /drone/saved-settings.sh
+      - cd /drone/server
+      - chmod +x ./tests/drone/test-acceptance.sh
+      - chmod +x ./tests/acceptance/run.sh
+      - ./tests/drone/test-acceptance.sh
     when:
       matrix:
         TEST_SUITE: api
@@ -143,22 +201,22 @@ pipeline:
     environment:
       - BROWSER=chrome
       - SELENIUM_HOST=selenium
-      - SRV_HOST_NAME=server
-      - SRV_HOST_PORT=80
-      - REMOTE_FED_SRV_HOST_NAME=federated
-      - REMOTE_FED_SRV_HOST_PORT=80
-      - SKELETON_DIR=/drone/server/tests/acceptance/webUISkeleton
       - SELENIUM_PORT=4444
+      - TEST_SERVER_URL=http://server
       - PLATFORM=Linux
       - MAILHOG_HOST=email
+      - DIVIDE_INTO_NUM_PARTS=8
+      - RUN_PART=${PART}
     commands:
-      - cd /drone/server
+      - touch /drone/saved-settings.sh
+      - . /drone/saved-settings.sh
+      - cd /drone/server/tests/acceptance
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
-      - bash tests/travis/start_ui_tests.sh --tags "~@app-required&&~@skip" --remote --all-suites
+      - chmod +x run.sh
+      - ./run.sh --remote --type webUI --tags "~@app-required&&~@skip"
     when:
       matrix:
         TEST_SUITE: selenium
-
 
   print-log:
     image: owncloudci/php:${PHP_VERSION}
@@ -167,6 +225,8 @@ pipeline:
       - cat /drone/server/data/owncloud.log
     when:
       status:  [ failure ]
+      matrix:
+        TEST_SUITE: phpunit
 
   rebuild:
     image: plugins/s3-cache:1
@@ -244,7 +304,7 @@ services:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - APACHE_WEBROOT=/drone/server
+      - APACHE_WEBROOT=/drone/fed-server
     command: [ "/usr/local/bin/apachectl", "-e", "debug" , "-D", "FOREGROUND" ]
     when:
       matrix:
@@ -348,44 +408,344 @@ matrix:
       CORE_BRANCH: master
 
   # acceptance tests
-    # UI
+    # UI stable10
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 1
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 2
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 3
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 4
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 5
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 6
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 7
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 8
+
+    # UI master
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 1
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
-
-    # API
-    - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
-      PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
-      USE_FEDERATED_SERVER: true
-      TEST_SUITE: api
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 2
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 3
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 4
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 5
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 6
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 7
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 8
+
+    # API stable10
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 1
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 2
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 3
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 4
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 5
+
+    # API master
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 1
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 2
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 3
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 4
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      USE_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: api
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 5
