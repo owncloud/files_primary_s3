@@ -135,16 +135,6 @@ pipeline:
         TEST_SUITE: phpunit
         STORAGE: ceph
 
-  setup-api-acceptance-tests:
-    image: owncloudci/php:${PHP_VERSION}
-    pull: true
-    commands:
-      # pre-create local_storage so configure-server will set its owner appropriately
-      - mkdir -p /drone/server/tests/acceptance/work/local_storage
-    when:
-      matrix:
-        TEST_SUITE: api
-
   configure-server:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
