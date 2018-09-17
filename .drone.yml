@@ -179,7 +179,7 @@ pipeline:
     environment:
       - TEST_SERVER_URL=http://server/
       - OC_TEST_ON_OBJECTSTORE=1
-      - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@masterkey_encryption
+      - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}
       - DIVIDE_INTO_NUM_PARTS=5
       - RUN_PART=${PART}
     commands:
@@ -211,7 +211,7 @@ pipeline:
       - cd /drone/server/tests/acceptance
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
       - chmod +x run.sh
-      - ./run.sh --remote --type webUI --tags "~@app-required&&~@skip"
+      - ./run.sh --remote --type webUI --tags "~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}"
     when:
       matrix:
         TEST_SUITE: selenium
