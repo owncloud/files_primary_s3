@@ -5,7 +5,6 @@ $CONFIG = [
 		'arguments' => [
 			// replace with your bucket
 			'bucket' => 'owncloud',
-			'autocreate' => true,
 			// uncomment to enable server side encryption
 			//'serversideencryption' => 'AES256',
 			'options' => [
