@@ -16,6 +16,7 @@
       "php": "7.0.0"
     }
   },
+
   "require-dev": {
     "owncloud/coding-standard": "^1.0"
   }
