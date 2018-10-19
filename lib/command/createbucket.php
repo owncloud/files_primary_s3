@@ -22,7 +22,7 @@
 
 namespace OCA\Files_Primary_S3\Command;
 
-use Aws\S3\S3Client;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\S3Client;
 use OCP\IConfig;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -107,6 +107,6 @@ EOS;
 		if ($cfg === null) {
 			throw new \InvalidArgumentException('No object store is configured.');
 		}
-		return S3Client::factory($cfg['arguments']['options']);
+		return new S3Client($cfg['arguments']['options']);
 	}
 }

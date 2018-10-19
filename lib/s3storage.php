@@ -25,14 +25,12 @@
 
 namespace OCA\Files_Primary_S3;
 
-use Aws\Exception\AwsException;
-use Aws\Handler\GuzzleV5\GuzzleHandler;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\ObjectUploader;
-use Aws\S3\S3Client;
-use GuzzleHttp\Event\BeforeEvent;
-use GuzzleHttp\Ring\Client\StreamHandler;
+use OCA\Files_Primary_S3\Vendor\Aws\Handler\GuzzleV5\GuzzleHandler;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\Exception\S3Exception;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\ObjectUploader;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\S3Client;
 use OC\ServiceUnavailableException;
+use OCA\Files_Primary_S3\Vendor\GuzzleHttp\Handler\StreamHandler;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
 use OCP\Files\ObjectStore\ObjectStoreWriteException;

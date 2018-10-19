@@ -3,10 +3,9 @@
   "description": "ownCloud primary storage integration using S3 protocol",
   "require": {
     "dg/composer-cleaner": "^2.0",
-    "aws/aws-sdk-php": "^3.48"
-  },
-  "replace": {
-    "guzzlehttp/guzzle": "*"
+    "aws/aws-sdk-php": "^3.48",
+    "guzzlehttp/guzzle": "^5.3.3",
+    "typisttech/imposter-plugin": "^0.3.0"
   },
   "license": "GPL-2.0",
   "config": {
@@ -22,6 +21,12 @@
   "extra": {
     "bamarni-bin": {
       "bin-links": false
+    },
+    "imposter": {
+      "namespace": "OCA\\Files_Primary_S3\\Vendor",
+      "excludes": [
+        "dg/composer-cleaner"
+      ]
     }
   }
 }

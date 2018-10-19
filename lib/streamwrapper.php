@@ -1,15 +1,15 @@
 <?php
 namespace OCA\Files_Primary_S3;
 
-use Aws\CacheInterface;
-use Aws\LruArrayCache;
-use Aws\Result;
-use Aws\S3\Exception\S3Exception;
-use Aws\S3\S3ClientInterface;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Stream;
-use GuzzleHttp\Psr7\CachingStream;
-use Psr\Http\Message\StreamInterface;
+use OCA\Files_Primary_S3\Vendor\Aws\CacheInterface;
+use OCA\Files_Primary_S3\Vendor\Aws\LruArrayCache;
+use OCA\Files_Primary_S3\Vendor\Aws\Result;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\Exception\S3Exception;
+use OCA\Files_Primary_S3\Vendor\Aws\S3\S3ClientInterface;
+use OCA\Files_Primary_S3\Vendor\GuzzleHttp\Psr7;
+use OCA\Files_Primary_S3\Vendor\GuzzleHttp\Psr7\Stream;
+use OCA\Files_Primary_S3\Vendor\GuzzleHttp\Psr7\CachingStream;
+use OCA\Files_Primary_S3\Vendor\Psr\Http\Message\StreamInterface;
 
 /**
  * Amazon S3 stream wrapper to use "s3://<bucket>/<key>?versionId=<version>" files with PHP
