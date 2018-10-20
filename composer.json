@@ -1,19 +1,23 @@
 {
-    "name": "owncloud/files_external_s3",
-    "description": "ownCloud primary storage integration using S3 protocol",
-    "require": {
-        "guzzlehttp/guzzle": "^5.3",
-        "aws/aws-sdk-php": "^3.48"
-    },
-    "license": "GPL-2.0",
-    "config" : {
-        "optimize-autoloader": true,
-        "classmap-authoritative": false,
-        "platform": {
-            "php": "7.0.0"
-        }
-    },
-    "require-dev": {
-        "owncloud/coding-standard": "^1.0"
+  "name": "owncloud/files_external_s3",
+  "description": "ownCloud primary storage integration using S3 protocol",
+  "require": {
+    "dg/composer-cleaner": "^2.0",
+    "aws/aws-sdk-php": "^3.48"
+  },
+  "replace": {
+    "guzzlehttp/guzzle": "*"
+  },
+  "license": "GPL-2.0",
+  "config": {
+    "optimize-autoloader": true,
+    "classmap-authoritative": false,
+    "platform": {
+      "php": "7.0.0"
     }
+  },
+
+  "require-dev": {
+    "owncloud/coding-standard": "^1.0"
+  }
 }
