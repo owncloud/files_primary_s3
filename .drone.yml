@@ -384,23 +384,23 @@ matrix:
     - STORAGE: ceph
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
 
     - STORAGE: scality
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
 
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
 
     - STORAGE: scality
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
 
   # acceptance tests
     # UI stable10
@@ -510,7 +510,7 @@ matrix:
 
     # UI master
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -523,7 +523,7 @@ matrix:
       PART: 1
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -536,7 +536,7 @@ matrix:
       PART: 2
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -549,7 +549,7 @@ matrix:
       PART: 3
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -562,7 +562,7 @@ matrix:
       PART: 4
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -575,7 +575,7 @@ matrix:
       PART: 5
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -588,7 +588,7 @@ matrix:
       PART: 6
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -601,7 +601,7 @@ matrix:
       PART: 7
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -681,7 +681,7 @@ matrix:
 
     # API master
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -694,7 +694,7 @@ matrix:
       PART: 1
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -707,7 +707,7 @@ matrix:
       PART: 2
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -720,7 +720,7 @@ matrix:
       PART: 3
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -733,7 +733,7 @@ matrix:
       PART: 4
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      CORE_BRANCH: feature/use-core-replace-dependency
       PREPARE_ACCEPTANCE: true
       USE_SERVER: true
       USE_FEDERATED_SERVER: true
