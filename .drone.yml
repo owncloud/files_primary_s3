@@ -56,6 +56,13 @@ pipeline:
     commands:
       - composer install -n --no-progress
 
+  prepare-app-config:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    commands:
+      - mkdir -p /drone/server/config
+      - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
+
   install-core:
     image: owncloudci/core
     pull: true
@@ -83,7 +90,6 @@ pipeline:
     environment:
       - STORAGE=${STORAGE}
     commands:
-      - cp tests/drone/$${STORAGE}.config.php /drone/server/config
       - cd /drone/server
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
@@ -96,6 +102,7 @@ pipeline:
       - wait-for-it scality:8000
       - cd /drone/server
       - php ./occ s3:create-bucket owncloud --accept-warning
+      - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
     when:
       matrix:
         STORAGE: scality
@@ -380,7 +387,14 @@ matrix:
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
       CORE_BRANCH: stable10
-    # 7.1
+
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.1
+      TEST_SUITE: phpunit
+      CORE_BRANCH: stable10
+
+  # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
@@ -391,7 +405,13 @@ matrix:
       TEST_SUITE: phpunit
       CORE_BRANCH: master
 
-    # 7.2
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.1
+      TEST_SUITE: phpunit
+      CORE_BRANCH: master
+
+  # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit

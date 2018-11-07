@@ -102,7 +102,8 @@ EOS;
 	}
 
 	private function getClient() {
-		$cfg = $this->config->getSystemValue('objectstore', null);
+		$cfg = $this->config->getSystemValue('objectstore_multibucket', null);
+		$cfg = $this->config->getSystemValue('objectstore', $cfg);
 		if ($cfg === null) {
 			throw new \InvalidArgumentException('No object store is configured.');
 		}
