@@ -100,7 +100,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		StreamWrapper::register($this->connection);
 
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
-			throw new \Exception('Bucket does not exist.');
+			throw new \Exception("Bucket <{$this->getBucket()}> does not exist.");
 		}
 	}
 
