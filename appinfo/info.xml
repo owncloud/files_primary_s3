@@ -18,13 +18,13 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 	<bugs>https://github.com/owncloud/files_primary_s3/issues</bugs>
 	<repository type="git">https://github.com/owncloud/files_primary_s3.git</repository>
 	<author>ownCloud GmbH</author>
-	<version>1.0.0</version>
+	<version>1.0.2</version>
 	<documentation>
 		<admin>https://doc.owncloud.com/server/latest/admin_manual/enterprise/external_storage/s3_swift_as_primary_object_store_configuration.html</admin>
 	</documentation>
 	<dependencies>
 		<php min-version="7.0" />
-		<owncloud min-version="10.0" max-version="11.0.0.0" />
+		<owncloud min-version="10" max-version="10" />
 	</dependencies>
 	<types>
 		<filesystem/>
