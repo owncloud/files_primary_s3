@@ -62,6 +62,9 @@ pipeline:
     commands:
       - mkdir -p /drone/server/config
       - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
+    when:
+      matrix:
+        NEED_INSTALL_APP: true
 
   install-core:
     image: owncloudci/core
@@ -74,17 +77,20 @@ pipeline:
       - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
       - YARN_CACHE_FOLDER=/drone/server/apps/files_primary_s3/.cache/yarn
       - bower_storage__packages=/drone/server/apps/files_primary_s3/.cache/bower
+    when:
+      matrix:
+        NEED_CORE: true
 
-  php-cs-fixer:
+  owncloud-coding-standard:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     commands:
-      -  vendor/bin/php-cs-fixer fix -v --diff --dry-run --allow-risky yes
+      - make test-php-style
     when:
       matrix:
-        TEST_SUITE: phpunit
+        TEST_SUITE: owncloud-coding-standard
 
-  prepare-app:
+  install-app:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
@@ -94,6 +100,9 @@ pipeline:
       - php ./occ a:l
       - php ./occ a:e files_primary_s3
       - php ./occ a:l
+    when:
+      matrix:
+        NEED_INSTALL_APP: true
 
   prepare-bucket-scality:
     image: owncloudci/php:${PHP_VERSION}
@@ -192,10 +201,9 @@ pipeline:
     commands:
       - touch /drone/saved-settings.sh
       - . /drone/saved-settings.sh
-      - cd /drone/server/tests/acceptance
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
-      - chmod +x run.sh
-      - ./run.sh --remote --type api --tags "~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}"
+      - chmod +x /drone/server/tests/acceptance/run.sh
+      - make test-acceptance-api
     when:
       matrix:
         TEST_SUITE: api
@@ -212,13 +220,13 @@ pipeline:
       - MAILHOG_HOST=email
       - DIVIDE_INTO_NUM_PARTS=8
       - RUN_PART=${PART}
+      - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}
     commands:
       - touch /drone/saved-settings.sh
       - . /drone/saved-settings.sh
-      - cd /drone/server/tests/acceptance
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
-      - chmod +x run.sh
-      - ./run.sh --remote --type webUI --tags "~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}"
+      - chmod +x /drone/server/tests/acceptance/run.sh
+      - make test-acceptance-webui
     when:
       matrix:
         TEST_SUITE: selenium
@@ -300,7 +308,7 @@ services:
     command: [ "/usr/local/bin/apachectl", "-e", "debug" , "-D", "FOREGROUND" ]
     when:
       matrix:
-        USE_SERVER: true
+        NEED_SERVER: true
 
   federated:
     image: owncloudci/php:${PHP_VERSION}
@@ -364,6 +372,15 @@ matrix:
 #      TEST_SUITE: phpunit
 #      CORE_BRANCH: stable10
 
+    # owncloud-coding-standard
+    - PHP_VERSION: 7.2
+      STORAGE: "does not matter"
+      TEST_SUITE: owncloud-coding-standard
+
+    - PHP_VERSION: 5.6
+      STORAGE: "does not matter"
+      TEST_SUITE: owncloud-coding-standard
+
     # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
@@ -371,63 +388,83 @@ matrix:
       CORE_BRANCH: stable10
       FLUSH_CACHE: true
       REBUILT_CACHE: true
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
       CORE_BRANCH: stable10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
       CORE_BRANCH: stable10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
       CORE_BRANCH: stable10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       STORAGE_CONFIG_SUFFIX: .multibucket
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
       CORE_BRANCH: stable10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
   # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
       CORE_BRANCH: master
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
       CORE_BRANCH: master
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       STORAGE_CONFIG_SUFFIX: .multibucket
       PHP_VERSION: 7.1
       TEST_SUITE: phpunit
       CORE_BRANCH: master
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
   # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
       CORE_BRANCH: master
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.2
       TEST_SUITE: phpunit
       CORE_BRANCH: master
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
   # acceptance tests
     # UI stable10
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -436,11 +473,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 1
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -449,11 +488,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 2
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -462,11 +503,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 3
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -475,11 +518,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 4
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -488,11 +533,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 5
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -501,11 +548,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 6
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -514,11 +563,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 7
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: selenium
@@ -527,12 +578,14 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 8
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     # UI master
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -541,11 +594,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 1
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -554,11 +609,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 2
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -567,11 +624,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 3
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -580,11 +639,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 4
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -593,11 +654,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 5
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -606,11 +669,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 6
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -619,11 +684,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 7
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: selenium
@@ -632,12 +699,14 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 8
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     # API stable10
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
@@ -646,11 +715,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 1
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
@@ -659,11 +730,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 2
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
@@ -672,11 +745,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 3
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
@@ -685,11 +760,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 4
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: stable10
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
       TEST_SUITE: api
@@ -698,12 +775,14 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 5
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     # API master
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: api
@@ -712,11 +791,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 1
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: api
@@ -725,11 +806,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 2
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: api
@@ -738,11 +821,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 3
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: api
@@ -751,11 +836,13 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 4
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
       PREPARE_ACCEPTANCE: true
-      USE_SERVER: true
+      NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
       TEST_SUITE: api
@@ -764,3 +851,5 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 5
+      NEED_CORE: true
+      NEED_INSTALL_APP: true

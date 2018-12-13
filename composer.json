@@ -16,8 +16,12 @@
       "php": "7.0.0"
     }
   },
-
   "require-dev": {
-    "owncloud/coding-standard": "^1.0"
+    "bamarni/composer-bin-plugin": "^1.2"
+  },
+  "extra": {
+    "bamarni-bin": {
+      "bin-links": false
+    }
   }
 }
