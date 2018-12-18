@@ -192,10 +192,10 @@ pipeline:
     commands:
       - touch /drone/saved-settings.sh
       - . /drone/saved-settings.sh
-      - cd /drone/server
-      - chmod +x ./tests/drone/test-acceptance.sh
-      - chmod +x ./tests/acceptance/run.sh
-      - ./tests/drone/test-acceptance.sh
+      - cd /drone/server/tests/acceptance
+      - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
+      - chmod +x run.sh
+      - ./run.sh --remote --type api --tags "~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}"
     when:
       matrix:
         TEST_SUITE: api
