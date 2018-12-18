@@ -68,10 +68,10 @@ pipeline:
 
   install-core:
     image: owncloudci/core
+    version: ${OC_VERSION}
     pull: true
     db_type: ${DB_TYPE}
     db_host: ${DB_HOST}
-    git_reference: ${CORE_BRANCH}
     environment:
       - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
       - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
@@ -354,23 +354,23 @@ matrix:
 #    - STORAGE: ceph
 #      PHP_VERSION: 5.6
 #      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
+#      OC_VERSION: daily-stable10-qa
 #
 #    - STORAGE: scality
 #      PHP_VERSION: 5.6
 #      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
+#      OC_VERSION: daily-stable10-qa
 #
 #    # 7.0
 #    - STORAGE: ceph
 #      PHP_VERSION: 7.0
 #      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
+#      OC_VERSION: daily-stable10-qa
 #
 #    - STORAGE: scality
 #      PHP_VERSION: 7.0
 #      TEST_SUITE: phpunit
-#      CORE_BRANCH: stable10
+#      OC_VERSION: daily-stable10-qa
 
     # owncloud-coding-standard
     - PHP_VERSION: 7.2
@@ -384,8 +384,8 @@ matrix:
     # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
+      OC_VERSION: daily-stable10-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: stable10
       FLUSH_CACHE: true
       REBUILT_CACHE: true
       NEED_CORE: true
@@ -393,76 +393,76 @@ matrix:
 
     - STORAGE: scality
       PHP_VERSION: 7.1
+      OC_VERSION: daily-stable10-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: stable10
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
+      OC_VERSION: daily-stable10-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: stable10
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.2
+      OC_VERSION: daily-stable10-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: stable10
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     - STORAGE: scality
       STORAGE_CONFIG_SUFFIX: .multibucket
       PHP_VERSION: 7.1
+      OC_VERSION: daily-stable10-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: stable10
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
   # 7.1
     - STORAGE: ceph
       PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     - STORAGE: scality
       STORAGE_CONFIG_SUFFIX: .multibucket
       PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
   # 7.2
     - STORAGE: ceph
       PHP_VERSION: 7.2
+      OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
     - STORAGE: scality
       PHP_VERSION: 7.2
+      OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit
-      CORE_BRANCH: master
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
   # acceptance tests
     # UI stable10
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -477,7 +477,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -492,7 +492,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -507,7 +507,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -522,7 +522,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -537,7 +537,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -552,7 +552,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -567,7 +567,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -582,7 +582,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -597,7 +597,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -612,7 +612,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -627,7 +627,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -642,7 +642,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -657,7 +657,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -672,7 +672,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -688,7 +688,7 @@ matrix:
 
     # UI master
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -703,7 +703,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -718,7 +718,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -733,7 +733,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -748,7 +748,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -763,7 +763,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -778,7 +778,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -793,7 +793,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -809,7 +809,7 @@ matrix:
 
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -824,7 +824,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -839,7 +839,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -854,7 +854,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -869,7 +869,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -884,7 +884,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -899,7 +899,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -915,7 +915,7 @@ matrix:
 
     # API stable10
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -930,7 +930,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -945,7 +945,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -960,7 +960,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -975,7 +975,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: stable10
+      OC_VERSION: daily-stable10-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -991,7 +991,7 @@ matrix:
 
     # API master
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -1006,7 +1006,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -1021,7 +1021,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -1036,7 +1036,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
@@ -1051,7 +1051,7 @@ matrix:
       NEED_INSTALL_APP: true
 
     - PHP_VERSION: 7.1
-      CORE_BRANCH: master
+      OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
