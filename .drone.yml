@@ -189,7 +189,7 @@ pipeline:
         OWNCLOUD_LOG: true
         USE_FEDERATED_SERVER: true
 
-  api-acceptance-tests:
+  core-api-acceptance-tests:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
@@ -206,9 +206,9 @@ pipeline:
       - make test-acceptance-api
     when:
       matrix:
-        TEST_SUITE: api
+        TEST_SUITE: core-api-acceptance
 
-  webui-acceptance-tests:
+  core-webui-acceptance-tests:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
@@ -229,7 +229,7 @@ pipeline:
       - make test-acceptance-webui
     when:
       matrix:
-        TEST_SUITE: selenium
+        TEST_SUITE: core-web-acceptance
 
   print-log:
     image: owncloudci/php:${PHP_VERSION}
@@ -325,7 +325,7 @@ services:
     pull: true
     when:
       matrix:
-        TEST_SUITE: selenium
+        TEST_SUITE: core-web-acceptance
 
   mysql:
     image: mysql:5.7
@@ -344,7 +344,7 @@ services:
     pull: true
     when:
       matrix:
-        TEST_SUITE: selenium
+        TEST_SUITE: core-web-acceptance
 
 
 matrix:
@@ -467,7 +467,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -482,7 +482,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -497,7 +497,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -512,7 +512,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -527,7 +527,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -542,7 +542,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -557,7 +557,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -572,7 +572,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -587,7 +587,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -602,7 +602,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -617,7 +617,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -632,7 +632,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -647,7 +647,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -662,7 +662,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -677,7 +677,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -693,7 +693,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -708,7 +708,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -723,7 +723,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -738,7 +738,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -753,7 +753,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -768,7 +768,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -783,7 +783,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -798,7 +798,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -814,7 +814,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -829,7 +829,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -844,7 +844,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -859,7 +859,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -874,7 +874,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -889,7 +889,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -904,7 +904,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: selenium
+      TEST_SUITE: core-web-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -920,7 +920,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -935,7 +935,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -950,7 +950,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -965,7 +965,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -980,7 +980,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-stable10-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -996,7 +996,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -1011,7 +1011,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -1026,7 +1026,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -1041,7 +1041,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
@@ -1056,7 +1056,7 @@ matrix:
       NEED_SERVER: true
       USE_FEDERATED_SERVER: true
       FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: api
+      TEST_SUITE: core-api-acceptance
       DB_TYPE: mysql
       DB_HOST: mysql
       STORAGE: ceph
