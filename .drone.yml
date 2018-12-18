@@ -218,7 +218,7 @@ pipeline:
       - TEST_SERVER_URL=http://server
       - PLATFORM=Linux
       - MAILHOG_HOST=email
-      - DIVIDE_INTO_NUM_PARTS=8
+      - DIVIDE_INTO_NUM_PARTS=15
       - RUN_PART=${PART}
       - BEHAT_FILTER_TAGS=~@app-required&&~@skip&&~@skipOnStorage:${STORAGE}
     commands:
@@ -581,6 +581,111 @@ matrix:
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 9
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 11
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 12
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 13
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 14
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: stable10
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-stable10-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 15
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
     # UI master
     - PHP_VERSION: 7.1
       CORE_BRANCH: master
@@ -699,6 +804,112 @@ matrix:
       STORAGE: ceph
       OWNCLOUD_LOG: true
       PART: 8
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 9
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 10
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 11
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 12
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 13
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 14
+      NEED_CORE: true
+      NEED_INSTALL_APP: true
+
+    - PHP_VERSION: 7.1
+      CORE_BRANCH: master
+      PREPARE_ACCEPTANCE: true
+      NEED_SERVER: true
+      USE_FEDERATED_SERVER: true
+      FEDERATION_OC_VERSION: daily-master-qa
+      TEST_SUITE: selenium
+      DB_TYPE: mysql
+      DB_HOST: mysql
+      STORAGE: ceph
+      OWNCLOUD_LOG: true
+      PART: 15
       NEED_CORE: true
       NEED_INSTALL_APP: true
 
