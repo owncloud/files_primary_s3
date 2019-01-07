@@ -122,7 +122,7 @@ pipeline:
     commands:
       - wait-for-it ceph:80
       - cd /drone/server
-      - php ./occ s3:create-bucket OWNCLOUD --accept-warning
+      - ./apps/files_primary_s3/tests/drone/create-bucket.sh
     when:
       matrix:
         STORAGE: ceph
