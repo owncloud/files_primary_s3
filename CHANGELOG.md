@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## [1.0.3]
+## [1.0.3] - 2019-01-09
 
 ### Fixed
 
@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.0.3..master
 [1.0.3]: https://github.com/owncloud/files_primary_s3/compare/v1.0.2..v1.0.3
 [1.0.2]: https://github.com/owncloud/files_primary_s3/compare/v1.0.0..v1.0.2
 
