@@ -66,6 +66,7 @@ appstore: vendor
 	lib \
 	vendor \
 	LICENSE \
+	CHANGELOG.md \
 	$(appstore_package_name)
 
 ifdef CAN_SIGN
