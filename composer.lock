@@ -1,30 +1,29 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "30772261fb1d1327e2578ae8428a5a53",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.81.3",
+            "version": "3.87.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e569fa3e8998dd20896ff189b063b61a5d42369d"
+                "reference": "4f042410335c06aa7ab81365194782a30c144bc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e569fa3e8998dd20896ff189b063b61a5d42369d",
-                "reference": "e569fa3e8998dd20896ff189b063b61a5d42369d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4f042410335c06aa7ab81365194782a30c144bc2",
+                "reference": "4f042410335c06aa7ab81365194782a30c144bc2",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
-                "ext-spl": "*",
                 "guzzlehttp/guzzle": "^5.3.3|^6.2.1",
                 "guzzlehttp/promises": "~1.0",
                 "guzzlehttp/psr7": "^1.4.1",
@@ -87,7 +86,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-12-11T23:08:33+00:00"
+            "time": "2019-03-04T19:19:05+00:00"
         },
         {
             "name": "dg/composer-cleaner",
