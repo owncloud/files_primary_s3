@@ -352,17 +352,6 @@ services:
 matrix:
   include:
   # unit tests
-#    # 5.6
-#    - STORAGE: ceph
-#      PHP_VERSION: 5.6
-#      TEST_SUITE: phpunit
-#      OC_VERSION: daily-stable10-qa
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 5.6
-#      TEST_SUITE: phpunit
-#      OC_VERSION: daily-stable10-qa
-#
 #    # 7.0
 #    - STORAGE: ceph
 #      PHP_VERSION: 7.0
@@ -379,7 +368,7 @@ matrix:
       STORAGE: "does not matter"
       TEST_SUITE: owncloud-coding-standard
 
-    - PHP_VERSION: 5.6
+    - PHP_VERSION: 7.0
       STORAGE: "does not matter"
       TEST_SUITE: owncloud-coding-standard
 
