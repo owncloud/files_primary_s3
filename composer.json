@@ -13,7 +13,7 @@
     "optimize-autoloader": true,
     "classmap-authoritative": false,
     "platform": {
-      "php": "7.0.0"
+      "php": "7.0.8"
     }
   },
   "require-dev": {

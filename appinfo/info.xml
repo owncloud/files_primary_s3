@@ -24,7 +24,7 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 	</documentation>
 	<dependencies>
 		<php min-version="7.0" />
-		<owncloud min-version="10" max-version="10" />
+		<owncloud min-version="10.2" max-version="10" />
 	</dependencies>
 	<types>
 		<filesystem/>
