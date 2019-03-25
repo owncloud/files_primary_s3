@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "97ab09c2371af19695e87102e3323426",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.90.1",
+            "version": "3.90.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3262a84de9428766646223963c944b2be2cd09c0"
+                "reference": "b9d93ad14a504a0833bdafa2e80c9bd90d6cf47a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3262a84de9428766646223963c944b2be2cd09c0",
-                "reference": "3262a84de9428766646223963c944b2be2cd09c0",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b9d93ad14a504a0833bdafa2e80c9bd90d6cf47a",
+                "reference": "b9d93ad14a504a0833bdafa2e80c9bd90d6cf47a",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-03-12T18:11:23+00:00"
+            "time": "2019-03-25T18:17:43+00:00"
         },
         {
             "name": "dg/composer-cleaner",
