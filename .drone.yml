@@ -228,8 +228,8 @@ pipeline:
       - . /drone/saved-settings.sh
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
       - chmod +x /drone/server/tests/acceptance/run.sh
-      - for i in `ls apps`; do su-exec www-data ./occ integrity:check-app $i; done
-      - su-exec www-data ./occ integrity:check-core
+      - for i in `ls /drone/server/apps`; do su-exec www-data /drone/server/occ integrity:check-app $i; done
+      - su-exec www-data /drone/server/occ integrity:check-core
       - make test-acceptance-webui
     when:
       matrix:
