@@ -162,6 +162,7 @@ pipeline:
       - php occ config:system:set trusted_domains 1 --value=server
       - php occ config:system:set trusted_domains 2 --value=federated
       - php occ log:manage --level 0
+      - php occ config:system:set --value true --type boolean integrity.check.disabled
       - php occ config:list
       - chown -R www-data. /drone/server
     when:
