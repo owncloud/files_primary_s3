@@ -126,10 +126,20 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
-		$uploader->upload();
+		$status = $uploader->upload();
+		$statusCode = $status->get('@metadata')['statusCode'];
 		if (\is_resource($stream)) {
 			\fclose($stream);
 		}
+
+		/**
+		 * Upload to object storage is successful when status code is 200
+		 */
+		if ($statusCode === 200) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
