@@ -32,7 +32,7 @@ use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
 use GuzzleHttp\Event\BeforeEvent;
-use GuzzleHttp\Ring\Client\StreamHandler;
+use GuzzleHttp\Handler\StreamHandler;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
