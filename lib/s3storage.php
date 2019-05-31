@@ -25,6 +25,7 @@
 
 namespace OCA\Files_Primary_S3;
 
+use Aws\Exception\AwsException;
 use Aws\Handler\GuzzleV5\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
@@ -34,6 +35,7 @@ use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
+use OCP\Files\ObjectStore\ObjectStoreWriteException;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -126,7 +128,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
-		$uploader->upload();
+
+		try {
+			$uploader->upload();
+		} catch (AwsException $e) {
+			throw new ObjectStoreWriteException($e->getMessage(), $e->getCode(), $e);
+		}
+
 		if (\is_resource($stream)) {
 			\fclose($stream);
 		}
