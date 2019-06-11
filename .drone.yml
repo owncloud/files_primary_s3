@@ -24,7 +24,7 @@ pipeline:
       - php occ a:l
       - php occ config:system:set trusted_domains 1 --value=server
       - php occ config:system:set trusted_domains 2 --value=federated
-      - php occ log:manage --level 0
+      - php occ log:manage --level 2
       - php occ config:list
       - echo "export TEST_SERVER_FED_URL=http://federated" > /drone/saved-settings.sh
     when:
@@ -161,7 +161,7 @@ pipeline:
       - php occ a:l
       - php occ config:system:set trusted_domains 1 --value=server
       - php occ config:system:set trusted_domains 2 --value=federated
-      - php occ log:manage --level 0
+      - php occ log:manage --level 2
       - php occ config:system:set --value true --type boolean integrity.check.disabled
       - php occ config:list
       - chown -R www-data. /drone/server
