@@ -3,10 +3,8 @@
   "description": "ownCloud primary storage integration using S3 protocol",
   "require": {
     "dg/composer-cleaner": "^2.0",
-    "aws/aws-sdk-php": "^3.48"
-  },
-  "replace": {
-    "guzzlehttp/guzzle": "*"
+    "aws/aws-sdk-php": "^3.48",
+    "guzzlehttp/guzzle": "^5.3"
   },
   "license": "GPL-2.0",
   "config": {

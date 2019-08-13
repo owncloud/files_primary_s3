@@ -15,8 +15,10 @@ endif
 
 app_name=$(notdir $(CURDIR))
 project_directory=$(CURDIR)/../$(app_name)
-build_tools_directory=$(CURDIR)/build/tools
-appstore_build_directory=$(CURDIR)/build/artifacts/appstore
+build_directory=$(CURDIR)/build
+scoper_directory=$(build_directory)/scoper
+build_tools_directory=$(build_directory)/tools
+appstore_build_directory=$(build_directory)/artifacts/appstore
 appstore_package_name=$(appstore_build_directory)/$(app_name)
 
 acceptance_test_deps=vendor-bin/behat/vendor
@@ -40,6 +42,7 @@ PHPUNITDBG=phpdbg -qrr -d memory_limit=4096M -d zend.enable_gc=0 "$(PWD)/../../l
 PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
 PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
 PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
+PHPSCOPER=php vendor-bin/php-scoper/vendor/bin/php-scoper
 BEHAT_BIN=vendor-bin/behat/vendor/bin/behat
 
 # start with displaying help
@@ -51,7 +54,7 @@ all: vendor
 
 .PHONY: clean
 clean: ## Remove appstore build
-	rm -rf ./build/artifacts
+	rm -rf $(build_directory)
 	rm -rf ./vendor
 	rm -Rf vendor-bin/**/vendor vendor-bin/**/composer.lock
 
@@ -59,19 +62,26 @@ clean: ## Remove appstore build
 dist: ## Builds the appstore package
 	make appstore
 
+.PHONY: scope
+scope: ## Scoper
+scope: vendor-bin/php-scoper/vendor
+	mkdir -p $(scoper_directory)
+	$(PHPSCOPER) add-prefix --output-dir $(scoper_directory) --force --config=./scoper.inc.php
+	$(COMPOSER_BIN) dump-autoload --working-dir $(scoper_directory) --classmap-authoritative
+
 # Builds the package for the app store, ignores php and js tests
 .PHONY: appstore
 appstore: ## Builds the package for app store
-appstore: vendor
+appstore: vendor scope
 	rm -rf $(appstore_build_directory)
 	mkdir -p $(appstore_package_name)
 	cp --parents -r \
 	appinfo \
-	lib \
-	vendor \
 	LICENSE \
 	CHANGELOG.md \
 	$(appstore_package_name)
+	cp -r $(scoper_directory)/lib $(appstore_package_name)/lib
+	cp -r $(scoper_directory)/vendor $(appstore_package_name)/vendor
 
 ifdef CAN_SIGN
 	$(sign) --path="$(appstore_package_name)"
@@ -170,3 +180,9 @@ vendor-bin/behat/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/behat/com
 
 vendor-bin/behat/composer.lock: vendor-bin/behat/composer.json
 	@echo behat composer.lock is not up to date.
+
+vendor-bin/php-scoper/vendor: vendor/bamarni/composer-bin-plugin vendor-bin/php-scoper/composer.lock
+	$(COMPOSER_BIN) bin php-scoper install --no-progress
+
+vendor-bin/php-scoper/composer.lock: vendor-bin/php-scoper/composer.json
+	@echo php-scoper composer.lock is not up to date.
