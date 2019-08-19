@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.109.2",
+            "version": "3.109.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bfbf0f0f1e4949747bd3e77dd8de94af47f7fb72"
+                "reference": "e8d3416f9b1e21029fc0eb63df075e325c690187"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bfbf0f0f1e4949747bd3e77dd8de94af47f7fb72",
-                "reference": "bfbf0f0f1e4949747bd3e77dd8de94af47f7fb72",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e8d3416f9b1e21029fc0eb63df075e325c690187",
+                "reference": "e8d3416f9b1e21029fc0eb63df075e325c690187",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-08-12T18:14:30+00:00"
+            "time": "2019-08-19T18:08:45+00:00"
         },
         {
             "name": "dg/composer-cleaner",
