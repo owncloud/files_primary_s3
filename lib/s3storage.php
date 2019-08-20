@@ -61,7 +61,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		if (!isset($params['options']) || !isset($params['bucket'])) {
 			throw new \Exception('Connection options and bucket must be configured.');
 		}
-
 		$this->params = $params;
 	}
 

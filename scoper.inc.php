@@ -60,6 +60,15 @@ return [
             }
             return \preg_replace('/const ISO8601_BASIC = \'(.*)\';/', '    const ISO8601_BASIC = \'Ymd\THis\Z\';', $content);
         },
+        // Fix AWS Exception magic
+        function (string $filePath, string $prefix, string $content): string {
+            if (false === (\strpos($filePath, 'vendor/aws/aws-sdk-php/src/AwsClient.php'))) {
+                return $content;
+            }
+            $content = \preg_replace('/Aws\\\\\\\\\{\$service\}\\\\\\\\Exception\\\\\\\\\{\$service\}Exception/', $prefix.'\\\\\\\\Aws\\\\\\\\{$service}\\\\\\\\Exception\\\\\\\\{$service}Exception', $content);
+            return $content;
+        }
+    ],
 
     // PHP-Scoper's goal is to make sure that all code for a project lies in a distinct PHP namespace. However, you
     // may want to share a common API between the bundled code of your PHAR and the consumer code. For example if
