@@ -105,8 +105,7 @@ pipeline:
       matrix:
         NEED_INSTALL_APP: true
 
-  install-built-app:
-    #scope requires php 7.2
+  build-app:
     image: owncloudci/php:7.2
     pull: true
     environment:
@@ -116,12 +115,23 @@ pipeline:
       - bower_storage__packages=/drone/files_primary_s3/.cache/bower
     commands:
       - make dist
-      - rm -rf appinfo lib vendor
+    when:
+      matrix:
+        NEED_INSTALL_BUILT_APP: true
+
+  install-built-app:
+    #scope requires php 7.2
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
+    environment:
+      - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
+      - NPM_CONFIG_CACHE=/drone/files_primary_s3/.cache/npm
+      - YARN_CACHE_FOLDER=/drone/files_primary_s3/.cache/yarn
+      - bower_storage__packages=/drone/files_primary_s3/.cache/bower
+    commands:
       - mkdir -p /drone/server/config
       - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
-      - cd /drone/server/apps-external
-      - mv $DRONE_WORKSPACE/build/artifacts/appstore/files_primary_s3.tar.gz .
-      - tar xfz files_primary_s3.tar.gz
+      - php /drone/server/occ market:install --local $DRONE_WORKSPACE/build/artifacts/appstore/files_primary_s3.tar.gz
       - php /drone/server/occ app:enable files_primary_s3
     when:
       matrix:
