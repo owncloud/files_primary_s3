@@ -52,6 +52,14 @@ return [
             }
             return \preg_replace('/namespace '.$prefix.'\\\\(.*)/', 'namespace $1', $content);
         },
+        // This should address gmdate constant being scoped in aws signature
+        // also see https://github.com/humbug/php-scoper/issues/301
+        function (string $filePath, string $prefix, string $content): string {
+            if (false === (\strpos($filePath, 'vendor/aws/aws-sdk-php/src/Signature/SignatureV4.php'))) {
+                return $content;
+            }
+            return \preg_replace('/const ISO8601_BASIC = \'(.*)\';/', '    const ISO8601_BASIC = \'Ymd\THis\Z\';', $content);
+        },
 
     // PHP-Scoper's goal is to make sure that all code for a project lies in a distinct PHP namespace. However, you
     // may want to share a common API between the bundled code of your PHAR and the consumer code. For example if
