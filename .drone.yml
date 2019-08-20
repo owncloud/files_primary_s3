@@ -381,116 +381,116 @@ matrix:
     - PHP_VERSION: 7.0
       STORAGE: "does not matter"
       TEST_SUITE: owncloud-coding-standard
-#
-#    # unit tests
-#    # 7.0
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.0
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-ceph
-#      FLUSH_CACHE: true
-#      REBUILT_CACHE: true
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.0
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      STORAGE_CONFIG_SUFFIX: .multibucket
-#      PHP_VERSION: 7.0
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    # 7.1
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.1
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-ceph
-#      FLUSH_CACHE: true
-#      REBUILT_CACHE: true
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.1
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      STORAGE_CONFIG_SUFFIX: .multibucket
-#      PHP_VERSION: 7.1
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    # 7.2
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.2
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-ceph
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.2
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      STORAGE_CONFIG_SUFFIX: .multibucket
-#      PHP_VERSION: 7.2
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    # 7.3
-#    - STORAGE: ceph
-#      PHP_VERSION: 7.3
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-ceph
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      PHP_VERSION: 7.3
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
-#    - STORAGE: scality
-#      STORAGE_CONFIG_SUFFIX: .multibucket
-#      PHP_VERSION: 7.3
-#      OC_VERSION: daily-master-qa
-#      TEST_SUITE: phpunit-scality
-#      NEED_CORE: true
-#      NEED_INSTALL_APP: true
-#      OWNCLOUD_LOG: true
-#
+
+    # unit tests
+    # 7.0
+    - STORAGE: ceph
+      PHP_VERSION: 7.0
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-ceph
+      FLUSH_CACHE: true
+      REBUILT_CACHE: true
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      PHP_VERSION: 7.0
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.0
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    # 7.1
+    - STORAGE: ceph
+      PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-ceph
+      FLUSH_CACHE: true
+      REBUILT_CACHE: true
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.1
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    # 7.2
+    - STORAGE: ceph
+      PHP_VERSION: 7.2
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-ceph
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      PHP_VERSION: 7.2
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.2
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    # 7.3
+    - STORAGE: ceph
+      PHP_VERSION: 7.3
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-ceph
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      PHP_VERSION: 7.3
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
+    - STORAGE: scality
+      STORAGE_CONFIG_SUFFIX: .multibucket
+      PHP_VERSION: 7.3
+      OC_VERSION: daily-master-qa
+      TEST_SUITE: phpunit-scality
+      NEED_CORE: true
+      NEED_INSTALL_BUILT_APP: true
+      OWNCLOUD_LOG: true
+
     # acceptance tests
     # UI master
     - PHP_VERSION: 7.1
