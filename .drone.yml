@@ -130,9 +130,9 @@ pipeline:
       - bower_storage__packages=/drone/files_primary_s3/.cache/bower
     commands:
       - mkdir -p /drone/server/config
-      - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
       - php /drone/server/occ market:install --local $DRONE_WORKSPACE/build/artifacts/appstore/files_primary_s3.tar.gz
       - php /drone/server/occ app:enable files_primary_s3
+      - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
     when:
       matrix:
         NEED_INSTALL_BUILT_APP: true
