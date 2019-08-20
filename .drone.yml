@@ -373,14 +373,14 @@ services:
 
 matrix:
   include:
-#    # owncloud-coding-standard
-#    - PHP_VERSION: 7.2
-#      STORAGE: "does not matter"
-#      TEST_SUITE: owncloud-coding-standard
-#
-#    - PHP_VERSION: 7.0
-#      STORAGE: "does not matter"
-#      TEST_SUITE: owncloud-coding-standard
+    # owncloud-coding-standard
+    - PHP_VERSION: 7.2
+      STORAGE: "does not matter"
+      TEST_SUITE: owncloud-coding-standard
+
+    - PHP_VERSION: 7.0
+      STORAGE: "does not matter"
+      TEST_SUITE: owncloud-coding-standard
 #
 #    # unit tests
 #    # 7.0

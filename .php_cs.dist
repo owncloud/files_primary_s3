@@ -9,6 +9,8 @@ $config
 	->exclude('.composer')
 	->exclude('vendor-bin')
 	->notPath('/^c3.php/')
+	->notPath('/^scoper.inc.php/')
+	->notPath('/^scoper-fix-autoloader.php/')
     ->in(__DIR__);
 
 return $config;
