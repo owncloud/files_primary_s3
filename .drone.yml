@@ -1,6 +1,7 @@
 workspace:
   base: /drone
-  path: server/apps/files_primary_s3
+  path: files_primary_s3
+
 
 branches: [ master, release, release/* ]
 
@@ -52,7 +53,7 @@ pipeline:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
     environment:
-      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
+      - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
     commands:
       - composer install -n --no-progress
 
@@ -72,11 +73,12 @@ pipeline:
     pull: true
     db_type: ${DB_TYPE}
     db_host: ${DB_HOST}
+    core_path: /drone/server
     environment:
-      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
-      - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
-      - YARN_CACHE_FOLDER=/drone/server/apps/files_primary_s3/.cache/yarn
-      - bower_storage__packages=/drone/server/apps/files_primary_s3/.cache/bower
+      - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
+      - NPM_CONFIG_CACHE=/drone/files_primary_s3/.cache/npm
+      - YARN_CACHE_FOLDER=/drone/files_primary_s3/.cache/yarn
+      - bower_storage__packages=/drone/files_primary_s3/.cache/bower
     when:
       matrix:
         NEED_CORE: true
@@ -109,22 +111,19 @@ pipeline:
     image: owncloudci/php:7.2
     pull: true
     environment:
-      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
-      - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
-      - YARN_CACHE_FOLDER=/drone/server/apps/files_primary_s3/.cache/yarn
-      - bower_storage__packages=/drone/server/apps/files_primary_s3/.cache/bower
+      - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
+      - NPM_CONFIG_CACHE=/drone/files_primary_s3/.cache/npm
+      - YARN_CACHE_FOLDER=/drone/files_primary_s3/.cache/yarn
+      - bower_storage__packages=/drone/files_primary_s3/.cache/bower
     commands:
       - make dist
       - rm -rf appinfo lib vendor
       - mkdir -p /drone/server/config
       - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
       - cd /drone/server/apps-external
-      - mv /drone/server/apps/files_primary_s3/build/artifacts/appstore/files_primary_s3.tar.gz .
+      - mv $DRONE_WORKSPACE/build/artifacts/appstore/files_primary_s3.tar.gz .
       - tar xfz files_primary_s3.tar.gz
       - php /drone/server/occ app:enable files_primary_s3
-      - ls -al /drone/server
-      - ls -al /drone/server/apps
-      - ls -al /drone/server/apps-external
     when:
       matrix:
         NEED_INSTALL_BUILT_APP: true
@@ -147,7 +146,7 @@ pipeline:
     commands:
       - wait-for-it ceph:80
       - cd /drone/server
-      - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+      - ./$DRONE_WORKSPACE/tests/drone/create-bucket.sh
     when:
       matrix:
         STORAGE: ceph
@@ -364,637 +363,637 @@ services:
 
 matrix:
   include:
-    # owncloud-coding-standard
-    - PHP_VERSION: 7.2
-      STORAGE: "does not matter"
-      TEST_SUITE: owncloud-coding-standard
-
-    - PHP_VERSION: 7.0
-      STORAGE: "does not matter"
-      TEST_SUITE: owncloud-coding-standard
-
-    # unit tests
-    # 7.0
-    - STORAGE: ceph
-      PHP_VERSION: 7.0
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-ceph
-      FLUSH_CACHE: true
-      REBUILT_CACHE: true
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      PHP_VERSION: 7.0
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      STORAGE_CONFIG_SUFFIX: .multibucket
-      PHP_VERSION: 7.0
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    # 7.1
-    - STORAGE: ceph
-      PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-ceph
-      FLUSH_CACHE: true
-      REBUILT_CACHE: true
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      STORAGE_CONFIG_SUFFIX: .multibucket
-      PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    # 7.2
-    - STORAGE: ceph
-      PHP_VERSION: 7.2
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-ceph
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      PHP_VERSION: 7.2
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      STORAGE_CONFIG_SUFFIX: .multibucket
-      PHP_VERSION: 7.2
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    # 7.3
-    - STORAGE: ceph
-      PHP_VERSION: 7.3
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-ceph
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      PHP_VERSION: 7.3
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    - STORAGE: scality
-      STORAGE_CONFIG_SUFFIX: .multibucket
-      PHP_VERSION: 7.3
-      OC_VERSION: daily-master-qa
-      TEST_SUITE: phpunit-scality
-      NEED_CORE: true
-      NEED_INSTALL_APP: true
-      OWNCLOUD_LOG: true
-
-    # acceptance tests
-    # UI master
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 1
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 2
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 3
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 4
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 5
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 6
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 7
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 8
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 9
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 10
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 11
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 12
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 13
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 14
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 15
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 16
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 17
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 18
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 19
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-web-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 20
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    # API master
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 1
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 2
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 3
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 4
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 5
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 6
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 7
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 8
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 9
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 10
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 11
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 12
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 13
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
-    - PHP_VERSION: 7.1
-      OC_VERSION: daily-master-qa
-      PREPARE_ACCEPTANCE: true
-      NEED_SERVER: true
-      USE_FEDERATED_SERVER: true
-      FEDERATION_OC_VERSION: daily-master-qa
-      TEST_SUITE: core-api-acceptance
-      DB_TYPE: mysql
-      DB_HOST: mysql
-      STORAGE: ceph
-      OWNCLOUD_LOG: true
-      PART: 14
-      NEED_CORE: true
-      NEED_INSTALL_BUILT_APP: true
-
+#    # owncloud-coding-standard
+#    - PHP_VERSION: 7.2
+#      STORAGE: "does not matter"
+#      TEST_SUITE: owncloud-coding-standard
+#
+#    - PHP_VERSION: 7.0
+#      STORAGE: "does not matter"
+#      TEST_SUITE: owncloud-coding-standard
+#
+#    # unit tests
+#    # 7.0
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.0
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-ceph
+#      FLUSH_CACHE: true
+#      REBUILT_CACHE: true
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.0
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      STORAGE_CONFIG_SUFFIX: .multibucket
+#      PHP_VERSION: 7.0
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    # 7.1
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-ceph
+#      FLUSH_CACHE: true
+#      REBUILT_CACHE: true
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      STORAGE_CONFIG_SUFFIX: .multibucket
+#      PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    # 7.2
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.2
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-ceph
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.2
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      STORAGE_CONFIG_SUFFIX: .multibucket
+#      PHP_VERSION: 7.2
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    # 7.3
+#    - STORAGE: ceph
+#      PHP_VERSION: 7.3
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-ceph
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      PHP_VERSION: 7.3
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    - STORAGE: scality
+#      STORAGE_CONFIG_SUFFIX: .multibucket
+#      PHP_VERSION: 7.3
+#      OC_VERSION: daily-master-qa
+#      TEST_SUITE: phpunit-scality
+#      NEED_CORE: true
+#      NEED_INSTALL_APP: true
+#      OWNCLOUD_LOG: true
+#
+#    # acceptance tests
+#    # UI master
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 1
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 2
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 3
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 4
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 5
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 6
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 7
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 8
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 9
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 10
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 11
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 12
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 13
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 14
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 15
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 16
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 17
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 18
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 19
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-web-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 20
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    # API master
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 1
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 2
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 3
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 4
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 5
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 6
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 7
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 8
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 9
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 10
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 11
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 12
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 13
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
+#    - PHP_VERSION: 7.1
+#      OC_VERSION: daily-master-qa
+#      PREPARE_ACCEPTANCE: true
+#      NEED_SERVER: true
+#      USE_FEDERATED_SERVER: true
+#      FEDERATION_OC_VERSION: daily-master-qa
+#      TEST_SUITE: core-api-acceptance
+#      DB_TYPE: mysql
+#      DB_HOST: mysql
+#      STORAGE: ceph
+#      OWNCLOUD_LOG: true
+#      PART: 14
+#      NEED_CORE: true
+#      NEED_INSTALL_BUILT_APP: true
+#
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
       PREPARE_ACCEPTANCE: true
