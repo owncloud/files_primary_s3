@@ -44,7 +44,14 @@ return [
     // heart contents.
     //
     // For more see: https://github.com/humbug/php-scoper#patchers
-    'patchers' => [],
+    'patchers' => [
+        // The patcher ensures that files belonging to the app will not be prefixed
+        function (string $filePath, string $prefix, string $content): string {
+            if (false === (\strpos($filePath, 'files_primary_s3/lib'))) {
+                return $content;
+            }
+            return \preg_replace('/namespace '.$prefix.'\\\\(.*)/', 'namespace $1', $content);
+        },
 
     // PHP-Scoper's goal is to make sure that all code for a project lies in a distinct PHP namespace. However, you
     // may want to share a common API between the bundled code of your PHAR and the consumer code. For example if
