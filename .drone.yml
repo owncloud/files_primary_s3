@@ -104,6 +104,31 @@ pipeline:
       matrix:
         NEED_INSTALL_APP: true
 
+  install-built-app:
+    #scope requires php 7.2
+    image: owncloudci/php:7.2
+    pull: true
+    environment:
+      - COMPOSER_HOME=/drone/server/apps/files_primary_s3/.cache/composer
+      - NPM_CONFIG_CACHE=/drone/server/apps/files_primary_s3/.cache/npm
+      - YARN_CACHE_FOLDER=/drone/server/apps/files_primary_s3/.cache/yarn
+      - bower_storage__packages=/drone/server/apps/files_primary_s3/.cache/bower
+    commands:
+      - make dist
+      - rm -rf appinfo lib vendor
+      - mkdir -p /drone/server/config
+      - cp tests/drone/${STORAGE}${STORAGE_CONFIG_SUFFIX}.config.php /drone/server/config
+      - cd /drone/server/apps-external
+      - mv /drone/server/apps/files_primary_s3/build/artifacts/appstore/files_primary_s3.tar.gz .
+      - tar xfz files_primary_s3.tar.gz
+      - php /drone/server/occ app:enable files_primary_s3
+      - ls -al /drone/server
+      - ls -al /drone/server/apps
+      - ls -al /drone/server/apps-external
+    when:
+      matrix:
+        NEED_INSTALL_BUILT_APP: true
+
   prepare-bucket-scality:
     image: owncloudci/php:${PHP_VERSION}
     pull: true
@@ -472,7 +497,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 1
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -487,7 +512,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 2
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -502,7 +527,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 3
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -517,7 +542,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 4
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -532,7 +557,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 5
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -547,7 +572,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 6
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -562,7 +587,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 7
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -577,7 +602,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 8
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -592,7 +617,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 9
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -607,7 +632,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 10
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -622,7 +647,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 11
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -637,7 +662,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 12
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -652,7 +677,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 13
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -667,7 +692,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 14
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -682,7 +707,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 15
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -697,7 +722,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 16
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -712,7 +737,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 17
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -727,7 +752,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 18
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -742,7 +767,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 19
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -757,7 +782,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 20
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     # API master
     - PHP_VERSION: 7.1
@@ -773,7 +798,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 1
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -788,7 +813,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 2
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -803,7 +828,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 3
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -818,7 +843,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 4
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -833,7 +858,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 5
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -848,7 +873,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 6
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -863,7 +888,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 7
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -878,7 +903,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 8
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -893,7 +918,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 9
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -908,7 +933,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 10
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -923,7 +948,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 11
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -938,7 +963,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 12
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -953,7 +978,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 13
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -968,7 +993,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 14
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
       OC_VERSION: daily-master-qa
@@ -983,4 +1008,4 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 15
       NEED_CORE: true
-      NEED_INSTALL_APP: true
+      NEED_INSTALL_BUILT_APP: true
