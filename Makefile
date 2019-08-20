@@ -68,6 +68,7 @@ scope: vendor-bin/php-scoper/vendor
 	mkdir -p $(scoper_directory)
 	$(PHPSCOPER) add-prefix --output-dir $(scoper_directory) --force --config=./scoper.inc.php
 	$(COMPOSER_BIN) dump-autoload --working-dir $(scoper_directory) --classmap-authoritative
+	php scoper-fix-autoloader.php
 
 # Builds the package for the app store, ignores php and js tests
 .PHONY: appstore

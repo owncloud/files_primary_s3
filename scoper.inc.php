@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Isolated\Symfony\Component\Finder\Finder;
 
+
+
 return [
     // The prefix configuration. If a non null value will be used, a random prefix will be generated.
     'prefix' => null,
@@ -59,20 +61,6 @@ return [
                 return $content;
             }
             return \preg_replace('/const ISO8601_BASIC = \'(.*)\';/', '    const ISO8601_BASIC = \'Ymd\THis\Z\';', $content);
-        },
-        // Needed to address https://github.com/humbug/php-scoper/issues/298
-        function (string $filePath, string $prefix, string $content): string {
-            if (false === (\strpos($filePath, 'autoload_files.php'))) {
-                return $content;
-            }
-            return \preg_replace('/\'(.*?)\' => (.*?),', '\'a$1\' => $2,', $content);
-        },
-        // Needed to address https://github.com/humbug/php-scoper/issues/298
-        function (string $filePath, string $prefix, string $content): string {
-            if (false === (\strpos($filePath, 'autoload_static.php'))) {
-                return $content;
-            }
-            return \preg_replace('/\'(.*?)\' => __DIR__ \. (.*?),/', '\'a$1\' => __DIR__ . $2,', $content);
         },
         // Fix AWS Exception magic
         function (string $filePath, string $prefix, string $content): string {
