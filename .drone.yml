@@ -155,7 +155,7 @@ pipeline:
     commands:
       - wait-for-it ceph:80
       - cd /drone/server
-      - ./$DRONE_WORKSPACE/tests/drone/create-bucket.sh
+      - $DRONE_WORKSPACE/tests/drone/create-bucket.sh
     when:
       matrix:
         STORAGE: ceph
