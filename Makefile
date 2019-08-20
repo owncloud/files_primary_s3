@@ -44,6 +44,7 @@ PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
 PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
 PHPSCOPER=php vendor-bin/php-scoper/vendor/bin/php-scoper
 BEHAT_BIN=vendor-bin/behat/vendor/bin/behat
+ACCEPTANCE_RUNNER?=../../tests/acceptance/run.sh
 
 # start with displaying help
 help: ## Show this help message
@@ -133,17 +134,17 @@ test-php-phpstan: vendor-bin/phpstan/vendor
 .PHONY: test-acceptance-api
 test-acceptance-api: ## Run API acceptance tests
 test-acceptance-api: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
+	BEHAT_BIN=$(BEHAT_BIN) $(ACCEPTANCE_RUNNER) --remote --type api
 
 .PHONY: test-acceptance-cli
 test-acceptance-cli: ## Run CLI acceptance tests
 test-acceptance-cli: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli
+	BEHAT_BIN=$(BEHAT_BIN) $(ACCEPTANCE_RUNNER) --remote --type cli
 
 .PHONY: test-acceptance-webui
 test-acceptance-webui: ## Run webUI acceptance tests
 test-acceptance-webui: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
+	BEHAT_BIN=$(BEHAT_BIN) $(ACCEPTANCE_RUNNER) --remote --type webUI
 
 #
 # Dependency management

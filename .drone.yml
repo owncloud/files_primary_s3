@@ -2,7 +2,6 @@ workspace:
   base: /drone
   path: files_primary_s3
 
-
 branches: [ master, release, release/* ]
 
 pipeline:
@@ -226,7 +225,7 @@ pipeline:
       - . /drone/saved-settings.sh
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
       - chmod +x /drone/server/tests/acceptance/run.sh
-      - make test-acceptance-api
+      - make test-acceptance-api ACCEPTANCE_RUNNER=/drone/server/tests/acceptance/run.sh
     when:
       matrix:
         TEST_SUITE: core-api-acceptance
@@ -250,7 +249,7 @@ pipeline:
       - . /drone/saved-settings.sh
       - chmod 777 /drone/server/tests/acceptance/filesForUpload -R
       - chmod +x /drone/server/tests/acceptance/run.sh
-      - make test-acceptance-webui
+      - make test-acceptance-webui ACCEPTANCE_RUNNER=/drone/server/tests/acceptance/run.sh
     when:
       matrix:
         TEST_SUITE: core-web-acceptance
