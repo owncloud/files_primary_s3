@@ -111,24 +111,27 @@ pipeline:
     pull: true
     environment:
       - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
-      - NPM_CONFIG_CACHE=/drone/files_primary_s3/.cache/npm
-      - YARN_CACHE_FOLDER=/drone/files_primary_s3/.cache/yarn
-      - bower_storage__packages=/drone/files_primary_s3/.cache/bower
     commands:
       - make dist
     when:
       matrix:
-        NEED_INSTALL_BUILT_APP: true
+        BUILT_APP: true
 
-  install-built-app:
-
-    image: owncloudci/php:${PHP_VERSION}
+  build-app-qa:
+    # scoper requires php 7.2 - that is why the app is built on a php7.2 image
+    image: owncloudci/php:7.2
     pull: true
     environment:
       - COMPOSER_HOME=/drone/files_primary_s3/.cache/composer
-      - NPM_CONFIG_CACHE=/drone/files_primary_s3/.cache/npm
-      - YARN_CACHE_FOLDER=/drone/files_primary_s3/.cache/yarn
-      - bower_storage__packages=/drone/files_primary_s3/.cache/bower
+    commands:
+      - make dist-qa
+    when:
+      matrix:
+        BUILT_APP_QA: true
+
+  install-built-app:
+    image: owncloudci/php:${PHP_VERSION}
+    pull: true
     commands:
       - mkdir -p /drone/server/config
       - php /drone/server/occ market:install --local $DRONE_WORKSPACE/build/artifacts/appstore/files_primary_s3.tar.gz
@@ -167,6 +170,7 @@ pipeline:
     commands:
       - wait-for-it scality:8000
       - cd /drone/server
+      - cp -r $DRONE_WORKSPACE/tests apps-external/files_primary_s3
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
@@ -178,6 +182,7 @@ pipeline:
     commands:
       - wait-for-it ceph:80
       - cd /drone/server
+      - cp -r $DRONE_WORKSPACE/tests apps-external/files_primary_s3
       - php ./lib/composer/bin/phpunit --configuration tests/phpunit-autotest.xml
     when:
       matrix:
@@ -391,6 +396,7 @@ matrix:
       FLUSH_CACHE: true
       REBUILT_CACHE: true
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -399,6 +405,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -408,6 +415,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -419,6 +427,7 @@ matrix:
       FLUSH_CACHE: true
       REBUILT_CACHE: true
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -427,6 +436,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -436,6 +446,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -445,6 +456,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-ceph
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -453,6 +465,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -462,6 +475,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -471,6 +485,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-ceph
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -479,6 +494,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -488,6 +504,7 @@ matrix:
       OC_VERSION: daily-master-qa
       TEST_SUITE: phpunit-scality
       NEED_CORE: true
+      BUILT_APP_QA: true
       NEED_INSTALL_BUILT_APP: true
       OWNCLOUD_LOG: true
 
@@ -506,6 +523,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 1
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -521,6 +539,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 2
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -536,6 +555,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 3
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -551,6 +571,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 4
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -566,6 +587,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 5
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -581,6 +603,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 6
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -596,6 +619,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 7
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -611,6 +635,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 8
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -626,6 +651,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 9
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -641,6 +667,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 10
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -656,6 +683,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 11
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -671,6 +699,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 12
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -686,6 +715,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 13
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -701,6 +731,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 14
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -716,6 +747,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 15
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -731,6 +763,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 16
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -746,6 +779,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 17
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -761,6 +795,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 18
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -776,6 +811,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 19
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -791,6 +827,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 20
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     # API master
@@ -807,6 +844,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 1
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -822,6 +860,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 2
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -837,6 +876,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 3
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -852,6 +892,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 4
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -867,6 +908,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 5
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -882,6 +924,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 6
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -897,6 +940,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 7
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -912,6 +956,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 8
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -927,6 +972,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 9
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -942,6 +988,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 10
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -957,6 +1004,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 11
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -972,6 +1020,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 12
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -987,6 +1036,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 13
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -1002,6 +1052,7 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 14
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true
 
     - PHP_VERSION: 7.1
@@ -1017,4 +1068,5 @@ matrix:
       OWNCLOUD_LOG: true
       PART: 15
       NEED_CORE: true
+      BUILT_APP: true
       NEED_INSTALL_BUILT_APP: true

@@ -63,6 +63,16 @@ clean: ## Remove appstore build
 dist: ## Builds the appstore package
 	make appstore
 
+.PHONY: dist-qa
+dist-qa: ## Builds the qa package
+dist-qa: vendor scope
+	rm -rf $(appstore_build_directory)
+	mkdir -p $(appstore_package_name)
+	cp --parents -r appinfo LICENSE CHANGELOG.md tests $(appstore_package_name)
+	cp -r $(scoper_directory)/lib $(appstore_package_name)/lib
+	cp -r $(scoper_directory)/vendor $(appstore_package_name)/vendor
+	tar --format=gnu -czf $(appstore_package_name).tar.gz -C $(appstore_package_name)/../ $(app_name)
+
 .PHONY: scope
 scope: ## Scoper
 scope: vendor-bin/php-scoper/vendor
