@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.0.4] - 2019-09-23
+
+### Fixed
+- Proper handling of objecstorage issues on object upload [#212](https://github.com/owncloud/files_primary_s3/pull/212)
+
+### Changed
+- Various library updates (`aws/aws-sdk-php`, `guzzlehttp/psr7`, `ralouphie/getallheaders` ) [#231](https://github.com/owncloud/files_primary_s3/pull/231)[#236](https://github.com/owncloud/files_primary_s3/pull/236) [#241](https://github.com/owncloud/files_primary_s3/pull/241)
 
 ## [1.0.3] - 2019-01-09
 
