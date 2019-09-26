@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
 ## [1.0.4] - 2019-09-23
 
 ### Fixed
@@ -28,8 +30,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - First marketplace release
-
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.0.3..master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.0.4...master
+[1.0.4]: https://github.com/owncloud/files_primary_s3/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/owncloud/files_primary_s3/compare/v1.0.2..v1.0.3
 [1.0.2]: https://github.com/owncloud/files_primary_s3/compare/v1.0.0..v1.0.2
 
