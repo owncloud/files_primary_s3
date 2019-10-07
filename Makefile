@@ -90,14 +90,14 @@ test-php-codecheck:
 	$(occ) app:check-code $(app_name) -c deprecation
 
 .PHONY: test-php-unit
-test-php-unit: ## Run php unit tests
+test-php-unit: ## Run core php unit tests
 test-php-unit:
-	# TODO: No tests in here.
+	cd ../../ && $(PHPUNIT) --configuration ./tests/phpunit-autotest.xml
 
 .PHONY: test-php-unit-dbg
-test-php-unit-dbg: ## Run php unit tests using phpdbg
+test-php-unit-dbg: ## Run core php unit tests using phpdbg
 test-php-unit-dbg:
-	# TODO: No tests in here.
+	cd ../../ && $(PHPUNITDBG) --configuration ./tests/phpunit-autotest.xml
 
 .PHONY: test-php-style
 test-php-style: ## Run php-cs-fixer and check owncloud code-style
