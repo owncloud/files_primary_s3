@@ -88,9 +88,6 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 25,
-			'extraEnvironment': {
-				'S3_TYPE': 'ceph',
-			},
 		},
 		'api-ceph': {
 			'suites': [
@@ -104,9 +101,6 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 25,
-			'extraEnvironment': {
-				'S3_TYPE': 'ceph',
-			},
 		},
 	}
 }
@@ -856,6 +850,10 @@ def acceptance():
 
 								if (needObjectStore):
 									environment['OC_TEST_ON_OBJECTSTORE'] = '1'
+									if (params['cephS3'] != False):
+										environment['S3_TYPE'] = 'ceph'
+									if (params['scalityS3'] != False):
+										environment['S3_TYPE'] = 'scality'
 
 								result = {
 									'kind': 'pipeline',
