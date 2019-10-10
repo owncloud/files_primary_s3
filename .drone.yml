@@ -1212,16 +1212,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 1
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1406,16 +1405,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 2
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1600,16 +1598,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 3
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1794,16 +1791,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 4
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1988,16 +1984,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 5
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2182,16 +2177,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 6
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2376,16 +2370,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 7
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2570,16 +2563,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 8
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2764,16 +2756,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 9
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2958,16 +2949,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 10
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3152,16 +3142,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 11
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3346,16 +3335,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 12
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3540,16 +3528,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 13
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3734,16 +3721,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 14
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3928,16 +3914,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 15
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4122,16 +4107,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 16
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4316,16 +4300,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 17
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4510,16 +4493,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 18
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4704,16 +4686,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 19
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4898,16 +4879,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 20
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -5092,16 +5072,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 21
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -5286,16 +5265,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 22
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -5480,16 +5458,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 23
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -5674,16 +5651,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 24
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -5868,16 +5844,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 25
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -6062,13 +6037,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 1
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6241,13 +6215,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 2
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6420,13 +6393,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 3
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6599,13 +6571,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 4
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6778,13 +6749,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 5
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6957,13 +6927,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 6
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7136,13 +7105,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 7
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7315,13 +7283,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 8
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7494,13 +7461,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 9
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7673,13 +7639,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 10
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7852,13 +7817,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 11
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8031,13 +7995,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 12
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8210,13 +8173,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 13
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8389,13 +8351,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 14
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8568,13 +8529,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 15
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8747,13 +8707,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 16
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8926,13 +8885,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 17
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -9105,13 +9063,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 18
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -9284,13 +9241,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 19
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -9463,13 +9419,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 20
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -9642,13 +9597,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 21
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -9821,13 +9775,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 22
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -10000,13 +9953,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 23
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -10179,13 +10131,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 24
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -10358,13 +10309,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 25
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:

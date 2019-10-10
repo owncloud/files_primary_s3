@@ -85,11 +85,11 @@ config = {
 			'cephS3': True,
 			'emailNeeded': True,
 			'federatedServerNeeded': True,
-			'filterTags': '~@app-required&&~@skip&&~@skipOnStorage:ceph',
+			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 25,
 			'extraEnvironment': {
-				'BEHAT_YML': '/var/www/owncloud/server/tests/acceptance/config/behat.yml',
+				'S3_TYPE': 'ceph',
 			},
 		},
 		'api-ceph': {
@@ -101,11 +101,11 @@ config = {
 			],
 			'cephS3': True,
 			'federatedServerNeeded': True,
-			'filterTags': '~@app-required&&~@skip&&~@skipOnStorage:ceph',
+			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 25,
 			'extraEnvironment': {
-				'BEHAT_YML': '/var/www/owncloud/server/tests/acceptance/config/behat.yml',
+				'S3_TYPE': 'ceph',
 			},
 		},
 	}
