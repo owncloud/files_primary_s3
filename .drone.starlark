@@ -85,12 +85,9 @@ config = {
 			'cephS3': True,
 			'emailNeeded': True,
 			'federatedServerNeeded': True,
-			'filterTags': '~@app-required&&~@skip&&~@skipOnStorage:ceph',
+			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 20,
-			'extraEnvironment': {
-				'BEHAT_YML': '/var/www/owncloud/server/tests/acceptance/config/behat.yml',
-			},
+			'numberOfParts': 25,
 		},
 		'api-ceph': {
 			'suites': [
@@ -101,12 +98,9 @@ config = {
 			],
 			'cephS3': True,
 			'federatedServerNeeded': True,
-			'filterTags': '~@app-required&&~@skip&&~@skipOnStorage:ceph',
+			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 20,
-			'extraEnvironment': {
-				'BEHAT_YML': '/var/www/owncloud/server/tests/acceptance/config/behat.yml',
-			},
+			'numberOfParts': 25,
 		},
 	}
 }
@@ -758,6 +752,7 @@ def acceptance():
 		'useBundledApp': False,
 		'includeKeyInMatrixName': False,
 		'runAllSuites': False,
+		'runCoreTests': False,
 		'numberOfParts': 1,
 	}
 
@@ -833,19 +828,32 @@ def acceptance():
 									environment['SELENIUM_PORT'] = '4444'
 									environment['BROWSER'] = browser
 									environment['PLATFORM'] = 'Linux'
-									makeParameter = 'test-acceptance-webui'
+									if (params['runCoreTests']):
+										makeParameter = 'test-acceptance-core-webui'
+									else:
+										makeParameter = 'test-acceptance-webui'
 
 								if isAPI:
-									makeParameter = 'test-acceptance-api'
+									if (params['runCoreTests']):
+										makeParameter = 'test-acceptance-core-api'
+									else:
+										makeParameter = 'test-acceptance-api'
 
 								if isCLI:
-									makeParameter = 'test-acceptance-cli'
+									if (params['runCoreTests']):
+										makeParameter = 'test-acceptance-core-cli'
+									else:
+										makeParameter = 'test-acceptance-cli'
 
 								if params['emailNeeded']:
 									environment['MAILHOG_HOST'] = 'email'
 
 								if (needObjectStore):
 									environment['OC_TEST_ON_OBJECTSTORE'] = '1'
+									if (params['cephS3'] != False):
+										environment['S3_TYPE'] = 'ceph'
+									if (params['scalityS3'] != False):
+										environment['S3_TYPE'] = 'scality'
 
 								result = {
 									'kind': 'pipeline',

@@ -119,20 +119,20 @@ test-php-phpstan: ## Run phpstan
 test-php-phpstan: vendor-bin/phpstan/vendor
 	$(PHPSTAN) analyse --memory-limit=4G --configuration=./phpstan.neon --no-progress --level=5 appinfo lib
 
-.PHONY: test-acceptance-api
-test-acceptance-api: ## Run API acceptance tests
-test-acceptance-api: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
+.PHONY: test-acceptance-core-api
+test-acceptance-core-api: ## Run core API acceptance tests
+test-acceptance-core-api: $(acceptance_test_deps)
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api -c ../../tests/acceptance/config/behat.yml --tags '~@app-required&&~@skipOnStorage:${S3_TYPE}&&~@skip'
 
-.PHONY: test-acceptance-cli
-test-acceptance-cli: ## Run CLI acceptance tests
-test-acceptance-cli: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli
+.PHONY: test-acceptance-core-cli
+test-acceptance-core-cli: ## Run core CLI acceptance tests
+test-acceptance-core-cli: $(acceptance_test_deps)
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type cli -c ../../tests/acceptance/config/behat.yml --tags '~@app-required&&~@skipOnStorage:${S3_TYPE}&&~@skip'
 
-.PHONY: test-acceptance-webui
-test-acceptance-webui: ## Run webUI acceptance tests
-test-acceptance-webui: $(acceptance_test_deps)
-	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
+.PHONY: test-acceptance-core-webui
+test-acceptance-core-webui: ## Run core webUI acceptance tests
+test-acceptance-core-webui: $(acceptance_test_deps)
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI -c ../../tests/acceptance/config/behat.yml --tags '~@app-required&&~@skipOnStorage:${S3_TYPE}&&~@skip'
 
 #
 # Dependency management

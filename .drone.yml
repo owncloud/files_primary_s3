@@ -1101,7 +1101,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-1-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-1-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1212,16 +1212,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 1
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1295,7 +1294,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-2-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-2-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1406,16 +1405,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 2
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1489,7 +1487,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-3-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-3-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1600,16 +1598,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 3
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1683,7 +1680,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-4-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-4-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1794,16 +1791,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 4
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -1877,7 +1873,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-5-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-5-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -1988,16 +1984,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 5
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2071,7 +2066,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-6-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-6-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -2182,16 +2177,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 6
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2265,7 +2259,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-7-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-7-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -2376,16 +2370,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 7
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2459,7 +2452,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-8-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-8-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -2570,16 +2563,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 8
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2653,7 +2645,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-9-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-9-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -2764,16 +2756,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 9
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -2847,7 +2838,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-10-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-10-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -2958,16 +2949,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 10
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3041,7 +3031,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-11-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-11-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -3152,16 +3142,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 11
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3235,7 +3224,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-12-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-12-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -3346,16 +3335,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 12
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3429,7 +3417,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-13-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-13-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -3540,16 +3528,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 13
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3623,7 +3610,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-14-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-14-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -3734,16 +3721,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 14
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -3817,7 +3803,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-15-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-15-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -3928,16 +3914,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 15
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4011,7 +3996,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-16-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-16-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -4122,16 +4107,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 16
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4205,7 +4189,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-17-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-17-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -4316,16 +4300,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 17
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4399,7 +4382,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-18-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-18-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -4510,16 +4493,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 18
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4593,7 +4575,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-19-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-19-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -4704,16 +4686,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 19
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4787,7 +4768,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: webUIall-20-20-master-chrome-mariadb10.2-php7.0
+name: webUIall-25-20-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -4898,16 +4879,15 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-webui
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
     OC_TEST_ON_OBJECTSTORE: 1
     PLATFORM: Linux
     RUN_PART: 20
+    S3_TYPE: ceph
     SELENIUM_HOST: selenium
     SELENIUM_PORT: 4444
     TEST_SERVER_URL: http://server
@@ -4981,7 +4961,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-1-master-mariadb10.2-php7.0
+name: webUIall-25-21-master-chrome-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5092,13 +5072,977 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-webui
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    BROWSER: chrome
+    DIVIDE_INTO_NUM_PARTS: 25
+    MAILHOG_HOST: email
+    OC_TEST_ON_OBJECTSTORE: 1
+    PLATFORM: Linux
+    RUN_PART: 21
+    S3_TYPE: ceph
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
+
+- name: email
+  pull: always
+  image: mailhog/mailhog
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: webUIall-25-22-master-chrome-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-webui
+  environment:
+    BROWSER: chrome
+    DIVIDE_INTO_NUM_PARTS: 25
+    MAILHOG_HOST: email
+    OC_TEST_ON_OBJECTSTORE: 1
+    PLATFORM: Linux
+    RUN_PART: 22
+    S3_TYPE: ceph
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
+
+- name: email
+  pull: always
+  image: mailhog/mailhog
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: webUIall-25-23-master-chrome-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-webui
+  environment:
+    BROWSER: chrome
+    DIVIDE_INTO_NUM_PARTS: 25
+    MAILHOG_HOST: email
+    OC_TEST_ON_OBJECTSTORE: 1
+    PLATFORM: Linux
+    RUN_PART: 23
+    S3_TYPE: ceph
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
+
+- name: email
+  pull: always
+  image: mailhog/mailhog
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: webUIall-25-24-master-chrome-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-webui
+  environment:
+    BROWSER: chrome
+    DIVIDE_INTO_NUM_PARTS: 25
+    MAILHOG_HOST: email
+    OC_TEST_ON_OBJECTSTORE: 1
+    PLATFORM: Linux
+    RUN_PART: 24
+    S3_TYPE: ceph
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
+
+- name: email
+  pull: always
+  image: mailhog/mailhog
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: webUIall-25-25-master-chrome-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-webui
+  environment:
+    BROWSER: chrome
+    DIVIDE_INTO_NUM_PARTS: 25
+    MAILHOG_HOST: email
+    OC_TEST_ON_OBJECTSTORE: 1
+    PLATFORM: Linux
+    RUN_PART: 25
+    S3_TYPE: ceph
+    SELENIUM_HOST: selenium
+    SELENIUM_PORT: 4444
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: selenium
+  pull: always
+  image: selenium/standalone-chrome-debug:3.141.59-oxygen
+  environment:
+    JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
+
+- name: email
+  pull: always
+  image: mailhog/mailhog
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-1-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 1
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -5160,7 +6104,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-2-master-mariadb10.2-php7.0
+name: apiAll-25-2-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5271,13 +6215,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 2
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -5339,7 +6282,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-3-master-mariadb10.2-php7.0
+name: apiAll-25-3-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5450,13 +6393,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 3
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -5518,7 +6460,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-4-master-mariadb10.2-php7.0
+name: apiAll-25-4-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5629,13 +6571,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 4
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -5697,7 +6638,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-5-master-mariadb10.2-php7.0
+name: apiAll-25-5-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5808,13 +6749,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 5
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -5876,7 +6816,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-6-master-mariadb10.2-php7.0
+name: apiAll-25-6-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -5987,13 +6927,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 6
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6055,7 +6994,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-7-master-mariadb10.2-php7.0
+name: apiAll-25-7-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -6166,13 +7105,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 7
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6234,7 +7172,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-8-master-mariadb10.2-php7.0
+name: apiAll-25-8-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -6345,13 +7283,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 8
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6413,7 +7350,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-9-master-mariadb10.2-php7.0
+name: apiAll-25-9-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -6524,13 +7461,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 9
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6592,7 +7528,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-10-master-mariadb10.2-php7.0
+name: apiAll-25-10-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -6703,13 +7639,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 10
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6771,7 +7706,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-11-master-mariadb10.2-php7.0
+name: apiAll-25-11-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -6882,13 +7817,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 11
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -6950,7 +7884,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-12-master-mariadb10.2-php7.0
+name: apiAll-25-12-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7061,13 +7995,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 12
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7129,7 +8062,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-13-master-mariadb10.2-php7.0
+name: apiAll-25-13-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7240,13 +8173,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 13
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7308,7 +8240,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-14-master-mariadb10.2-php7.0
+name: apiAll-25-14-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7419,13 +8351,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 14
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7487,7 +8418,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-15-master-mariadb10.2-php7.0
+name: apiAll-25-15-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7598,13 +8529,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 15
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7666,7 +8596,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-16-master-mariadb10.2-php7.0
+name: apiAll-25-16-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7777,13 +8707,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 16
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -7845,7 +8774,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-17-master-mariadb10.2-php7.0
+name: apiAll-25-17-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -7956,13 +8885,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 17
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8024,7 +8952,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-18-master-mariadb10.2-php7.0
+name: apiAll-25-18-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -8135,13 +9063,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 18
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8203,7 +9130,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-19-master-mariadb10.2-php7.0
+name: apiAll-25-19-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -8314,13 +9241,12 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 19
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8382,7 +9308,7 @@ depends_on:
 ---
 kind: pipeline
 type: docker
-name: apiAll-20-20-master-mariadb10.2-php7.0
+name: apiAll-25-20-master-mariadb10.2-php7.0
 
 platform:
   os: linux
@@ -8493,13 +9419,902 @@ steps:
   commands:
   - touch /var/www/owncloud/saved-settings.sh
   - . /var/www/owncloud/saved-settings.sh
-  - make test-acceptance-api
+  - make test-acceptance-core-api
   environment:
-    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
-    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
-    DIVIDE_INTO_NUM_PARTS: 20
+    DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 20
+    S3_TYPE: ceph
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-21-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
+    OC_TEST_ON_OBJECTSTORE: 1
+    RUN_PART: 21
+    S3_TYPE: ceph
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-22-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
+    OC_TEST_ON_OBJECTSTORE: 1
+    RUN_PART: 22
+    S3_TYPE: ceph
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-23-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
+    OC_TEST_ON_OBJECTSTORE: 1
+    RUN_PART: 23
+    S3_TYPE: ceph
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-24-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
+    OC_TEST_ON_OBJECTSTORE: 1
+    RUN_PART: 24
+    S3_TYPE: ceph
+    TEST_SERVER_URL: http://server
+
+services:
+- name: mariadb
+  pull: always
+  image: mariadb:10.2
+  environment:
+    MYSQL_DATABASE: owncloud
+    MYSQL_PASSWORD: owncloud
+    MYSQL_ROOT_PASSWORD: owncloud
+    MYSQL_USER: owncloud
+
+- name: ceph
+  pull: always
+  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  environment:
+    CEPH_DEMO_ACCESS_KEY: owncloud123456
+    CEPH_DEMO_SECRET_KEY: secret123456
+    CEPH_DEMO_UID: owncloud
+    NETWORK_AUTO_DETECT: 4
+    RGW_NAME: ceph
+
+- name: server
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/server
+
+- name: federated
+  pull: always
+  image: owncloudci/php:7.0
+  command:
+  - /usr/local/bin/apachectl
+  - -e
+  - debug
+  - -D
+  - FOREGROUND
+  environment:
+    APACHE_WEBROOT: /var/www/owncloud/federated
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+- coding-standard-php7.1
+- coding-standard-php7.2
+- coding-standard-php7.3
+
+---
+kind: pipeline
+type: docker
+name: apiAll-25-25-master-mariadb10.2-php7.0
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: testrunner/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: mariadb
+    db_name: owncloud
+    db_password: owncloud
+    db_type: mysql
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    version: daily-master-qa
+
+- name: install-testrunner
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - mkdir /tmp/testrunner
+  - git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner
+  - rsync -aIX /tmp/testrunner /var/www/owncloud
+  - cp -r /var/www/owncloud/testrunner/apps/files_primary_s3 /var/www/owncloud/server/apps/
+  - cd /var/www/owncloud/testrunner
+  - make install-composer-deps vendor-bin-deps
+
+- name: install-federation
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/federated
+    version: daily-master-qa
+
+- name: configure-federation
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - echo "export TEST_SERVER_FED_URL=http://federated" > /var/www/owncloud/saved-settings.sh
+  - cd /var/www/owncloud/federated
+  - php occ a:l
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=federated
+  - php occ log:manage --level 2
+  - php occ config:list
+
+- name: owncloud-log-federated
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/federated/data/owncloud.log
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: owncloud-log-server
+  pull: always
+  image: owncloud/ubuntu:18.04
+  detach: true
+  commands:
+  - tail -f /var/www/owncloud/server/data/owncloud.log
+
+- name: setup-ceph
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 ceph:80
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+
+- name: fix-permissions
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - chown -R www-data /var/www/owncloud/server
+  - chown -R www-data /var/www/owncloud/federated
+
+- name: acceptance-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - touch /var/www/owncloud/saved-settings.sh
+  - . /var/www/owncloud/saved-settings.sh
+  - make test-acceptance-core-api
+  environment:
+    DIVIDE_INTO_NUM_PARTS: 25
+    OC_TEST_ON_OBJECTSTORE: 1
+    RUN_PART: 25
+    S3_TYPE: ceph
     TEST_SERVER_URL: http://server
 
 services:
@@ -8597,45 +10412,55 @@ depends_on:
 - phpunit-ceph-php7.1-sqlite
 - phpunit-ceph-php7.2-sqlite
 - phpunit-ceph-php7.3-sqlite
-- webUIall-20-1-master-chrome-mariadb10.2-php7.0
-- webUIall-20-2-master-chrome-mariadb10.2-php7.0
-- webUIall-20-3-master-chrome-mariadb10.2-php7.0
-- webUIall-20-4-master-chrome-mariadb10.2-php7.0
-- webUIall-20-5-master-chrome-mariadb10.2-php7.0
-- webUIall-20-6-master-chrome-mariadb10.2-php7.0
-- webUIall-20-7-master-chrome-mariadb10.2-php7.0
-- webUIall-20-8-master-chrome-mariadb10.2-php7.0
-- webUIall-20-9-master-chrome-mariadb10.2-php7.0
-- webUIall-20-10-master-chrome-mariadb10.2-php7.0
-- webUIall-20-11-master-chrome-mariadb10.2-php7.0
-- webUIall-20-12-master-chrome-mariadb10.2-php7.0
-- webUIall-20-13-master-chrome-mariadb10.2-php7.0
-- webUIall-20-14-master-chrome-mariadb10.2-php7.0
-- webUIall-20-15-master-chrome-mariadb10.2-php7.0
-- webUIall-20-16-master-chrome-mariadb10.2-php7.0
-- webUIall-20-17-master-chrome-mariadb10.2-php7.0
-- webUIall-20-18-master-chrome-mariadb10.2-php7.0
-- webUIall-20-19-master-chrome-mariadb10.2-php7.0
-- webUIall-20-20-master-chrome-mariadb10.2-php7.0
-- apiAll-20-1-master-mariadb10.2-php7.0
-- apiAll-20-2-master-mariadb10.2-php7.0
-- apiAll-20-3-master-mariadb10.2-php7.0
-- apiAll-20-4-master-mariadb10.2-php7.0
-- apiAll-20-5-master-mariadb10.2-php7.0
-- apiAll-20-6-master-mariadb10.2-php7.0
-- apiAll-20-7-master-mariadb10.2-php7.0
-- apiAll-20-8-master-mariadb10.2-php7.0
-- apiAll-20-9-master-mariadb10.2-php7.0
-- apiAll-20-10-master-mariadb10.2-php7.0
-- apiAll-20-11-master-mariadb10.2-php7.0
-- apiAll-20-12-master-mariadb10.2-php7.0
-- apiAll-20-13-master-mariadb10.2-php7.0
-- apiAll-20-14-master-mariadb10.2-php7.0
-- apiAll-20-15-master-mariadb10.2-php7.0
-- apiAll-20-16-master-mariadb10.2-php7.0
-- apiAll-20-17-master-mariadb10.2-php7.0
-- apiAll-20-18-master-mariadb10.2-php7.0
-- apiAll-20-19-master-mariadb10.2-php7.0
-- apiAll-20-20-master-mariadb10.2-php7.0
+- webUIall-25-1-master-chrome-mariadb10.2-php7.0
+- webUIall-25-2-master-chrome-mariadb10.2-php7.0
+- webUIall-25-3-master-chrome-mariadb10.2-php7.0
+- webUIall-25-4-master-chrome-mariadb10.2-php7.0
+- webUIall-25-5-master-chrome-mariadb10.2-php7.0
+- webUIall-25-6-master-chrome-mariadb10.2-php7.0
+- webUIall-25-7-master-chrome-mariadb10.2-php7.0
+- webUIall-25-8-master-chrome-mariadb10.2-php7.0
+- webUIall-25-9-master-chrome-mariadb10.2-php7.0
+- webUIall-25-10-master-chrome-mariadb10.2-php7.0
+- webUIall-25-11-master-chrome-mariadb10.2-php7.0
+- webUIall-25-12-master-chrome-mariadb10.2-php7.0
+- webUIall-25-13-master-chrome-mariadb10.2-php7.0
+- webUIall-25-14-master-chrome-mariadb10.2-php7.0
+- webUIall-25-15-master-chrome-mariadb10.2-php7.0
+- webUIall-25-16-master-chrome-mariadb10.2-php7.0
+- webUIall-25-17-master-chrome-mariadb10.2-php7.0
+- webUIall-25-18-master-chrome-mariadb10.2-php7.0
+- webUIall-25-19-master-chrome-mariadb10.2-php7.0
+- webUIall-25-20-master-chrome-mariadb10.2-php7.0
+- webUIall-25-21-master-chrome-mariadb10.2-php7.0
+- webUIall-25-22-master-chrome-mariadb10.2-php7.0
+- webUIall-25-23-master-chrome-mariadb10.2-php7.0
+- webUIall-25-24-master-chrome-mariadb10.2-php7.0
+- webUIall-25-25-master-chrome-mariadb10.2-php7.0
+- apiAll-25-1-master-mariadb10.2-php7.0
+- apiAll-25-2-master-mariadb10.2-php7.0
+- apiAll-25-3-master-mariadb10.2-php7.0
+- apiAll-25-4-master-mariadb10.2-php7.0
+- apiAll-25-5-master-mariadb10.2-php7.0
+- apiAll-25-6-master-mariadb10.2-php7.0
+- apiAll-25-7-master-mariadb10.2-php7.0
+- apiAll-25-8-master-mariadb10.2-php7.0
+- apiAll-25-9-master-mariadb10.2-php7.0
+- apiAll-25-10-master-mariadb10.2-php7.0
+- apiAll-25-11-master-mariadb10.2-php7.0
+- apiAll-25-12-master-mariadb10.2-php7.0
+- apiAll-25-13-master-mariadb10.2-php7.0
+- apiAll-25-14-master-mariadb10.2-php7.0
+- apiAll-25-15-master-mariadb10.2-php7.0
+- apiAll-25-16-master-mariadb10.2-php7.0
+- apiAll-25-17-master-mariadb10.2-php7.0
+- apiAll-25-18-master-mariadb10.2-php7.0
+- apiAll-25-19-master-mariadb10.2-php7.0
+- apiAll-25-20-master-mariadb10.2-php7.0
+- apiAll-25-21-master-mariadb10.2-php7.0
+- apiAll-25-22-master-mariadb10.2-php7.0
+- apiAll-25-23-master-mariadb10.2-php7.0
+- apiAll-25-24-master-mariadb10.2-php7.0
+- apiAll-25-25-master-mariadb10.2-php7.0
 
 ...
