@@ -24,6 +24,10 @@ config = {
 
 	'javascript': False,
 
+	'phan': True,
+
+	'phpstan': False,
+
 	'phpunit': {
 		'scality': {
 			'phpVersions': [
