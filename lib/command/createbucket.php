@@ -74,7 +74,7 @@ EOS;
 		if ($result) {
 			$output->writeln("Bucket already exists: $bucketName");
 			if (!$input->getOption('update-configuration')) {
-				return;
+				return 1;
 			}
 		} else {
 			$output->writeln("Creating bucket <$bucketName> ...");

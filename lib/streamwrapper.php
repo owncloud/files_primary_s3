@@ -97,9 +97,9 @@ class StreamWrapper {
 	/**
 	 * Register the 's3://' stream wrapper
 	 *
-	 * @param S3ClientInterface $client   Client to use with the stream wrapper
-	 * @param string            $protocol Protocol to register as.
-	 * @param CacheInterface    $cache    Default cache for the protocol.
+	 * @param S3ClientInterface   $client   Client to use with the stream wrapper
+	 * @param string              $protocol Protocol to register as.
+	 * @param CacheInterface|null $cache    Default cache for the protocol.
 	 */
 	public static function register(
 		S3ClientInterface $client,
@@ -434,13 +434,14 @@ class StreamWrapper {
 			$this->dir_opendir($this->openedPath, null);
 			return true;
 		});
+		return true;
 	}
 
 	/**
 	 * This method is called in response to readdir()
 	 *
-	 * @return string Should return a string representing the next filename, or
-	 *                false if there is no next file.
+	 * @return string|false Should return a string representing the next filename, or
+	 *                      false if there is no next file.
 	 * @link http://www.php.net/manual/en/function.readdir.php
 	 */
 	public function dir_readdir() {

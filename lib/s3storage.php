@@ -85,7 +85,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				return;
 			}
 			// force content length header on empty body
-			$request->setHeader('Content-Length', 0);
+			$request->setHeader('Content-Length', "0");
 		});
 		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
