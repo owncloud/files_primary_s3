@@ -17,7 +17,7 @@ config = {
 
 	'phan': True,
 
-	'phpstan': False,
+	'phpstan': True,
 
 	'phpunit': {
 		'scality': {
