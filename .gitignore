@@ -1,7 +1,19 @@
-vendor
+/build/
+/l10n/.transifexrc
 .php_cs.cache
+
+# Composer
+vendor/
+vendor-bin/**/vendor
+vendor-bin/**/composer.lock
+
+# Mac OS
+.DS_Store
+
+# Tests - auto-generated files
+/tests/acceptance/output*
+/tests/output
+
 composer
 .composer
 .npm
-build
-
