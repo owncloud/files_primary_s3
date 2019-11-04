@@ -107,6 +107,7 @@ EOS;
 		if ($cfg === null) {
 			throw new \InvalidArgumentException('No object store is configured.');
 		}
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		return S3Client::factory($cfg['arguments']['options']);
 	}
 }

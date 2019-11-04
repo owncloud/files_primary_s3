@@ -89,6 +89,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		});
 		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		$this->connection = S3Client::factory($config);
 		try {
 			$this->connection->listBuckets();
