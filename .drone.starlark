@@ -11,16 +11,7 @@ config = {
 
 	'appInstallCommand': 'composer install',
 
-	'codestyle': {
-		'ordinary' : {
-			'phpVersions': [
-				'7.0',
-				'7.1',
-				'7.2',
-				'7.3',
-			],
-		},
-	},
+	'codestyle': True,
 
 	'javascript': False,
 
