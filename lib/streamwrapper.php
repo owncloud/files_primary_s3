@@ -703,6 +703,7 @@ class StreamWrapper {
 		if ($flags & STREAM_URL_STAT_QUIET) {
 			return $flags & STREAM_URL_STAT_LINK
 				// This is triggered for things like is_link()
+				/* @phan-suppress-next-line PhanTypeMismatchArgument, PhanTypeMismatchReturn */
 				? $this->formatUrlStat(false)
 				: false;
 		}
