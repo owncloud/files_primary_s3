@@ -68,6 +68,7 @@ EOS;
 			}
 		}
 
+		/** @var string $bucketName */
 		$bucketName = $input->getArgument('bucket');
 		$client = $this->getClient();
 		$result = $client->doesBucketExist($bucketName);
