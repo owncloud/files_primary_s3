@@ -15,9 +15,6 @@ config = {
 		'ordinary' : {
 			'phpVersions': [
 				'7.0',
-				'7.1',
-				'7.2',
-				'7.3',
 			],
 		},
 	},
@@ -27,10 +24,7 @@ config = {
 	'phpunit': {
 		'scality': {
 			'phpVersions': [
-				'7.0',
 				'7.1',
-				'7.2',
-				'7.3',
 			],
 			'databases': [
 				'sqlite',
@@ -43,10 +37,7 @@ config = {
 		},
 		'scality-multibucket': {
 			'phpVersions': [
-				'7.0',
 				'7.1',
-				'7.2',
-				'7.3',
 			],
 			'databases': [
 				'sqlite',
@@ -60,10 +51,7 @@ config = {
 		},
 		'ceph': {
 			'phpVersions': [
-				'7.0',
 				'7.1',
-				'7.2',
-				'7.3',
 			],
 			'databases': [
 				'sqlite',
@@ -74,35 +62,7 @@ config = {
 		},
 	},
 
-	'acceptance': {
-		'webUI-ceph': {
-			'suites': [
-				'webUIall',
-			],
-			'servers': [
-				'daily-master-qa'
-			],
-			'cephS3': True,
-			'emailNeeded': True,
-			'federatedServerNeeded': True,
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 25,
-		},
-		'api-ceph': {
-			'suites': [
-				'apiAll',
-			],
-			'servers': [
-				'daily-master-qa'
-			],
-			'cephS3': True,
-			'federatedServerNeeded': True,
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 25,
-		},
-	}
+	'acceptance': False,
 }
 
 def main(ctx):
