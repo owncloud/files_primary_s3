@@ -106,6 +106,85 @@ depends_on:
 ---
 kind: pipeline
 type: docker
+name: phpunit-scality-multibucket-php7.0-sqlite
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: server/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: sqlite
+    db_name: owncloud
+    db_password: owncloud
+    db_type: sqlite
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    git_reference: timing-in-VersioningTest
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: setup-scality
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 scality:8000
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
+
+- name: phpunit-tests
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - make test-php-unit
+
+services:
+- name: scality
+  pull: always
+  image: owncloudci/scality-s3server
+  environment:
+    HOST_NAME: scality
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+
+---
+kind: pipeline
+type: docker
 name: phpunit-scality-multibucket-php7.1-sqlite
 
 platform:
@@ -163,6 +242,164 @@ steps:
 - name: phpunit-tests
   pull: always
   image: owncloudci/php:7.1
+  commands:
+  - make test-php-unit
+
+services:
+- name: scality
+  pull: always
+  image: owncloudci/scality-s3server
+  environment:
+    HOST_NAME: scality
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+
+---
+kind: pipeline
+type: docker
+name: phpunit-scality-multibucket-php7.2-sqlite
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: server/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: sqlite
+    db_name: owncloud
+    db_password: owncloud
+    db_type: sqlite
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    git_reference: timing-in-VersioningTest
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.2
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.2
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: setup-scality
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 scality:8000
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
+
+- name: phpunit-tests
+  pull: always
+  image: owncloudci/php:7.2
+  commands:
+  - make test-php-unit
+
+services:
+- name: scality
+  pull: always
+  image: owncloudci/scality-s3server
+  environment:
+    HOST_NAME: scality
+
+trigger:
+  ref:
+  - refs/pull/**
+  - refs/tags/**
+  - refs/heads/master
+
+depends_on:
+- coding-standard-php7.0
+
+---
+kind: pipeline
+type: docker
+name: phpunit-scality-multibucket-php7.3-sqlite
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /var/www/owncloud
+  path: server/apps/files_primary_s3
+
+steps:
+- name: install-core
+  pull: always
+  image: owncloudci/core
+  settings:
+    core_path: /var/www/owncloud/server
+    db_host: sqlite
+    db_name: owncloud
+    db_password: owncloud
+    db_type: sqlite
+    db_username: owncloud
+    exclude: apps/files_primary_s3
+    git_reference: timing-in-VersioningTest
+
+- name: install-app-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.3
+  commands:
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - composer install
+
+- name: setup-server-files_primary_s3
+  pull: always
+  image: owncloudci/php:7.3
+  commands:
+  - cd /var/www/owncloud/server
+  - php occ a:l
+  - php occ a:e files_primary_s3
+  - php occ a:e testing
+  - php occ a:l
+  - php occ config:system:set trusted_domains 1 --value=server
+  - php occ log:manage --level 2
+
+- name: setup-scality
+  pull: always
+  image: owncloudci/php:7.0
+  commands:
+  - wait-for-it -t 60 scality:8000
+  - cd /var/www/owncloud/server/apps/files_primary_s3
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
+  - cd /var/www/owncloud/server
+  - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
+
+- name: phpunit-tests
+  pull: always
+  image: owncloudci/php:7.3
   commands:
   - make test-php-unit
 
@@ -292,7 +529,10 @@ trigger:
 
 depends_on:
 - phpunit-scality-php7.1-sqlite
+- phpunit-scality-multibucket-php7.0-sqlite
 - phpunit-scality-multibucket-php7.1-sqlite
+- phpunit-scality-multibucket-php7.2-sqlite
+- phpunit-scality-multibucket-php7.3-sqlite
 - phpunit-ceph-php7.1-sqlite
 
 ...
