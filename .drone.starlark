@@ -76,7 +76,10 @@ config = {
 			'servers': [
 				'daily-master-qa'
 			],
-			'scalityS3': True,
+			'scalityS3': {
+				'config': 'multibucket',
+				'createExtraBuckets': True
+			},
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,

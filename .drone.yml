@@ -694,9 +694,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -868,9 +869,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -1042,9 +1044,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -1216,9 +1219,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -1390,9 +1394,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -1564,9 +1569,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
@@ -1738,9 +1744,10 @@ steps:
   commands:
   - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
   - php occ s3:create-bucket owncloud --accept-warning
+  - for I in $(seq 1 9); do php ./occ s3:create-bucket  owncloud$I --accept-warning; done
 
 - name: fix-permissions
   pull: always
