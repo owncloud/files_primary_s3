@@ -779,7 +779,7 @@ def acceptance():
 				for browser in params['browsers']:
 					for phpVersion in params['phpVersions']:
 						for db in params['databases']:
-							for runPart in range(19, params['numberOfParts'] + 1):
+							for runPart in range(20, params['numberOfParts'] + 1):
 								name = 'unknown'
 
 								if isWebUI or isAPI or isCLI:
