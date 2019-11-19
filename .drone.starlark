@@ -76,7 +76,7 @@ config = {
 			'servers': [
 				'daily-master-qa'
 			],
-			'cephS3': True,
+			'scalityS3': True,
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,

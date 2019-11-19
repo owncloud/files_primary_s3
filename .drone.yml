@@ -688,15 +688,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -716,7 +716,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 19
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -729,15 +729,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -866,15 +862,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -894,7 +890,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 20
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -907,15 +903,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -1044,15 +1036,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -1072,7 +1064,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 21
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -1085,15 +1077,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -1222,15 +1210,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -1250,7 +1238,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 22
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -1263,15 +1251,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -1400,15 +1384,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -1428,7 +1412,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 23
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -1441,15 +1425,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -1578,15 +1558,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -1606,7 +1586,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 24
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -1619,15 +1599,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
@@ -1756,15 +1732,15 @@ steps:
   commands:
   - tail -f /var/www/owncloud/server/data/owncloud.log
 
-- name: setup-ceph
+- name: setup-scality
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 60 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
-  - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
+  - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
-  - ./apps/files_primary_s3/tests/drone/create-bucket.sh
+  - php occ s3:create-bucket owncloud --accept-warning
 
 - name: fix-permissions
   pull: always
@@ -1784,7 +1760,7 @@ steps:
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 25
-    S3_TYPE: ceph
+    S3_TYPE: scality
     TEST_SERVER_URL: http://server
 
 services:
@@ -1797,15 +1773,11 @@ services:
     MYSQL_ROOT_PASSWORD: owncloud
     MYSQL_USER: owncloud
 
-- name: ceph
+- name: scality
   pull: always
-  image: owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+  image: owncloudci/scality-s3server
   environment:
-    CEPH_DEMO_ACCESS_KEY: owncloud123456
-    CEPH_DEMO_SECRET_KEY: secret123456
-    CEPH_DEMO_UID: owncloud
-    NETWORK_AUTO_DETECT: 4
-    RGW_NAME: ceph
+    HOST_NAME: scality
 
 - name: server
   pull: always
