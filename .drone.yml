@@ -1214,6 +1214,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -1407,6 +1409,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -1600,6 +1604,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -1793,6 +1799,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -1986,6 +1994,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -2179,6 +2189,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -2372,6 +2384,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -2565,6 +2579,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -2758,6 +2774,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -2951,6 +2969,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -3144,6 +3164,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -3337,6 +3359,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -3530,6 +3554,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -3723,6 +3749,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -3916,6 +3944,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -4109,6 +4139,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -4302,6 +4334,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -4495,6 +4529,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -4688,6 +4724,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -4881,6 +4919,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -5074,6 +5114,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -5267,6 +5309,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -5460,6 +5504,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -5653,6 +5699,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -5846,6 +5894,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-webui
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     BROWSER: chrome
     DIVIDE_INTO_NUM_PARTS: 25
     MAILHOG_HOST: email
@@ -6039,6 +6089,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 1
@@ -6217,6 +6269,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 2
@@ -6395,6 +6449,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 3
@@ -6573,6 +6629,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 4
@@ -6751,6 +6809,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 5
@@ -6929,6 +6989,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 6
@@ -7107,6 +7169,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 7
@@ -7285,6 +7349,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 8
@@ -7463,6 +7529,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 9
@@ -7641,6 +7709,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 10
@@ -7819,6 +7889,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 11
@@ -7997,6 +8069,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 12
@@ -8175,6 +8249,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 13
@@ -8353,6 +8429,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 14
@@ -8531,6 +8609,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 15
@@ -8709,6 +8789,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 16
@@ -8887,6 +8969,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 17
@@ -9065,6 +9149,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 18
@@ -9243,6 +9329,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 19
@@ -9421,6 +9509,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 20
@@ -9599,6 +9689,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 21
@@ -9777,6 +9869,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 22
@@ -9955,6 +10049,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 23
@@ -10133,6 +10229,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 24
@@ -10311,6 +10409,8 @@ steps:
   - . /var/www/owncloud/saved-settings.sh
   - make test-acceptance-core-api
   environment:
+    BEHAT_FILTER_TAGS: ~@app-required&&~@skip&&~@skipOnStorage:ceph
+    BEHAT_YML: /var/www/owncloud/server/tests/acceptance/config/behat.yml
     DIVIDE_INTO_NUM_PARTS: 25
     OC_TEST_ON_OBJECTSTORE: 1
     RUN_PART: 25
