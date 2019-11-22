@@ -1126,7 +1126,7 @@ def installCore(version, db, useBundledApp):
 		'image': 'owncloudci/core',
 		'pull': 'always',
 		'settings': {
-			'git_reference': 'revert-36326-objectstore_transfer',
+			'git_reference': 'skip-testTransferAllFiles-on-ObjectStoreStorage',
 			'core_path': '/var/www/owncloud/server',
 			'db_type': dbType,
 			'db_name': database,

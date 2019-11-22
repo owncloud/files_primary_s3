@@ -49,7 +49,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
@@ -128,7 +128,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
@@ -207,7 +207,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
@@ -286,7 +286,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
@@ -365,7 +365,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
@@ -444,7 +444,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: revert-36326-objectstore_transfer
+    git_reference: skip-testTransferAllFiles-on-ObjectStoreStorage
 
 - name: install-app-files_primary_s3
   pull: always
