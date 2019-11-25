@@ -1163,7 +1163,7 @@ def installCore(version, db, useBundledApp):
 		'image': 'owncloudci/core',
 		'pull': 'always',
 		'settings': {
-			'git_reference': 'test-at-PR-36247-eff024b32fa742540e927bd7cb20fa74f4b50611',
+			'git_reference': 'test-at-PR-36253-491e546b12c73ebbdfe2bc396a4161e61ed0da62',
 			'core_path': '/var/www/owncloud/server',
 			'db_type': dbType,
 			'db_name': database,
