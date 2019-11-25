@@ -8,3 +8,5 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 **Supported features**
 - S3 Multi-part upload (enables uploading files > 5 GB)
 - S3 Versioning
+
+Testing against various core branches.
