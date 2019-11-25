@@ -1163,7 +1163,7 @@ def installCore(version, db, useBundledApp):
 		'image': 'owncloudci/core',
 		'pull': 'always',
 		'settings': {
-			'git_reference': 'revert-transfer-ownership-20191125',
+			'git_reference': 'test-at-PR-36325-e5ef0ec0d8fa299770a25b3d25b2fc6819cd0256',
 			'core_path': '/var/www/owncloud/server',
 			'db_type': dbType,
 			'db_name': database,
