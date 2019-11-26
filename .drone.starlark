@@ -89,6 +89,21 @@ config = {
 			'runAllSuites': True,
 			'numberOfParts': 25,
 		},
+		'webUI-ceph-latest-nightly': {
+			'suites': [
+				'webUIall',
+			],
+			'servers': [
+				'latest'
+			],
+			'cephS3': True,
+			'emailNeeded': True,
+			'federatedServerNeeded': True,
+			'runCoreTests': True,
+			'runAllSuites': True,
+			'numberOfParts': 25,
+			'cron': 'nightly'
+		},
 		'api-ceph': {
 			'suites': [
 				'apiAll',
@@ -101,6 +116,20 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 25,
+		},
+		'api-ceph-latest-nightly': {
+			'suites': [
+				'apiAll',
+			],
+			'servers': [
+				'latest'
+			],
+			'cephS3': True,
+			'federatedServerNeeded': True,
+			'runCoreTests': True,
+			'runAllSuites': True,
+			'numberOfParts': 25,
+			'cron': 'nightly'
 		},
 	}
 }
