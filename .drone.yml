@@ -288,7 +288,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -372,7 +372,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -456,7 +456,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -540,7 +540,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -624,7 +624,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -708,7 +708,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -792,7 +792,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -876,7 +876,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 scality:8000
+  - wait-for-it -t 120 scality:8000
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/scality.multibucket.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -960,7 +960,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1047,7 +1047,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1134,7 +1134,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1221,7 +1221,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1353,7 +1353,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1548,7 +1548,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1743,7 +1743,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -1938,7 +1938,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -2133,7 +2133,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -2328,7 +2328,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -2523,7 +2523,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -2718,7 +2718,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -2913,7 +2913,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -3108,7 +3108,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -3303,7 +3303,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -3498,7 +3498,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -3693,7 +3693,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -3888,7 +3888,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -4083,7 +4083,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -4278,7 +4278,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -4473,7 +4473,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -4668,7 +4668,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -4863,7 +4863,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -5058,7 +5058,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -5253,7 +5253,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -5448,7 +5448,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -5643,7 +5643,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -5838,7 +5838,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -6033,7 +6033,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -6228,7 +6228,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -6421,7 +6421,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -6614,7 +6614,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -6807,7 +6807,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7000,7 +7000,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7193,7 +7193,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7386,7 +7386,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7579,7 +7579,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7772,7 +7772,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -7965,7 +7965,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -8158,7 +8158,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -8351,7 +8351,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -8544,7 +8544,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -8737,7 +8737,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -8930,7 +8930,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -9123,7 +9123,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -9316,7 +9316,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -9509,7 +9509,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -9702,7 +9702,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -9895,7 +9895,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -10088,7 +10088,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -10281,7 +10281,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -10474,7 +10474,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -10667,7 +10667,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -10860,7 +10860,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11053,7 +11053,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11233,7 +11233,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11413,7 +11413,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11593,7 +11593,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11773,7 +11773,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -11953,7 +11953,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -12133,7 +12133,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -12313,7 +12313,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -12493,7 +12493,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -12673,7 +12673,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -12853,7 +12853,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13033,7 +13033,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13213,7 +13213,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13393,7 +13393,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13573,7 +13573,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13753,7 +13753,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -13933,7 +13933,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -14113,7 +14113,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -14293,7 +14293,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -14473,7 +14473,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -14653,7 +14653,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -14833,7 +14833,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15013,7 +15013,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15193,7 +15193,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15373,7 +15373,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15553,7 +15553,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15731,7 +15731,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -15909,7 +15909,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16087,7 +16087,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16265,7 +16265,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16443,7 +16443,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16621,7 +16621,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16799,7 +16799,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -16977,7 +16977,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -17155,7 +17155,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -17333,7 +17333,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -17511,7 +17511,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -17689,7 +17689,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -17867,7 +17867,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18045,7 +18045,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18223,7 +18223,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18401,7 +18401,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18579,7 +18579,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18757,7 +18757,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -18935,7 +18935,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -19113,7 +19113,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -19291,7 +19291,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -19469,7 +19469,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -19647,7 +19647,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
@@ -19825,7 +19825,7 @@ steps:
   pull: always
   image: owncloudci/php:7.0
   commands:
-  - wait-for-it -t 60 ceph:80
+  - wait-for-it -t 120 ceph:80
   - cd /var/www/owncloud/server/apps/files_primary_s3
   - cp tests/drone/ceph.config.php /var/www/owncloud/server/config
   - cd /var/www/owncloud/server
