@@ -68,13 +68,14 @@ EOS;
 			}
 		}
 
+		/** @var string $bucketName */
 		$bucketName = $input->getArgument('bucket');
 		$client = $this->getClient();
 		$result = $client->doesBucketExist($bucketName);
 		if ($result) {
 			$output->writeln("Bucket already exists: $bucketName");
 			if (!$input->getOption('update-configuration')) {
-				return;
+				return 1;
 			}
 		} else {
 			$output->writeln("Creating bucket <$bucketName> ...");
@@ -107,6 +108,7 @@ EOS;
 		if ($cfg === null) {
 			throw new \InvalidArgumentException('No object store is configured.');
 		}
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		return S3Client::factory($cfg['arguments']['options']);
 	}
 }

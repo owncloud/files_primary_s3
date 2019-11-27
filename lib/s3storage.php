@@ -42,7 +42,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 	/**
-	 * @var S3Client
+	 * @var S3Client|null
 	 */
 	private $connection;
 
@@ -54,7 +54,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	/**
 	 * S3Storage constructor.
 	 *
-	 * @param $params
+	 * @param array $params
 	 * @throws \Exception
 	 */
 	public function __construct($params) {
@@ -85,10 +85,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				return;
 			}
 			// force content length header on empty body
-			$request->setHeader('Content-Length', 0);
+			$request->setHeader('Content-Length', "0");
 		});
 		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		$this->connection = S3Client::factory($config);
 		try {
 			$this->connection->listBuckets();

@@ -5,6 +5,7 @@ use Aws\CacheInterface;
 use Aws\LruArrayCache;
 use Aws\Result;
 use Aws\S3\Exception\S3Exception;
+use Aws\S3\S3Client;
 use Aws\S3\S3ClientInterface;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Stream;
@@ -64,7 +65,7 @@ class StreamWrapper {
 	/** @var resource|null Stream context (this is set by PHP) */
 	public $context;
 
-	/** @var StreamInterface Underlying stream resource */
+	/** @var StreamInterface|null Underlying stream resource */
 	private $body;
 
 	/** @var int Size of the body that is opened */
@@ -76,7 +77,7 @@ class StreamWrapper {
 	/** @var string Mode in which the stream was opened */
 	private $mode;
 
-	/** @var \Iterator Iterator used with opendir() related calls */
+	/** @var \Iterator|null Iterator used with opendir() related calls */
 	private $objectIterator;
 
 	/** @var string The bucket that was opened when opendir() was called */
@@ -88,7 +89,7 @@ class StreamWrapper {
 	/** @var string Opened bucket path */
 	private $openedPath;
 
-	/** @var CacheInterface Cache for object and dir lookups */
+	/** @var CacheInterface|null Cache for object and dir lookups */
 	private $cache;
 
 	/** @var string The opened protocol (e.g., "s3") */
@@ -97,9 +98,9 @@ class StreamWrapper {
 	/**
 	 * Register the 's3://' stream wrapper
 	 *
-	 * @param S3ClientInterface $client   Client to use with the stream wrapper
-	 * @param string            $protocol Protocol to register as.
-	 * @param CacheInterface    $cache    Default cache for the protocol.
+	 * @param S3ClientInterface   $client   Client to use with the stream wrapper
+	 * @param string              $protocol Protocol to register as.
+	 * @param CacheInterface|null $cache    Default cache for the protocol.
 	 */
 	public static function register(
 		S3ClientInterface $client,
@@ -138,11 +139,11 @@ class StreamWrapper {
 			return $this->triggerError($errors);
 		}
 
-		return $this->boolCall(function () use ($path) {
+		return $this->boolCall(function () {
 			switch ($this->mode) {
-				case 'r': return $this->openReadStream($path);
-				case 'a': return $this->openAppendStream($path);
-				default: return $this->openWriteStream($path);
+				case 'r': return $this->openReadStream();
+				case 'a': return $this->openAppendStream();
+				default: return $this->openWriteStream();
 			}
 		});
 	}
@@ -246,7 +247,7 @@ class StreamWrapper {
 	/**
 	 * Parse the protocol out of the given path.
 	 *
-	 * @param $path
+	 * @param string $path
 	 */
 	private function initProtocol($path) {
 		$parts = \explode('://', $path, 2);
@@ -371,7 +372,7 @@ class StreamWrapper {
 		$this->openedPath = $path;
 		$params = $this->withPath($path);
 		$delimiter = $this->getOption('delimiter');
-		/** @var callable $filterFn */
+		/** @var callable|null $filterFn */
 		$filterFn = $this->getOption('listFilter');
 		$op = ['Bucket' => $params['Bucket']];
 		$this->openedBucket = $params['Bucket'];
@@ -431,16 +432,17 @@ class StreamWrapper {
 	public function dir_rewinddir() {
 		$this->boolCall(function () {
 			$this->objectIterator = null;
-			$this->dir_opendir($this->openedPath, null);
+			$this->dir_opendir($this->openedPath, '');
 			return true;
 		});
+		return true;
 	}
 
 	/**
 	 * This method is called in response to readdir()
 	 *
-	 * @return string Should return a string representing the next filename, or
-	 *                false if there is no next file.
+	 * @return string|false Should return a string representing the next filename, or
+	 *                      false if there is no next file.
 	 * @link http://www.php.net/manual/en/function.readdir.php
 	 */
 	public function dir_readdir() {
@@ -614,7 +616,7 @@ class StreamWrapper {
 	/**
 	 * Gets the client from the stream context
 	 *
-	 * @return S3ClientInterface
+	 * @return S3Client
 	 * @throws \RuntimeException if no client has been configured
 	 */
 	private function getClient() {
@@ -702,7 +704,8 @@ class StreamWrapper {
 		if ($flags & STREAM_URL_STAT_QUIET) {
 			return $flags & STREAM_URL_STAT_LINK
 				// This is triggered for things like is_link()
-				? $this->formatUrlStat(false)
+				/* @phan-suppress-next-line PhanTypeMismatchArgument, PhanTypeMismatchReturn */
+				? $this->formatUrlStat()
 				: false;
 		}
 
