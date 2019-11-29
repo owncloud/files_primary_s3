@@ -49,7 +49,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -107,7 +107,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: phan
   pull: always
@@ -146,7 +146,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: phan
   pull: always
@@ -185,7 +185,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: phan
   pull: always
@@ -224,7 +224,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -307,7 +307,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -390,7 +390,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -473,7 +473,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -556,7 +556,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -639,7 +639,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -722,7 +722,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -808,7 +808,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -894,7 +894,7 @@ steps:
     db_type: sqlite
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-app-files_primary_s3
   pull: always
@@ -980,7 +980,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -1174,7 +1174,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -1368,7 +1368,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -1562,7 +1562,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -1756,7 +1756,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -1950,7 +1950,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -2144,7 +2144,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -2338,7 +2338,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -2532,7 +2532,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -2726,7 +2726,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -2920,7 +2920,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -3114,7 +3114,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -3308,7 +3308,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -3502,7 +3502,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -3696,7 +3696,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -3890,7 +3890,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -4084,7 +4084,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -4278,7 +4278,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -4472,7 +4472,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -4666,7 +4666,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -4860,7 +4860,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -5054,7 +5054,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -5248,7 +5248,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -5442,7 +5442,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -5636,7 +5636,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -5830,7 +5830,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6022,7 +6022,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6214,7 +6214,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6406,7 +6406,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6598,7 +6598,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6790,7 +6790,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -6982,7 +6982,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -7174,7 +7174,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -7366,7 +7366,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -7558,7 +7558,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -7750,7 +7750,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -7942,7 +7942,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -8134,7 +8134,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -8326,7 +8326,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -8518,7 +8518,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -8710,7 +8710,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -8902,7 +8902,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -9094,7 +9094,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -9286,7 +9286,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -9478,7 +9478,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -9670,7 +9670,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -9862,7 +9862,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10054,7 +10054,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10246,7 +10246,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10438,7 +10438,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10630,7 +10630,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10809,7 +10809,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -10988,7 +10988,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -11167,7 +11167,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -11346,7 +11346,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -11525,7 +11525,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -11704,7 +11704,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -11883,7 +11883,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12062,7 +12062,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12241,7 +12241,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12420,7 +12420,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12599,7 +12599,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12778,7 +12778,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -12957,7 +12957,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -13136,7 +13136,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -13315,7 +13315,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -13494,7 +13494,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -13673,7 +13673,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -13852,7 +13852,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14031,7 +14031,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14210,7 +14210,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14389,7 +14389,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14568,7 +14568,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14747,7 +14747,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -14926,7 +14926,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15105,7 +15105,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15282,7 +15282,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15459,7 +15459,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15636,7 +15636,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15813,7 +15813,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -15990,7 +15990,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -16167,7 +16167,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -16344,7 +16344,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -16521,7 +16521,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -16698,7 +16698,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -16875,7 +16875,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17052,7 +17052,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17229,7 +17229,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17406,7 +17406,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17583,7 +17583,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17760,7 +17760,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -17937,7 +17937,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18114,7 +18114,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18291,7 +18291,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18468,7 +18468,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18645,7 +18645,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18822,7 +18822,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -18999,7 +18999,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -19176,7 +19176,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always
@@ -19353,7 +19353,7 @@ steps:
     db_type: mysql
     db_username: owncloud
     exclude: apps/files_primary_s3
-    git_reference: objectstore_transfer2
+    git_reference: dependabot/composer/sabre/http-5.0.5
 
 - name: install-testrunner
   pull: always

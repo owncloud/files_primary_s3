@@ -1255,7 +1255,7 @@ def installCore(version, db, useBundledApp):
 		'image': 'owncloudci/core',
 		'pull': 'always',
 		'settings': {
-			'git_reference': 'objectstore_transfer2',
+			'git_reference': 'dependabot/composer/sabre/http-5.0.5',
 			'core_path': '/var/www/owncloud/server',
 			'db_type': dbType,
 			'db_name': database,
