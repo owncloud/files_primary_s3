@@ -35,6 +35,7 @@ use GuzzleHttp\Ring\Client\StreamHandler;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
+use OCP\Files\ObjectStore\ObjectStoreOperationException;
 use OCP\Files\ObjectStore\ObjectStoreWriteException;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -133,7 +134,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		try {
 			$uploader->upload();
 		} catch (AwsException $e) {
-			throw new ObjectStoreWriteException($e->getMessage(), $e->getCode(), $e);
+			/**
+			 * If the error is from AwsException then just wrap the aws error message
+			 * to our exception.
+			 */
+			throw new ObjectStoreWriteException($e->getAwsErrorMessage(), $e->getStatusCode(), $e);
 		}
 
 		if (\is_resource($stream)) {
@@ -146,10 +151,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 */
 	public function deleteObject($urn) {
 		$this->init();
-		$this->connection->deleteObject([
-			'Bucket' => $this->getBucket(),
-			'Key' => $urn,
-		]);
+		try {
+			$this->connection->deleteObject([
+				'Bucket' => $this->getBucket(),
+				'Key' => $urn,
+			]);
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	/**
@@ -157,7 +166,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 */
 	public function readObject($urn) {
 		$this->init();
-		return \fopen($this->getUrl($urn), 'r');
+		try {
+			return \fopen($this->getUrl($urn), 'r');
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	public function getUrl($urn, $versionId = null) {
@@ -174,26 +187,31 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 *
 	 * @param string $urn the unified resource name used to identify the object
 	 * @return array
+	 * @throws ObjectStoreOperationException
 	 * @since 10.0.5
 	 */
 	public function getVersions($urn) {
 		$this->init();
-		$list = $this->connection->listObjectVersions([
-			'Bucket' => $this->getBucket(),
-			'Prefix'    => $urn
-		]);
-		$versions = \array_filter($list['Versions'], function ($v) use ($urn) {
-			return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
-		});
-		return \array_map(function ($version) {
-			return [
-				'version' => $version['VersionId'],
-				'timestamp' => $version['LastModified']->getTimestamp(),
-				'oid' => $version['Key'],
-				'etag' => $version['ETag'],
-				'size' => $version['Size'],
-			];
-		}, $versions);
+		try {
+			$list = $this->connection->listObjectVersions([
+				'Bucket' => $this->getBucket(),
+				'Prefix' => $urn
+			]);
+			$versions = \array_filter($list['Versions'], function ($v) use ($urn) {
+				return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
+			});
+			return \array_map(function ($version) {
+				return [
+					'version' => $version['VersionId'],
+					'timestamp' => $version['LastModified']->getTimestamp(),
+					'oid' => $version['Key'],
+					'etag' => $version['ETag'],
+					'size' => $version['Size'],
+				];
+			}, $versions);
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	/**
@@ -202,26 +220,31 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return array
+	 * @throws ObjectStoreOperationException
 	 * @since 10.0.5
 	 */
 	public function getVersion($urn, $versionId) {
 		$this->init();
-		$list = $this->connection->listObjectVersions([
-			'Bucket' => $this->getBucket(),
-			'Prefix' => $urn,
-			'VersionIdMarker' => $versionId
-		]);
-		$versions = \array_filter($list['Versions'], function ($v) use ($urn, $versionId) {
-			return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
-		});
-		$version = \array_values($versions)[0];
-		return [
-			'version' => $version['VersionId'],
-			'timestamp' => $version['LastModified']->getTimestamp(),
-			'oid' => $version['Key'],
-			'etag' => $version['ETag'],
-			'size' => $version['Size'],
-		];
+		try {
+			$list = $this->connection->listObjectVersions([
+				'Bucket' => $this->getBucket(),
+				'Prefix' => $urn,
+				'VersionIdMarker' => $versionId
+			]);
+			$versions = \array_filter($list['Versions'], function ($v) use ($urn, $versionId) {
+				return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
+			});
+			$version = \array_values($versions)[0];
+			return [
+				'version' => $version['VersionId'],
+				'timestamp' => $version['LastModified']->getTimestamp(),
+				'oid' => $version['Key'],
+				'etag' => $version['ETag'],
+				'size' => $version['Size'],
+			];
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	/**
@@ -230,11 +253,16 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return resource
+	 * @throws ObjectStoreOperationException
 	 * @since 10.0.5
 	 */
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
-		return \fopen($this->getUrl($urn, $versionId), 'r');
+		try {
+			return \fopen($this->getUrl($urn, $versionId), 'r');
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	/**
@@ -243,17 +271,22 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @param string $versionId
 	 * @return boolean
+	 * @throws ObjectStoreOperationException
 	 * @since 10.0.5
 	 */
 	public function restoreVersion($urn, $versionId) {
 		$this->init();
-		$this->connection->copyObject([
-			'Bucket' => $this->getBucket(),
-			'Key' => $urn,
-			'CopySource' => "/{$this->getBucket()}/".\rawurlencode($urn)."?versionId=$versionId"
-		]);
+		try {
+			$this->connection->copyObject([
+				'Bucket' => $this->getBucket(),
+				'Key' => $urn,
+				'CopySource' => "/{$this->getBucket()}/" . \rawurlencode($urn) . "?versionId=$versionId"
+			]);
 
-		return true;
+			return true;
+		} catch (AwsException $ex) {
+			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
+		}
 	}
 
 	/**
