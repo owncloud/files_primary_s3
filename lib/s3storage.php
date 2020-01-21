@@ -26,6 +26,7 @@
 namespace OCA\Files_Primary_S3;
 
 use Aws\Exception\AwsException;
+use Aws\Exception\MultipartUploadException;
 use Aws\Handler\GuzzleV5\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
@@ -139,6 +140,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			 * to our exception.
 			 */
 			throw new ObjectStoreWriteException($e->getAwsErrorMessage(), $e->getStatusCode(), $e);
+		} catch (MultipartUploadException $e) {
+			/**
+			 * There can be multiple parts that might have failed to upload. So it would be
+			 * better to have a custom message here. The getMessage throws all the parts which
+			 * are failed.
+			 */
+			\OC::$server->getLogger()->logException($e);
+			throw new ObjectStoreWriteException("Upload failed. Kindly check the logs.", $e->getCode(), $e);
 		}
 
 		if (\is_resource($stream)) {
