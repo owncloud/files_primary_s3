@@ -47,6 +47,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - First marketplace release
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...master
 [1.1.1]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/owncloud/files_primary_s3/compare/v1.0.4...v1.1.0
 [1.0.4]: https://github.com/owncloud/files_primary_s3/compare/v1.0.3...v1.0.4
