@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-- Catch Mulipart execption when uploading large files - [#304](https://github.com/owncloud/files_primary_s3/issues/304)
+- Catch Multipart exception when uploading large files - [#304](https://github.com/owncloud/files_primary_s3/issues/304)
 
 ## [1.1.0] - 2019-12-23
 
