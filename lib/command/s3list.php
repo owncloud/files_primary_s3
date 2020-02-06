@@ -49,6 +49,14 @@ class s3List extends Command {
 			->addArgument('object', InputArgument::OPTIONAL, 'Key of the object; it`s versions will be listed');
 	}
 
+	/**
+	 * Executes the current command.
+	 *
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
+	 *
+	 * @return int|null|void
+	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$client = $this->getClient();
 

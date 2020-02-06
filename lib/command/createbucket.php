@@ -53,6 +53,14 @@ class createBucket extends Command {
 			->addOption('accept-warning', null, InputOption::VALUE_NONE, 'No warning about the usage of this command will be displayed');
 	}
 
+	/**
+	 * Executes the current command.
+	 *
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
+	 *
+	 * @return int|null|void
+	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		if (!$input->getOption('accept-warning')) {
 			$helper = new QuestionHelper();
