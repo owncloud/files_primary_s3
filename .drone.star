@@ -69,7 +69,7 @@ config = {
 	'acceptance': {
 		'webUI-ceph': {
 			'suites': [
-				'webUIall',
+				'webUICeph',
 			],
 			'servers': [
 				'daily-master-qa'
@@ -83,7 +83,7 @@ config = {
 		},
 		'webUI-ceph-latest-nightly': {
 			'suites': [
-				'webUIall',
+				'webUICeph',
 			],
 			'servers': [
 				'latest'
@@ -98,7 +98,7 @@ config = {
 		},
 		'api-ceph': {
 			'suites': [
-				'apiAll',
+				'apiCeph',
 			],
 			'servers': [
 				'daily-master-qa'
@@ -111,7 +111,7 @@ config = {
 		},
 		'api-ceph-latest-nightly': {
 			'suites': [
-				'apiAll',
+				'apiCeph',
 			],
 			'servers': [
 				'latest'
@@ -122,6 +122,19 @@ config = {
 			'runAllSuites': True,
 			'numberOfParts': 32,
 			'cron': 'nightly'
+		},
+		'api-scality': {
+			'suites': [
+				'apiScality',
+			],
+			'servers': [
+				'daily-master-qa'
+			],
+			'scalityS3': True,
+			'federatedServerNeeded': True,
+			'runCoreTests': True,
+			'runAllSuites': True,
+			'numberOfParts': 32,
 		},
 	}
 }
