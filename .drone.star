@@ -136,8 +136,80 @@ config = {
 			'runAllSuites': True,
 			'numberOfParts': 32,
 		},
+		'api-scality-remote-smoke': {
+			'suites': {
+				'apiAll': 'api-scality-remote' ,
+			},
+			'filterTags': '@smokeTest',
+			'servers': [
+				'daily-master-qa'
+			],
+			'extraSetup': [
+				{
+					'name': 'configure-app',
+					'image': 'owncloudci/php:7.1',
+					'pull': 'always',
+					'commands': [
+						'cd /var/www/owncloud/server/apps/files_primary_s3',
+						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
+						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/scality:8000/s3.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
+						'cd /var/www/owncloud/server/',
+						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
+						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_key'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret'
+						},
+					}
+				}
+			],
+			'extraTeardown': [
+				{
+					'name': 'cleanup-scality-bucket',
+					'image': 'banst/awscli',
+					'pull': 'always',
+					'commands': [
+						'aws configure set aws_access_key_id $SCALITY_KEY',
+						'aws configure set aws_secret_access_key $SCALITY_SECRET',
+						'aws --endpoint-url https://s3.isv.scality.com s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url https://s3.isv.scality.com s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_key'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret'
+						},
+					},
+					'when': {
+						'status': [
+							'failure',
+							'success',
+						],
+					},
+				}
+			],
+			'extraEnvironment': {
+				'S3_TYPE': 'scality',
+			},
+			'federatedServerNeeded': True,
+			'runCoreTests': True,
+			'runAllSuites': True,
+			'numberOfParts': 32,
+		},
 	}
 }
+
 
 def main(ctx):
 	before = beforePipelines()
@@ -536,6 +608,7 @@ def javascript():
 		'extraServices': [],
 		'extraEnvironment': {},
 		'extraCommandsBeforeTestRun': [],
+		'extraTeardown': [],
 	}
 
 	if 'defaults' in config:
@@ -579,7 +652,7 @@ def javascript():
 					'make test-js'
 				]
 			}
-		],
+		] + params['extraTeardown'],
 		'services': params['extraServices'],
 		'depends_on': [],
 		'trigger': {
@@ -633,6 +706,7 @@ def phptests(testType):
 		'extraEnvironment': {},
 		'extraCommandsBeforeTestRun': [],
 		'extraApps': {},
+		'extraTeardown': [],
 	}
 
 	if 'defaults' in config:
@@ -731,7 +805,7 @@ def phptests(testType):
 								command
 							]
 						}
-					],
+					] + params['extraTeardown'],
 					'services':
 						databaseService(db) +
 						cephService(params['cephS3']) +
@@ -799,6 +873,7 @@ def acceptance():
 		'xForwardedFor': False,
 		'extraSetup': [],
 		'extraServices': [],
+		'extraTeardown': [],
 		'extraEnvironment': {},
 		'extraCommandsBeforeTestRun': [],
 		'extraApps': {},
@@ -959,7 +1034,7 @@ def acceptance():
 												'make %s' % makeParameter
 											]
 										}),
-									],
+									] + params['extraTeardown'],
 									'services':
 										databaseService(db) +
 										browserService(browser) +
