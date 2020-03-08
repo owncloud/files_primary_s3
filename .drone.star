@@ -1282,16 +1282,18 @@ def getDbName(db):
 def getDbUsername(db):
 	name = getDbName(db)
 
+	# The Oracle image has the Db Username hardcoded
 	if name == 'oracle':
-		return 'system'
+		return 'autotest'
 
 	return 'owncloud'
 
 def getDbPassword(db):
 	name = getDbName(db)
 
+	# The Oracle image has the Db Password hardcoded
 	if name == 'oracle':
-		return 'oracle'
+		return 'owncloud'
 
 	return 'owncloud'
 
@@ -1301,6 +1303,7 @@ def getDbRootPassword():
 def getDbDatabase(db):
 	name = getDbName(db)
 
+	# The Oracle image has the Db Name hardcoded
 	if name == 'oracle':
 		return 'XE'
 
