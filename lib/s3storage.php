@@ -60,8 +60,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @throws \Exception
 	 */
 	public function __construct($params) {
-		if (!isset($params['options']) || !isset($params['bucket'])) {
-			throw new \Exception('Connection options and bucket must be configured.');
+		if (!isset($params['options'], $params['bucket'])) {
+			throw new \Exception($this->t('Connection options and bucket must be configured.'));
 		}
 
 		$this->params = $params;
@@ -74,7 +74,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$config = $this->params['options'];
 		$client = new \GuzzleHttp\Client(['handler' => new StreamHandler()]);
 		$emitter = $client->getEmitter();
-		$emitter->on('before', function (BeforeEvent $event) {
+		$emitter->on('before', static function (BeforeEvent $event) {
 			$request = $event->getRequest();
 			if ($request->getMethod() !== 'PUT') {
 				return;
@@ -87,7 +87,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				return;
 			}
 			// force content length header on empty body
-			$request->setHeader('Content-Length', "0");
+			$request->setHeader('Content-Length', '0');
 		});
 		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
@@ -97,7 +97,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
 			\OC::$server->getLogger()->logException($exception);
-			throw new ServiceUnavailableException("No S3 ObjectStore available");
+			$message = $this->t('No S3 ObjectStore available');
+			throw new ServiceUnavailableException($message);
 		}
 
 		// TODO: update aws sdk once https://github.com/aws/aws-sdk-php/pull/1424 is merged
@@ -105,7 +106,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		StreamWrapper::register($this->connection);
 
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
-			throw new \Exception("Bucket <{$this->getBucket()}> does not exist.");
+			throw new \Exception($this->t('Bucket <%s> does not exist.', [$this->getBucket()]));
 		}
 	}
 
@@ -147,7 +148,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			 * are failed.
 			 */
 			\OC::$server->getLogger()->logException($e);
-			throw new ObjectStoreWriteException("Upload failed. Kindly check the logs.", $e->getCode(), $e);
+			$message = $this->t('Upload failed. Please ask you administrator to have a look at the log files for more details.');
+			throw new ObjectStoreWriteException($message, $e->getCode(), $e);
 		}
 
 		if (\is_resource($stream)) {
@@ -206,10 +208,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				'Bucket' => $this->getBucket(),
 				'Prefix' => $urn
 			]);
-			$versions = \array_filter($list['Versions'], function ($v) use ($urn) {
+			$versions = \array_filter($list['Versions'], static function ($v) use ($urn) {
 				return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
 			});
-			return \array_map(function ($version) {
+			return \array_map(static function ($version) {
 				return [
 					'version' => $version['VersionId'],
 					'timestamp' => $version['LastModified']->getTimestamp(),
@@ -240,7 +242,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				'Prefix' => $urn,
 				'VersionIdMarker' => $versionId
 			]);
-			$versions = \array_filter($list['Versions'], function ($v) use ($urn, $versionId) {
+			$versions = \array_filter($list['Versions'], static function ($v) use ($urn, $versionId) {
 				return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
 			});
 			$version = \array_values($versions)[0];
@@ -263,6 +265,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $versionId
 	 * @return resource
 	 * @throws ObjectStoreOperationException
+	 * @throws ServiceUnavailableException
 	 * @since 10.0.5
 	 */
 	public function getContentOfVersion($urn, $versionId) {
@@ -281,6 +284,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $versionId
 	 * @return boolean
 	 * @throws ObjectStoreOperationException
+	 * @throws ServiceUnavailableException
 	 * @since 10.0.5
 	 */
 	public function restoreVersion($urn, $versionId) {
@@ -301,12 +305,18 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	/**
 	 * Tells the storage to explicitly create a version of a given file
 	 *
-	 * @return boolean
+	 * @param string $internalPath
+	 * @return bool
 	 * @since 10.0.5
 	 */
-	public function saveVersion($internalPath) {
+	public function saveVersion($internalPath): bool {
 		// There is no need in any explicit operations.
 		// In a versioned bucket the versions are created automatically
 		return true;
+	}
+
+	private function t(string $text, array $parameters = []) {
+		return \OC::$server->getL10N('files_primary_s3')
+			->t($text, $parameters);
 	}
 }

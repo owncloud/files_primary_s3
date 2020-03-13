@@ -1,5 +1,8 @@
 /build/
 /l10n/.transifexrc
+/l10n/l10n.pl
+/l10n/templates
+/l10n/*.po
 .php_cs.cache
 
 # Composer
