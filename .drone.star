@@ -176,6 +176,7 @@ config = {
 					'name': 'cleanup-scality-bucket',
 					'image': 'banst/awscli',
 					'pull': 'always',
+					'failure': 'ignore',
 					'commands': [
 						'aws configure set aws_access_key_id $SCALITY_KEY',
 						'aws configure set aws_secret_access_key $SCALITY_SECRET',
