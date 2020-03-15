@@ -1,0 +1,9 @@
+OC.L10N.register(
+    "files_primary_s3",
+    {
+    "Connection options and bucket must be configured." : "Bağlantı seçenekleri ve veri kümesi yapılandırılmalıdır.",
+    "No S3 ObjectStore available" : "S3 Nesne depolama bulunamadı",
+    "Bucket <%s> does not exist." : "<%s> veri kümesi mevcut değil.",
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Karşıya yükleme başarısız. Daha fazla bilgi için lütfen yöneticinizden günlük dosyalarına bakmasını isteyin."
+},
+"nplurals=2; plural=(n > 1);");
