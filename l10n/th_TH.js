@@ -1,0 +1,9 @@
+OC.L10N.register(
+    "files_primary_s3",
+    {
+    "Connection options and bucket must be configured." : "ต้องกำหนดค่าตัวเลือกการเชื่อมต่อและที่เก็บข้อมูล",
+    "No S3 ObjectStore available" : "ไม่พบ S3 ObjectStore",
+    "Bucket <%s> does not exist." : "ไม่พบ Bucket <%s> ",
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "การอัปโหลดล้มเหลว โปรดขอให้ผู้ดูแลระบบของคุณ ดูรายละเอียดเพิ่มเติมได้จากไฟล์ log"
+},
+"nplurals=1; plural=0;");
