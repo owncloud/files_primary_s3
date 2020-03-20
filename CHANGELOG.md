@@ -4,7 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.1.2] - 2020-03-20
+
+### Fixed
+
+- Bugfix/l10n - [#323](https://github.com/owncloud/files_primary_s3/issues/323)
+
+### Changed
+
+- Update PHP dependencies - [#316](https://github.com/owncloud/files_primary_s3/issues/316)
+
+### Added
+
+- Add phpdoc for Symfony Command execute - [#309](https://github.com/owncloud/files_primary_s3/issues/309)
 
 ## [1.1.1] - 2020-01-23
 
@@ -49,7 +61,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - First marketplace release
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...master
+
+[1.1.2]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/owncloud/files_primary_s3/compare/v1.0.4...v1.1.0
 [1.0.4]: https://github.com/owncloud/files_primary_s3/compare/v1.0.3...v1.0.4
