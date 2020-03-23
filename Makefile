@@ -139,9 +139,9 @@ composer.lock: composer.json
 	@echo composer.lock is not up to date.
 
 vendor: composer.lock
-	ifndef COMPOSER_BIN
-		$(error composer is not available on your system, please install composer)
-	endif
+ifndef COMPOSER_BIN
+	$(error composer is not available on your system, please install composer)
+endif
 	$(COMPOSER_BIN) install --no-dev
 
 vendor/bamarni/composer-bin-plugin: composer.lock
