@@ -905,7 +905,7 @@ class StreamWrapper {
 	/**
 	 * Returns the size of the opened object body.
 	 *
-	 * @return int|null
+	 * @return int
 	 */
 	private function getSize() {
 		$size = $this->body->getSize();
