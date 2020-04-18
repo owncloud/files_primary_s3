@@ -22,7 +22,6 @@ config = {
 	'phpunit': {
 		'scality': {
 			'phpVersions': [
-				'7.1',
 				'7.2',
 				'7.3',
 			],
@@ -37,7 +36,6 @@ config = {
 		},
 		'scality-multibucket': {
 			'phpVersions': [
-				'7.1',
 				'7.2',
 				'7.3',
 			],
@@ -53,7 +51,6 @@ config = {
 		},
 		'ceph': {
 			'phpVersions': [
-				'7.1',
 				'7.2',
 				'7.3',
 			],
@@ -147,7 +144,7 @@ config = {
 			'extraSetup': [
 				{
 					'name': 'configure-app',
-					'image': 'owncloudci/php:7.1',
+					'image': 'owncloudci/php:7.2',
 					'pull': 'always',
 					'commands': [
 						'cd /var/www/owncloud/server/apps/files_primary_s3',
@@ -211,7 +208,6 @@ config = {
 	}
 }
 
-
 def main(ctx):
 	before = beforePipelines()
 
@@ -253,7 +249,7 @@ def codestyle():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.1'],
+		'phpVersions': ['7.2'],
 	}
 
 	if 'defaults' in config:
@@ -442,7 +438,7 @@ def phan():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.1', '7.2', '7.3'],
+		'phpVersions': ['7.2', '7.3'],
 	}
 
 	if 'defaults' in config:
@@ -514,7 +510,7 @@ def build():
 		return pipelines
 
 	default = {
-		'phpVersions': ['7.1'],
+		'phpVersions': ['7.2'],
 		'commands': [
 			'make dist'
 		],
@@ -640,13 +636,13 @@ def javascript():
 		},
 		'steps':
 			installCore('daily-master-qa', 'sqlite', False) +
-			installApp('7.1') +
-			setupServerAndApp('7.1', params['logLevel']) +
+			installApp('7.2') +
+			setupServerAndApp('7.2', params['logLevel']) +
 			params['extraSetup'] +
 		[
 			{
 				'name': 'js-tests',
-				'image': 'owncloudci/php:7.1',
+				'image': 'owncloudci/php:7.2',
 				'pull': 'always',
 				'environment': params['extraEnvironment'],
 				'commands': params['extraCommandsBeforeTestRun'] + [
@@ -693,7 +689,7 @@ def phptests(testType):
 	errorFound = False
 
 	default = {
-		'phpVersions': ['7.1', '7.2', '7.3'],
+		'phpVersions': ['7.2', '7.3'],
 		'databases': [
 			'sqlite', 'mariadb:10.2', 'mysql:5.5', 'mysql:5.7', 'postgres:9.4', 'oracle'
 		],
@@ -861,7 +857,7 @@ def acceptance():
 	default = {
 		'servers': ['daily-master-qa', 'latest'],
 		'browsers': ['chrome'],
-		'phpVersions': ['7.1'],
+		'phpVersions': ['7.2'],
 		'databases': ['mariadb:10.2'],
 		'federatedServerNeeded': False,
 		'filterTags': '',
@@ -1432,7 +1428,7 @@ def setupCeph(serviceParams):
 
 	return [{
 		'name': 'setup-ceph',
-		'image': 'owncloudci/php:7.1',
+		'image': 'owncloudci/php:7.2',
 		'pull': 'always',
 		'commands': setupCommands + ([
 			'./apps/files_primary_s3/tests/drone/create-bucket.sh',
@@ -1460,7 +1456,7 @@ def setupScality(serviceParams):
 
 	return [{
 		'name': 'setup-scality',
-		'image': 'owncloudci/php:7.1',
+		'image': 'owncloudci/php:7.2',
 		'pull': 'always',
 		'commands': setupCommands + ([
 			'php occ s3:create-bucket owncloud --accept-warning'
