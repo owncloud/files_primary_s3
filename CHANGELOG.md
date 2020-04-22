@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [1.1.2] - 2020-03-20
+## [1.1.2] - 2020-04-22
 
 ### Fixed
 
@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Add phpdoc for Symfony Command execute - [#309](https://github.com/owncloud/files_primary_s3/issues/309)
+- Add l10n to dist/appstore build - [#340](https://github.com/owncloud/files_primary_s3/issues/340)
 
 ## [1.1.1] - 2020-01-23
 
