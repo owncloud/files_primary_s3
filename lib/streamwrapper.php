@@ -636,6 +636,7 @@ class StreamWrapper {
 		}
 
 		return [
+			/** @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset */
 			'Bucket'    => $pathInfo['host'],
 			'Key'       => isset($pathInfo['path']) ? \ltrim($pathInfo['path'], "/") : null,
 			'VersionId' => $versionId
