@@ -77,6 +77,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 27,
+			'phpVersions': [
+				'7.4',
+			],
 		},
 		'webUI-ceph-latest-nightly': {
 			'suites': [
@@ -91,7 +94,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 27,
-			'cron': 'nightly'
+			'phpVersions': [
+				'7.4',
+			],
 		},
 		'api-ceph': {
 			'suites': [
@@ -105,6 +110,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
+			'phpVersions': [
+				'7.4',
+			],
 		},
 		'api-ceph-latest-nightly': {
 			'suites': [
@@ -118,7 +126,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
-			'cron': 'nightly'
+			'phpVersions': [
+				'7.4',
+			],
 		},
 		'api-scality': {
 			'suites': [
@@ -132,6 +142,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
+			'phpVersions': [
+				'7.4',
+			],
 		},
 		'api-scality-remote-smoke': {
 			'suites': {
@@ -204,6 +217,9 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
+			'phpVersions': [
+				'7.4',
+			],
 		},
 	}
 }
@@ -1515,7 +1531,7 @@ def installFederated(federatedServerVersion, phpVersion, logLevel, db, dbSuffix 
 			'image': 'owncloudci/core',
 			'pull': 'always',
 			'settings': {
-				'version': federatedServerVersion,
+				'git_reference': 'php7.4-20200310',
 				'core_path': '/var/www/owncloud/federated',
 				'db_type': 'mysql',
 				'db_name': database,
