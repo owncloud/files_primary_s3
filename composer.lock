@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.134.8",
+            "version": "3.140.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8a9b598a0ede2165be5988899dcebead6fcc4d41"
+                "reference": "52645498aea4dd2d090884322121270daf3e0f06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8a9b598a0ede2165be5988899dcebead6fcc4d41",
-                "reference": "8a9b598a0ede2165be5988899dcebead6fcc4d41",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/52645498aea4dd2d090884322121270daf3e0f06",
+                "reference": "52645498aea4dd2d090884322121270daf3e0f06",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-04-17T18:11:57+00:00"
+            "time": "2020-06-04T18:19:47+00:00"
         },
         {
             "name": "dg/composer-cleaner",
@@ -407,16 +407,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.15.0",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac"
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
-                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fa79b11539418b02fc5e1897267673ba2c19419c",
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -462,27 +462,27 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-03-09T19:04:49+00:00"
+            "time": "2020-05-12T16:47:27+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "bamarni/composer-bin-plugin",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bamarni/composer-bin-plugin.git",
-                "reference": "46cb272590cc6b7f5947655063a7fd6ea097838b"
+                "reference": "9329fb0fbe29e0e1b2db8f4639a193e4f5406225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bamarni/composer-bin-plugin/zipball/46cb272590cc6b7f5947655063a7fd6ea097838b",
-                "reference": "46cb272590cc6b7f5947655063a7fd6ea097838b",
+                "url": "https://api.github.com/repos/bamarni/composer-bin-plugin/zipball/9329fb0fbe29e0e1b2db8f4639a193e4f5406225",
+                "reference": "9329fb0fbe29e0e1b2db8f4639a193e4f5406225",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0 || ^2.0",
-                "php": "^5.6 || ^7.0 || ^8.0"
+                "php": "^5.5.9 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "^1.0 || ^2.0",
@@ -510,7 +510,7 @@
                 "isolation",
                 "tool"
             ],
-            "time": "2020-04-17T09:33:47+00:00"
+            "time": "2020-05-03T08:27:20+00:00"
         }
     ],
     "aliases": [],
