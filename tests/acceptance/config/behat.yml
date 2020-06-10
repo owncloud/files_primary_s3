@@ -1,0 +1,21 @@
+default:
+  autoload:
+    '': '%paths.base%/../features/bootstrap'
+
+  extensions:
+      jarnaiz\JUnitFormatter\JUnitFormatterExtension:
+          filename: report.xml
+          outputDir: '%paths.base%/../output/'
+
+  suites:
+    apiFilesPrimaryS3:
+      paths:
+        - '%paths.base%/../features/apiFilesPrimaryS3'
+      contexts:
+        - FilesPrimaryS3Context:
+        - FeatureContext: &common_feature_context_params
+            baseUrl:  http://localhost:8080
+            adminUsername: admin
+            adminPassword: admin
+            ocPath: apps/testing/api/v1/occ
+            regularUserPassword: 123456
