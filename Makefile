@@ -132,6 +132,11 @@ test-acceptance-core-webui: ## Run core webUI acceptance tests
 test-acceptance-core-webui: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI -c ../../tests/acceptance/config/behat.yml --tags '~@app-required&&~@skipOnStorage:${S3_TYPE}&&~@skip&&${BEHAT_FILTER_TAGS}'
 
+.PHONY: test-acceptance-api
+test-acceptance-api: ## Run API acceptance tests
+test-acceptance-api: $(acceptance_test_deps)
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
+
 #
 # Dependency management
 #--------------------------------------
