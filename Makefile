@@ -137,6 +137,11 @@ test-acceptance-api: ## Run API acceptance tests
 test-acceptance-api: $(acceptance_test_deps)
 	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type api
 
+.PHONY: test-acceptance-webui
+test-acceptance-webui: ## Run webUI acceptance tests
+test-acceptance-webui: $(acceptance_test_deps)
+	BEHAT_BIN=$(BEHAT_BIN) ../../tests/acceptance/run.sh --remote --type webUI
+
 #
 # Dependency management
 #--------------------------------------
