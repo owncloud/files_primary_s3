@@ -82,7 +82,6 @@ config = {
 			},
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
-			'runAllSuites': True,
 		},
 	}
 }
