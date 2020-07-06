@@ -15,7 +15,7 @@ config = {
 	'acceptance': {
 		'api-scality-remote-smoke': {
 			'suites': {
-				'apiVersions': 'api-scality-remote' ,
+				'apiVersions': 'api-scality-remote',
 			},
 			'filterTags': '@smokeTest',
 			'servers': [
@@ -79,6 +79,8 @@ config = {
 			],
 			'extraEnvironment': {
 				'S3_TYPE': 'scality',
+				'BEHAT_FEATURE': '../../tests/acceptance/features/apiVersions/fileVersions.feature:80',
+				'BEHAT_RERUN_TIMES': 10,
 			},
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
@@ -835,9 +837,7 @@ def acceptance():
 								environment['TEST_SERVER_URL'] = 'http://server'
 								environment['BEHAT_FILTER_TAGS'] = params['filterTags']
 
-								if (params['runAllSuites'] == False):
-									environment['BEHAT_SUITE'] = suite
-								else:
+								if (params['runAllSuites'] != False):
 									environment['DIVIDE_INTO_NUM_PARTS'] = params['numberOfParts']
 									environment['RUN_PART'] = runPart
 
