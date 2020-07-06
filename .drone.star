@@ -138,7 +138,7 @@ config = {
 		},
 		'api-scality-remote-smoke': {
 			'suites': {
-				'apiAll': 'api-scality-remote' ,
+				'apiVersions': 'api-scality-remote' ,
 			},
 			'filterTags': '@smokeTest',
 			'servers': [
@@ -206,7 +206,6 @@ config = {
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 32,
 		},
 	}
 }
