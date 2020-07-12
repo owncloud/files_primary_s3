@@ -67,6 +67,16 @@ config = {
 	},
 
 	'acceptance': {
+        'webUI': {
+            'suites': {
+                'webUIFilesPrimaryS3': 'webUIFilesPriS3'
+            },
+            'cephS3': True,
+            'browsers': [
+                'chrome',
+                'firefox'
+            ],
+        },
 		'webUI-ceph': {
 			'suites': [
 				'webUICeph',
