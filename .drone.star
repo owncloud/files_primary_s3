@@ -67,6 +67,12 @@ config = {
 	},
 
 	'acceptance': {
+        'api': {
+            'suites': {
+                'apiFilesPrimaryS3': 'apiFilesPriS3'
+            },
+            'cephS3': True,
+        },
         'webUI': {
             'suites': {
                 'webUIFilesPrimaryS3': 'webUIFilesPriS3'

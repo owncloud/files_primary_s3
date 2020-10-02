@@ -21,6 +21,8 @@ default:
             adminPassword: admin
             ocPath: apps/testing/api/v1/occ
             regularUserPassword: 123456
+        - WebDavPropertiesContext:
+        - FilesVersionsContext:
 
     webUIFilesPrimaryS3:
       paths:
