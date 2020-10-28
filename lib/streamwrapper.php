@@ -7,7 +7,7 @@ use Aws\Result;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\S3Client;
 use Aws\S3\S3ClientInterface;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\MimeType;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\CachingStream;
 use Psr\Http\Message\StreamInterface;
@@ -166,7 +166,7 @@ class StreamWrapper {
 		// Attempt to guess the ContentType of the upload based on the
 		// file extension of the key
 		if (!isset($params['ContentType']) &&
-			($type = Psr7\mimetype_from_filename($params['Key']))
+			($type = MimeType::fromFilename($params['Key']))
 		) {
 			$params['ContentType'] = $type;
 		}
