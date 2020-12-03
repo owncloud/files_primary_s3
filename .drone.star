@@ -29,7 +29,6 @@ config = {
 			'databases': [
 				'sqlite',
 			],
-			'coverage': False,
 			'scalityS3': {
 				'createExtraBuckets': True
 			},
@@ -44,7 +43,6 @@ config = {
 			'databases': [
 				'sqlite',
 			],
-			'coverage': False,
 			'scalityS3': {
 				'config': 'multibucket',
 				'createExtraBuckets': True
@@ -60,7 +58,6 @@ config = {
 			'databases': [
 				'sqlite',
 			],
-			'coverage': False,
 			'cephS3': True,
 			'includeKeyInMatrixName': True,
 		},
