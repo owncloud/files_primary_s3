@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.158.18",
+            "version": "3.169.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "75aebc2f5dfd23ad7272ff1d59c521bc2a8e2802"
+                "reference": "d15a231355e4435fc33bab83df075ec31edd0a9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/75aebc2f5dfd23ad7272ff1d59c521bc2a8e2802",
-                "reference": "75aebc2f5dfd23ad7272ff1d59c521bc2a8e2802",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d15a231355e4435fc33bab83df075ec31edd0a9b",
+                "reference": "d15a231355e4435fc33bab83df075ec31edd0a9b",
                 "shasum": ""
             },
             "require": {
@@ -89,12 +89,7 @@
                 "s3",
                 "sdk"
             ],
-            "support": {
-                "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
-                "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.158.18"
-            },
-            "time": "2020-10-30T18:12:38+00:00"
+            "time": "2020-12-14T19:12:33+00:00"
         },
         {
             "name": "dg/composer-cleaner",
@@ -142,10 +137,6 @@
             "keywords": [
                 "composer"
             ],
-            "support": {
-                "issues": "https://github.com/dg/composer-cleaner/issues",
-                "source": "https://github.com/dg/composer-cleaner/tree/v2.2"
-            },
             "time": "2020-10-27T13:01:26+00:00"
         },
         {
@@ -197,10 +188,6 @@
             "keywords": [
                 "promise"
             ],
-            "support": {
-                "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.4.0"
-            },
             "time": "2020-09-30T07:37:28+00:00"
         },
         {
@@ -272,10 +259,6 @@
                 "uri",
                 "url"
             ],
-            "support": {
-                "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.7.0"
-            },
             "time": "2020-09-30T07:37:11+00:00"
         },
         {
@@ -333,10 +316,6 @@
                 "json",
                 "jsonpath"
             ],
-            "support": {
-                "issues": "https://github.com/jmespath/jmespath.php/issues",
-                "source": "https://github.com/jmespath/jmespath.php/tree/2.6.0"
-            },
             "time": "2020-07-31T21:01:56+00:00"
         },
         {
@@ -387,9 +366,6 @@
                 "request",
                 "response"
             ],
-            "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
-            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -430,10 +406,6 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "support": {
-                "issues": "https://github.com/ralouphie/getallheaders/issues",
-                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
-            },
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
@@ -497,9 +469,6 @@
                 "portable",
                 "shim"
             ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.20.0"
-            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -562,10 +531,6 @@
                 "isolation",
                 "tool"
             ],
-            "support": {
-                "issues": "https://github.com/bamarni/composer-bin-plugin/issues",
-                "source": "https://github.com/bamarni/composer-bin-plugin/tree/master"
-            },
             "time": "2020-05-03T08:27:20+00:00"
         }
     ],
@@ -579,5 +544,5 @@
     "platform-overrides": {
         "php": "7.1"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }
