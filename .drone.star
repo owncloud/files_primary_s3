@@ -93,6 +93,7 @@ config = {
 			'cephS3': True,
 			'emailNeeded': True,
 			'federatedServerNeeded': True,
+			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 27,
@@ -107,6 +108,7 @@ config = {
 			'cephS3': True,
 			'emailNeeded': True,
 			'federatedServerNeeded': True,
+			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 27,
@@ -121,6 +123,7 @@ config = {
 			],
 			'cephS3': True,
 			'federatedServerNeeded': True,
+			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
@@ -134,6 +137,7 @@ config = {
 			],
 			'cephS3': True,
 			'federatedServerNeeded': True,
+			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
@@ -148,6 +152,7 @@ config = {
 			],
 			'scalityS3': True,
 			'federatedServerNeeded': True,
+			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 32,
@@ -156,7 +161,7 @@ config = {
 			'suites': {
 				'apiAll': 'api-scality-remote' ,
 			},
-			'filterTags': '@smokeTest',
+			'filterTags': '@smokeTest&&~@skip&&~@app-required',
 			'servers': [
 				'daily-master-qa'
 			],
