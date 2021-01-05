@@ -90,12 +90,12 @@ test-php-codecheck:
 .PHONY: test-php-unit
 test-php-unit: ## Run core php unit tests
 test-php-unit:
-	$(PHPUNIT) --configuration ./phpunit.xml
+	cd ../../tests && $(PHPUNIT) --configuration ./phpunit-autotest.xml
 
 .PHONY: test-php-unit-dbg
 test-php-unit-dbg: ## Run core php unit tests using phpdbg
 test-php-unit-dbg:
-	$(PHPUNITDBG) --configuration ./phpunit.xml
+	cd ../../tests && $(PHPUNITDBG) --configuration ./phpunit-autotest.xml
 
 .PHONY: test-php-style
 test-php-style: ## Run php-cs-fixer and check owncloud code-style
