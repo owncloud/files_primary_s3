@@ -1572,7 +1572,7 @@ def databaseServiceForFederation(db, suffix):
 		print('Not implemented federated database for ', dbName)
 		return []
 
-	return [{
+	service = {
 		'name': dbName + suffix,
 		'image': db,
 		'pull': 'always',
@@ -1582,4 +1582,7 @@ def databaseServiceForFederation(db, suffix):
 			'MYSQL_DATABASE': getDbDatabase(db) + suffix,
 			'MYSQL_ROOT_PASSWORD': getDbRootPassword()
 		}
-	}]
+	}
+	if (db == 'mysql:8.0'):
+		service['command'] = ['--default-authentication-plugin=mysql_native_password']
+	return [service]
