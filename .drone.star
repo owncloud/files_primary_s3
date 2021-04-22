@@ -177,7 +177,7 @@ config = {
 						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/scality:8000/s3.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
 						'cd /var/www/owncloud/server/',
 						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
 						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
@@ -201,9 +201,9 @@ config = {
 					'commands': [
 						'aws configure set aws_access_key_id $SCALITY_KEY',
 						'aws configure set aws_secret_access_key $SCALITY_SECRET',
-						'aws --endpoint-url https://s3.isv.scality.com s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url https://s3-b.isv.scality.com s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
 						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'aws --endpoint-url https://s3.isv.scality.com s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url https://s3-b.isv.scality.com s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
 					],
 					'environment': {
 						'SCALITY_KEY': {
