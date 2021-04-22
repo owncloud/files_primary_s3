@@ -176,7 +176,7 @@ config = {
 						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
 						'echo "magic is $SCALITY_SECRET"',
-						'SCALITY_SECRET_ESCAPED=${SCALITY_SECRET//\//\\\/}; sed -i -e "s/verySecretKey1/${SCALITY_SECRET_ESCAPED}/" /var/www/owncloud/server/config/scality.config.php',
+						'SCALITY_SECRET_ESCAPED=$SCALITY_SECRET;SCALITY_SECRET_ESCAPED=${SCALITY_SECRET_ESCAPED//\//\\\/}; sed -i -e "s/verySecretKey1/${SCALITY_SECRET_ESCAPED}/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
 						'cat /var/www/owncloud/server/config/scality.config.php',
