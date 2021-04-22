@@ -184,10 +184,10 @@ config = {
 					],
 					'environment': {
 						'SCALITY_KEY': {
-							'from_secret': 'scality_key'
+							'from_secret': 'scality_access_key_ring_8'
 						},
 						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret'
+							'from_secret': 'scality_secret_access_key_ring_8'
 						},
 					}
 				}
@@ -207,10 +207,10 @@ config = {
 					],
 					'environment': {
 						'SCALITY_KEY': {
-							'from_secret': 'scality_key'
+							'from_secret': 'scality_access_key_ring_8'
 						},
 						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret'
+							'from_secret': 'scality_secret_access_key_ring_8'
 						},
 					},
 					'when': {
