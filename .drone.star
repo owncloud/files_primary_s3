@@ -175,7 +175,7 @@ config = {
 						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
 						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/verySecretKey1/${SCALITY_SECRET//\//\\\/}/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
 						'cat /var/www/owncloud/server/config/scality.config.php',
@@ -189,9 +189,6 @@ config = {
 						},
 						'SCALITY_SECRET': {
 							'from_secret': 'scality_secret_access_key_ring_8'
-						},
-						'SCALITY_SECRET_ESCAPED': {
-							'from_secret': 'scality_secret_access_key_ring_8_escaped'
 						},
 					}
 				}
