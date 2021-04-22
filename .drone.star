@@ -206,9 +206,9 @@ config = {
 					'commands': [
 						'aws configure set aws_access_key_id $SCALITY_KEY',
 						'aws configure set aws_secret_access_key $SCALITY_SECRET',
-						'aws --endpoint-url https://s3-b.isv.scality.com s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh https://s3-b.isv.scality.com owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'aws --endpoint-url https://s3-b.isv.scality.com s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
 					],
 					'environment': {
 						'SCALITY_KEY': {
@@ -217,6 +217,7 @@ config = {
 						'SCALITY_SECRET': {
 							'from_secret': 'scality_secret_access_key_ring_8'
 						},
+						'SCALITY_ENDPOINT': 'https://s3-b.isv.scality.com',
 					},
 					'when': {
 						'status': [
