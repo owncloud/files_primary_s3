@@ -1,7 +1,7 @@
 #!/bin/sh
 
 bucket=$1
-endpointUrl=https://s3.isv.scality.com
+endpointUrl=https://s3-b.isv.scality.com
 set -e
 
 echo "Removing all versions from $bucket"
