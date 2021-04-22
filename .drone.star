@@ -176,8 +176,7 @@ config = {
 						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
 						'echo "magic is $SCALITY_SECRET"',
-						# 'TEST_VAR="some/Text/123/numbers"; TEST_VAR_ESCAPED="$(echo "$TEST_VAR" | sed -e \'s_/_\\/_\')"; echo "TEST VAR is $TEST_VAR and escaped version is $TEST_VAR_ESCAPED"',
-						'SCALITY_SECRET_ESCAPED=$SCALITY_SECRET;SCALITY_SECRET_ESCAPED=${SCALITY_SECRET_ESCAPED//\\\\//\\\\\\\\\\\\/}; sed -i -e "s/verySecretKey1/${SCALITY_SECRET_ESCAPED}/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
 						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
 						'cat /var/www/owncloud/server/config/scality.config.php',
@@ -191,6 +190,9 @@ config = {
 						},
 						'SCALITY_SECRET': {
 							'from_secret': 'scality_secret_access_key_ring_8'
+						},
+						'SCALITY_SECRET_ESCAPED': {
+							'from_secret': 'scality_secret_access_key_ring_8_escaped'
 						},
 					}
 				}
