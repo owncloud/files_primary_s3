@@ -161,7 +161,7 @@ config = {
 			'suites': {
 				'apiAll': 'api-scality-remote' ,
 			},
-			'filterTags': '@smokeTest&&~@skip&&~@app-required',
+			'filterTags': '~@skip&&~@app-required',
 			'servers': [
 				'daily-master-qa'
 			],
