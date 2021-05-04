@@ -227,7 +227,7 @@ config = {
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 32,
+			'numberOfParts': 8,
 		},
 		'api-scality8-remote-smoke': {
 			'suites': {
