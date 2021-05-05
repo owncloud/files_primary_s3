@@ -234,7 +234,7 @@ config = {
 			'suites': {
 				'apiAll': 'api-scal8-remote' ,
 			},
-			'filterTags': '~@skip&&~@app-required',
+			'filterTags': '@smokeTest&&~@skip&&~@app-required',
 			'servers': [
 				'daily-master-qa'
 			],
@@ -307,7 +307,7 @@ config = {
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 24,
+			'numberOfParts': 8,
 		},
 	}
 }
