@@ -224,6 +224,7 @@ config = {
 			'extraEnvironment': {
 				'S3_TYPE': 'scality',
 			},
+			'scalityS3': True,
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,
@@ -302,6 +303,7 @@ config = {
 			'extraEnvironment': {
 				'S3_TYPE': 'scality',
 			},
+			'scalityS3': True,
 			'federatedServerNeeded': True,
 			'runCoreTests': True,
 			'runAllSuites': True,
