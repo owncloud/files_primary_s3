@@ -6,7 +6,7 @@ config = {
 	},
 
 	'branches': [
-		'master'
+		'try-running-ci'
 	],
 
 	'appInstallCommand': 'composer install',
@@ -19,70 +19,8 @@ config = {
 
 	'phpstan': True,
 
-	'phpunit': {
-		'scality': {
-			'phpVersions': [
-				'7.2',
-				'7.3',
-				'7.4',
-			],
-			'databases': [
-				'sqlite',
-			],
-			'coverage': False,
-			'scalityS3': {
-				'createExtraBuckets': True
-			},
-			'includeKeyInMatrixName': True,
-		},
-		'scality-multibucket': {
-			'phpVersions': [
-				'7.2',
-				'7.3',
-				'7.4',
-			],
-			'databases': [
-				'sqlite',
-			],
-			'coverage': False,
-			'scalityS3': {
-				'config': 'multibucket',
-				'createExtraBuckets': True
-			},
-			'includeKeyInMatrixName': True,
-		},
-		'ceph': {
-			'phpVersions': [
-				'7.2',
-				'7.3',
-				'7.4',
-			],
-			'databases': [
-				'sqlite',
-			],
-			'coverage': False,
-			'cephS3': True,
-			'includeKeyInMatrixName': True,
-		},
-	},
-
 	'acceptance': {
-        'api': {
-            'suites': {
-                'apiFilesPrimaryS3': 'apiFilesPriS3'
-            },
-            'cephS3': True,
-        },
-        'webUI': {
-            'suites': {
-                'webUIFilesPrimaryS3': 'webUIFilesPriS3'
-            },
-            'cephS3': True,
-            'browsers': [
-                'chrome',
-                'firefox'
-            ],
-        },
+
 		'webUI-ceph': {
 			'suites': [
 				'webUICeph',
@@ -113,199 +51,6 @@ config = {
 			'runAllSuites': True,
 			'numberOfParts': 27,
 			'cron': 'nightly'
-		},
-		'api-ceph': {
-			'suites': [
-				'apiCeph',
-			],
-			'servers': [
-				'daily-master-qa'
-			],
-			'cephS3': True,
-			'federatedServerNeeded': True,
-			'filterTags': '~@skip&&~@app-required',
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 32,
-		},
-		'api-ceph-latest-nightly': {
-			'suites': [
-				'apiCeph',
-			],
-			'servers': [
-				'latest'
-			],
-			'cephS3': True,
-			'federatedServerNeeded': True,
-			'filterTags': '~@skip&&~@app-required',
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 32,
-			'cron': 'nightly'
-		},
-		'api-scality': {
-			'suites': [
-				'apiScality',
-			],
-			'servers': [
-				'daily-master-qa'
-			],
-			'scalityS3': True,
-			'federatedServerNeeded': True,
-			'filterTags': '~@skip&&~@app-required',
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 32,
-		},
-		'api-scality7-remote-smoke': {
-			'suites': {
-				'apiAll': 'api-scal7-remote' ,
-			},
-			'filterTags': '@smokeTest&&~@skip&&~@app-required',
-			'servers': [
-				'daily-master-qa'
-			],
-			'extraSetup': [
-				{
-					'name': 'configure-app',
-					'image': 'owncloudci/php:7.2',
-					'pull': 'always',
-					'commands': [
-						'cd /var/www/owncloud/server/apps/files_primary_s3',
-						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
-						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/scality:8000/s3.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
-						'cd /var/www/owncloud/server/',
-						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
-						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
-					],
-					'environment': {
-						'SCALITY_KEY': {
-							'from_secret': 'scality_key'
-						},
-						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret'
-						},
-					}
-				}
-			],
-			'extraTeardown': [
-				{
-					'name': 'cleanup-scality-bucket',
-					'image': 'banst/awscli',
-					'pull': 'always',
-					'failure': 'ignore',
-					'commands': [
-						'aws configure set aws_access_key_id $SCALITY_KEY',
-						'aws configure set aws_secret_access_key $SCALITY_SECRET',
-						'aws --endpoint-url https://s3.isv.scality.com s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'aws --endpoint-url https://s3.isv.scality.com s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-					],
-					'environment': {
-						'SCALITY_KEY': {
-							'from_secret': 'scality_key'
-						},
-						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret'
-						},
-					},
-					'when': {
-						'status': [
-							'failure',
-							'success',
-						],
-					},
-				}
-			],
-			'extraEnvironment': {
-				'S3_TYPE': 'scality',
-			},
-			'scalityS3': True,
-			'federatedServerNeeded': True,
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 8,
-		},
-		'api-scality8-remote-smoke': {
-			'suites': {
-				'apiAll': 'api-scal8-remote' ,
-			},
-			'filterTags': '@smokeTest&&~@skip&&~@app-required',
-			'servers': [
-				'daily-master-qa'
-			],
-			'extraSetup': [
-				{
-					'name': 'configure-app',
-					'image': 'owncloudci/php:7.2',
-					'pull': 'always',
-					'commands': [
-						'cd /var/www/owncloud/server/apps/files_primary_s3',
-						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
-						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
-						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
-						'cd /var/www/owncloud/server/',
-						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
-						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
-					],
-					'environment': {
-						'SCALITY_KEY': {
-							'from_secret': 'scality_access_key_ring_8'
-						},
-						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret_access_key_ring_8'
-						},
-						'SCALITY_SECRET_ESCAPED': {
-							'from_secret': 'scality_secret_access_key_ring_8_escaped'
-						},
-					}
-				}
-			],
-			'extraTeardown': [
-				{
-					'name': 'cleanup-scality-bucket',
-					'image': 'banst/awscli',
-					'pull': 'always',
-					'failure': 'ignore',
-					'commands': [
-						'aws configure set aws_access_key_id $SCALITY_KEY',
-						'aws configure set aws_secret_access_key $SCALITY_SECRET',
-						'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-					],
-					'environment': {
-						'SCALITY_KEY': {
-							'from_secret': 'scality_access_key_ring_8'
-						},
-						'SCALITY_SECRET': {
-							'from_secret': 'scality_secret_access_key_ring_8'
-						},
-						'SCALITY_ENDPOINT': 'https://s3-b.isv.scality.com',
-					},
-					'when': {
-						'status': [
-							'failure',
-							'success',
-						],
-					},
-				}
-			],
-			'extraEnvironment': {
-				'S3_TYPE': 'scality',
-			},
-			'scalityS3': True,
-			'federatedServerNeeded': True,
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 8,
 		},
 	}
 }
@@ -1040,7 +785,7 @@ def acceptance():
 						for db in params['databases']:
 							for runPart in range(1, params['numberOfParts'] + 1):
 								name = 'unknown'
-
+								
 								if isWebUI or isAPI or isCLI:
 									browserString = '' if browser == '' else '-' + browser
 									keyString = '-' + category if params['includeKeyInMatrixName'] else ''
