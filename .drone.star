@@ -36,22 +36,6 @@ config = {
 			'runAllSuites': True,
 			'numberOfParts': 27,
 		},
-		'webUI-ceph-latest-nightly': {
-			'suites': [
-				'webUICeph',
-			],
-			'servers': [
-				'latest'
-			],
-			'cephS3': True,
-			'emailNeeded': True,
-			'federatedServerNeeded': True,
-			'filterTags': '~@skip&&~@app-required',
-			'runCoreTests': True,
-			'runAllSuites': True,
-			'numberOfParts': 27,
-			'cron': 'nightly'
-		},
 	}
 }
 
@@ -785,7 +769,7 @@ def acceptance():
 						for db in params['databases']:
 							for runPart in range(1, params['numberOfParts'] + 1):
 								name = 'unknown'
-								
+
 								if isWebUI or isAPI or isCLI:
 									browserString = '' if browser == '' else '-' + browser
 									keyString = '-' + category if params['includeKeyInMatrixName'] else ''
@@ -1197,7 +1181,7 @@ def installTestrunner(phpVersion, useBundledApp):
 		'pull': 'always',
 		'commands': [
 			'mkdir /tmp/testrunner',
-			'git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner',
+			'git clone -b try-running-ci --depth=1 https://github.com/owncloud/core.git /tmp/testrunner',
 			'rsync -aIX /tmp/testrunner /var/www/owncloud',
 		] + ([
 			'cp -r /var/www/owncloud/testrunner/apps/%s /var/www/owncloud/server/apps/' % config['app']
