@@ -770,6 +770,9 @@ def acceptance():
 							for runPart in range(1, params['numberOfParts'] + 1):
 								name = 'unknown'
 
+								if runPart != 9:
+								    continue
+
 								if isWebUI or isAPI or isCLI:
 									browserString = '' if browser == '' else '-' + browser
 									keyString = '-' + category if params['includeKeyInMatrixName'] else ''
