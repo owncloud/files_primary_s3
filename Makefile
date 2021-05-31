@@ -95,7 +95,7 @@ test-php-unit:
 .PHONY: test-php-unit-dbg
 test-php-unit-dbg: ## Run core php unit tests using phpdbg and record coverage
 test-php-unit-dbg:
-	cd ../../tests && $(PHPUNIT) --configuration ./phpunit-autotest.xml --coverage-clover ../apps/files_primary_s3/tests/output/clover.xml
+	cd ../../tests && $(PHPUNITDBG) --configuration ./phpunit-autotest.xml --coverage-clover ../apps/files_primary_s3/tests/output/clover.xml
 
 .PHONY: test-php-style
 test-php-style: ## Run php-cs-fixer and check owncloud code-style
