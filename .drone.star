@@ -20,10 +20,8 @@ config = {
 	'phpstan': True,
 
 	'phpunit': {
-		'scality': {
+		'scality-cov': {
 			'phpVersions': [
-				'7.2',
-				'7.3',
 				'7.4',
 			],
 			'databases': [
@@ -33,11 +31,24 @@ config = {
 				'createExtraBuckets': True
 			},
 			'includeKeyInMatrixName': True,
+			'coverage': True,
 		},
-		'scality-multibucket': {
+		'scality': {
 			'phpVersions': [
 				'7.2',
 				'7.3',
+			],
+			'databases': [
+				'sqlite',
+			],
+			'scalityS3': {
+				'createExtraBuckets': True
+			},
+			'includeKeyInMatrixName': True,
+			'coverage': False,
+		},
+		'scality-multibucket-cov': {
+			'phpVersions': [
 				'7.4',
 			],
 			'databases': [
@@ -48,11 +59,25 @@ config = {
 				'createExtraBuckets': True
 			},
 			'includeKeyInMatrixName': True,
+			'coverage': True,
 		},
-		'ceph': {
+		'scality-multibucket': {
 			'phpVersions': [
 				'7.2',
 				'7.3',
+			],
+			'databases': [
+				'sqlite',
+			],
+			'scalityS3': {
+				'config': 'multibucket',
+				'createExtraBuckets': True
+			},
+			'includeKeyInMatrixName': True,
+			'coverage': False,
+		},
+		'ceph-cov': {
+			'phpVersions': [
 				'7.4',
 			],
 			'databases': [
@@ -60,6 +85,19 @@ config = {
 			],
 			'cephS3': True,
 			'includeKeyInMatrixName': True,
+			'coverage': True,
+		},
+		'ceph': {
+			'phpVersions': [
+				'7.2',
+				'7.3',
+			],
+			'databases': [
+				'sqlite',
+			],
+			'cephS3': True,
+			'includeKeyInMatrixName': True,
+			'coverage': False,
 		},
 	},
 
