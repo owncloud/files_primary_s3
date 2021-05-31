@@ -33,7 +33,7 @@ endif
 
 # bin file definitions
 PHPUNIT=php -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
-PHPUNITDBG=phpdbg -qrr -d memory_limit=4096M -d zend.enable_gc=0 "$(PWD)/../../lib/composer/bin/phpunit"
+PHPUNITDBG=phpdbg -qrr -d memory_limit=6G -d zend.enable_gc=0 "$(PWD)/../../lib/composer/bin/phpunit"
 PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
 PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
 PHPSTAN=php -d zend.enable_gc=0 vendor-bin/phpstan/vendor/bin/phpstan
@@ -93,9 +93,9 @@ test-php-unit:
 	cd ../../tests && $(PHPUNIT) --configuration ./phpunit-autotest.xml
 
 .PHONY: test-php-unit-dbg
-test-php-unit-dbg: ## Run core php unit tests using phpdbg
+test-php-unit-dbg: ## Run core php unit tests using phpdbg and record coverage
 test-php-unit-dbg:
-	cd ../../tests && $(PHPUNITDBG) --configuration ./phpunit-autotest.xml
+	cd ../../tests && $(PHPUNITDBG) --configuration ./phpunit-autotest.xml --coverage-clover ../apps/files_primary_s3/tests/output/clover.xml
 
 .PHONY: test-php-style
 test-php-style: ## Run php-cs-fixer and check owncloud code-style

@@ -21,3 +21,6 @@ vendor-bin/**/composer.lock
 composer
 .composer
 .npm
+
+# SonarCloud scanner
+.scannerwork
