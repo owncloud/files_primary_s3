@@ -786,7 +786,8 @@ class StreamWrapper {
 		// Fail if this pseudo directory key already exists
 		if ($this->getClient()->doesObjectExist(
 			$params['Bucket'],
-			$params['Key'])
+			$params['Key']
+		)
 		) {
 			return $this->triggerError("Subfolder already exists: {$path}");
 		}

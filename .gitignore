@@ -4,6 +4,7 @@
 /l10n/templates
 /l10n/*.po
 .php_cs.cache
+.php-cs-fixer.cache
 
 # Composer
 vendor/
