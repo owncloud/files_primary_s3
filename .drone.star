@@ -264,6 +264,7 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
+			'cron': 'nightly'
 		},
 		'api-scality8-remote-smoke': {
 			'suites': {
@@ -341,12 +342,13 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
+			'cron': 'nightly'
 		},
 	}
 }
 
 def main(ctx):
-	
+
 	before = beforePipelines()
 
 	coverageTests = coveragePipelines(ctx)
