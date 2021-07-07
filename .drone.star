@@ -216,6 +216,7 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
+			'cron': 'nightly'
 		},
 		'api-scality-artesca-remote-smoke': {
 			'suites': {
@@ -241,6 +242,7 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
+			'cron': 'nightly'
 		},
 	}
 }
