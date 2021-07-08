@@ -200,14 +200,66 @@ config = {
 			'servers': [
 				'daily-master-qa'
 			],
-			'externalScality': {
-				'secrets': {
-					'scality_key': 'scality_access_key_ring_8',
-					'scality_secret': 'scality_secret_access_key_ring_8',
-					'scality_secret_escaped': 'scality_secret_access_key_ring_8_escaped'
-				},
-				'externalServerUrl': 's3-b.isv.scality.com'
-			},
+			'extraSetup': [
+				{
+					'name': 'configure-app',
+					'image': 'owncloudci/php:7.2',
+					'pull': 'always',
+					'commands': [
+						'cd /var/www/owncloud/server/apps/files_primary_s3',
+						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
+						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/scality:8000/s3-b.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
+						'cd /var/www/owncloud/server/',
+						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
+						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_access_key_ring_8'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret_access_key_ring_8'
+						},
+						'SCALITY_SECRET_ESCAPED': {
+							'from_secret': 'scality_secret_access_key_ring_8_escaped'
+						},
+					}
+				}
+			],
+			'extraTeardown': [
+				{
+					'name': 'cleanup-scality-bucket',
+					'image': 'banst/awscli',
+					'pull': 'always',
+					'failure': 'ignore',
+					'commands': [
+						'aws configure set aws_access_key_id $SCALITY_KEY',
+						'aws configure set aws_secret_access_key $SCALITY_SECRET',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_access_key_ring_8'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret_access_key_ring_8'
+						},
+						'SCALITY_ENDPOINT': 'https://s3-b.isv.scality.com',
+					},
+					'when': {
+						'status': [
+							'failure',
+							'success',
+						],
+					},
+				}
+			],
 			'extraEnvironment': {
 				'S3_TYPE': 'scality',
 			},
@@ -216,6 +268,7 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
+			'cron': 'nightly'
 		},
 		'api-scality-artesca-remote-smoke': {
 			'suites': {
@@ -225,14 +278,66 @@ config = {
 			'servers': [
 				'daily-master-qa'
 			],
-			'externalScality': {
-				'secrets': {
-					'scality_key': 'scality_access_key_artesca',
-					'scality_secret': 'scality_secret_access_key_artesca',
-					'scality_secret_escaped': 'scality_secret_access_key_artesca_escaped'
-				},
-				'externalServerUrl': 'artesca.isv.scality.com'
-			},
+			'extraSetup': [
+				{
+					'name': 'configure-app',
+					'image': 'owncloudci/php:7.2',
+					'pull': 'always',
+					'commands': [
+						'cd /var/www/owncloud/server/apps/files_primary_s3',
+						'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
+						'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
+						'sed -i -e "s/scality:8000/artesca.isv.scality.com/" /var/www/owncloud/server/config/scality.config.php',
+						'cd /var/www/owncloud/server/',
+						'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
+						'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_access_key_artesca'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret_access_key_artesca'
+						},
+						'SCALITY_SECRET_ESCAPED': {
+							'from_secret': 'scality_secret_access_key_artesca_escaped'
+						},
+					}
+				}
+			],
+			'extraTeardown': [
+				{
+					'name': 'cleanup-scality-bucket',
+					'image': 'banst/awscli',
+					'pull': 'always',
+					'failure': 'ignore',
+					'commands': [
+						'aws configure set aws_access_key_id $SCALITY_KEY',
+						'aws configure set aws_secret_access_key $SCALITY_SECRET',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+						'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
+					],
+					'environment': {
+						'SCALITY_KEY': {
+							'from_secret': 'scality_access_key_artesca'
+						},
+						'SCALITY_SECRET': {
+							'from_secret': 'scality_secret_access_key_artesca'
+						},
+						'SCALITY_ENDPOINT': 'https://artesca.isv.scality.com',
+					},
+					'when': {
+						'status': [
+							'failure',
+							'success',
+						],
+					},
+				}
+			],
 			'extraEnvironment': {
 				'S3_TYPE': 'scality',
 			},
@@ -1005,7 +1110,6 @@ def acceptance(ctx):
 		'extraEnvironment': {},
 		'extraCommandsBeforeTestRun': [],
 		'extraApps': {},
-		'externalScality': [],
 		'useBundledApp': False,
 		'includeKeyInMatrixName': False,
 		'runAllSuites': False,
@@ -1059,71 +1163,6 @@ def acceptance(ctx):
 			# switch off earlyFail when running cron builds (for example, nightly CI)
 			if (ctx.build.event == "cron"):
 				params["earlyFail"] = False
-
-			if 'externalScality' in params and len(params['externalScality']) != 0:
-				# We want to use an external scality server for this pipeline.
-				# That uses some "standard" extraSetup and extraTeardown.
-				# Put the needed setup and teardown in place.
-				params["extraSetup"] = [
-					{
-						'name': 'configure-app',
-						'image': 'owncloudci/php:7.2',
-						'pull': 'always',
-						'commands': [
-							'cd /var/www/owncloud/server/apps/files_primary_s3',
-							'cp tests/drone/scality.config.php /var/www/owncloud/server/config',
-							'sed -i -e "s/owncloud/owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER/" /var/www/owncloud/server/config/scality.config.php',
-							'sed -i -e "s/accessKey1/$SCALITY_KEY/" /var/www/owncloud/server/config/scality.config.php',
-							'sed -i -e "s/verySecretKey1/$SCALITY_SECRET_ESCAPED/" /var/www/owncloud/server/config/scality.config.php',
-							'sed -i -e "s/http/https/" /var/www/owncloud/server/config/scality.config.php',
-							'sed -i -e "s/scality:8000/%s/" /var/www/owncloud/server/config/scality.config.php' % params['externalScality']['externalServerUrl'],
-							'cd /var/www/owncloud/server/',
-							'php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning',
-							'cd /var/www/owncloud/testrunner/apps/files_primary_s3',
-						],
-						'environment': {
-							'SCALITY_KEY': {
-								'from_secret': params['externalScality']['secrets']['scality_key']
-							},
-							'SCALITY_SECRET': {
-								'from_secret': params['externalScality']['secrets']['scality_secret']
-							},
-							'SCALITY_SECRET_ESCAPED': {
-								'from_secret': params['externalScality']['secrets']['scality_secret_escaped']
-							},
-						}
-					}
-				]
-				params["extraTeardown"] = [
-					{
-						'name': 'cleanup-scality-bucket',
-						'image': 'banst/awscli',
-						'pull': 'always',
-						'failure': 'ignore',
-						'commands': [
-							'aws configure set aws_access_key_id $SCALITY_KEY',
-							'aws configure set aws_secret_access_key $SCALITY_SECRET',
-							'aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-							'/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-							'aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER',
-						],
-						'environment': {
-							'SCALITY_KEY': {
-								'from_secret': params['externalScality']['secrets']['scality_key']
-							},
-							'SCALITY_SECRET': {
-								'from_secret': params['externalScality']['secrets']['scality_secret']
-							},
-							'SCALITY_ENDPOINT': 'https://%s' % params['externalScality']['externalServerUrl'],
-						},
-						'when': {
-							'status': [
-								'failure',
-								'success',
-							],
-						},
-					}
-				]
 
 			if isAPI or isCLI:
 				params['browsers'] = ['']
