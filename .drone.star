@@ -161,7 +161,7 @@ config = {
 			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 29,
+			'numberOfParts': 30,
 		},
 		'api-ceph-latest-nightly': {
 			'suites': [
@@ -175,7 +175,7 @@ config = {
 			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 29,
+			'numberOfParts': 30,
 			'cron': 'nightly'
 		},
 		'api-scality': {
@@ -190,7 +190,7 @@ config = {
 			'filterTags': '~@skip&&~@app-required',
 			'runCoreTests': True,
 			'runAllSuites': True,
-			'numberOfParts': 29,
+			'numberOfParts': 30,
 		},
 		'api-scality8-remote-smoke': {
 			'suites': {
