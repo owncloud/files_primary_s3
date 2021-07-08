@@ -268,13 +268,12 @@ config = {
 			'runCoreTests': True,
 			'runAllSuites': True,
 			'numberOfParts': 8,
-			'cron': 'nightly'
 		},
 	}
 }
 
 def main(ctx):
-	
+
 	before = beforePipelines(ctx)
 
 	coverageTests = coveragePipelines(ctx)
