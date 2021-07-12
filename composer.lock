@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.184.7",
+            "version": "3.185.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d5d5fe5fdfca6c7a56f2f8364d09c3100d5c2149"
+                "reference": "fee396b3e137cc2ec9ae94159d01dd1ed15d8c40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d5d5fe5fdfca6c7a56f2f8364d09c3100d5c2149",
-                "reference": "d5d5fe5fdfca6c7a56f2f8364d09c3100d5c2149",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fee396b3e137cc2ec9ae94159d01dd1ed15d8c40",
+                "reference": "fee396b3e137cc2ec9ae94159d01dd1ed15d8c40",
                 "shasum": ""
             },
             "require": {
@@ -92,9 +92,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.184.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.185.11"
             },
-            "time": "2021-06-21T18:37:16+00:00"
+            "time": "2021-07-12T18:13:46+00:00"
         },
         {
             "name": "dg/composer-cleaner",
