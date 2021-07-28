@@ -146,7 +146,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 25,
-            "cron": "nightly",
         },
         "api-ceph": {
             "suites": [
@@ -175,7 +174,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
-            "cron": "nightly",
         },
         "api-scality": {
             "suites": [
@@ -215,7 +213,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 8,
-            "cron": "nightly",
         },
         "api-scality-artesca-remote-smoke": {
             "suites": {
@@ -241,7 +238,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 8,
-            "cron": "nightly",
         },
     },
 }
