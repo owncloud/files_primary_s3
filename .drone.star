@@ -1152,7 +1152,7 @@ def acceptance(ctx):
                             "aws configure set aws_access_key_id $SCALITY_KEY",
                             "aws configure set aws_secret_access_key $SCALITY_SECRET",
                             "aws --endpoint-url $SCALITY_ENDPOINT s3 rm --recursive s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
-                            "/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
+                            "/var/www/owncloud/testrunner/apps/files_primary_s3/tests/delete_all_object_versions.sh $SCALITY_ENDPOINT owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
                             "aws --endpoint-url $SCALITY_ENDPOINT s3 rb --force s3://owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER",
                         ],
                         "environment": {
