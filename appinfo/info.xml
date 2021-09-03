@@ -23,7 +23,7 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 		<admin>https://doc.owncloud.com/server/latest/admin_manual/enterprise/external_storage/s3_swift_as_primary_object_store_configuration.html</admin>
 	</documentation>
 	<dependencies>
-		<php min-version="7.1" />
+		<php min-version="7.3" />
 		<owncloud min-version="10.3" max-version="10" />
 	</dependencies>
 	<types>

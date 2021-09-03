@@ -6,9 +6,6 @@ SHELL := /bin/bash
 COMPOSER_BIN := $(shell command -v composer 2> /dev/null)
 
 NPM := $(shell command -v npm 2> /dev/null)
-ifndef NPM
-    $(error npm is not available on your system, please install npm)
-endif
 
 app_name=$(notdir $(CURDIR))
 project_directory=$(CURDIR)/../$(app_name)
