@@ -36,7 +36,6 @@ config = {
         "scality": {
             "phpVersions": [
                 "7.3",
-                "7.4",
             ],
             "databases": [
                 "sqlite",
@@ -64,7 +63,6 @@ config = {
         "scality-multibucket": {
             "phpVersions": [
                 "7.3",
-                "7.4",
             ],
             "databases": [
                 "sqlite",
@@ -90,7 +88,6 @@ config = {
         "ceph": {
             "phpVersions": [
                 "7.3",
-                "7.4",
             ],
             "databases": [
                 "sqlite",
