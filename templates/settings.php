@@ -25,6 +25,6 @@ style('files_primary_s3', 'settings');
 
 <div class="section" id="encryptionAPI">
 	<div class="warning">
-		<?php p($l->t('S3 Object Storage is currently not compatible with encryption, enabling might cause data-loss.')); ?>
+		<?php p($l->t('Storage encryption is not compatible with S3 Object Storage.')); ?>
 	</div>
 </div>
