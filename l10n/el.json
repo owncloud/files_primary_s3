@@ -1,0 +1,7 @@
+{ "translations": {
+    "Connection options and bucket must be configured." : "Οι επιλογές σύνδεσης και το bucket πρέπει να ρυθμιστούν.",
+    "No S3 ObjectStore available" : "Δεν υπάρχει διαθέσιμο S3 ObjectStore",
+    "Bucket <%s> does not exist." : "Το Bucket <%s> δεν υπάρχει.",
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Η μεταφόρτωση απέτυχε. Ζητήστε από τον διαχειριστή να ρίξει μια ματιά στα αρχεία καταγραφής για περισσότερες λεπτομέρειες."
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
