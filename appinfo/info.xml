@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <info>
 	<id>files_primary_s3</id>
-	<name>S3 Object Storage</name>
+	<name>S3 Primary Object Storage</name>
 	<summary>Leverage object storage via S3 as primary storage</summary>
 	<description>
 For it's benefits over traditional file system storage, object storage has become more and more popular. Speaking simply object storages split files into parts of the same size and store them including the metadata to assemble these objects to files. In contrast to file system storage this enables infinite scalability to cope for an exponentially growing amount of data. Furthermore object storage systems like CEPH or Scality RING provide built-in features for automatic data replication, redundancy/high availability and even geo-distribution which are necessities for professional production environments. For enterprises object storage systems can reduce maintenance efforts significantly and offer huge cost savings compared to other storage systems.
@@ -20,7 +20,7 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 	<author>ownCloud GmbH</author>
 	<version>1.1.2</version>
 	<documentation>
-		<admin>https://doc.owncloud.com/server/latest/admin_manual/enterprise/external_storage/s3_swift_as_primary_object_store_configuration.html</admin>
+		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/s3_compatible_object_storage_as_primary.html</admin>
 	</documentation>
 	<dependencies>
 		<php min-version="7.3" />
