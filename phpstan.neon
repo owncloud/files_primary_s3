@@ -3,3 +3,4 @@ parameters:
   bootstrapFiles:
     - %currentWorkingDirectory%/../../lib/base.php
   ignoreErrors:
+     - '#Method OCA\\Files_Primary_S3\\Panels\\Admin::getPanel\(\) should return OCP\\AppFramework\\Http\\TemplateResponse|OCP\\Template but returns null.#'
