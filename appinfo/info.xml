@@ -32,7 +32,6 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 	<commands>
 		<command>OCA\Files_Primary_S3\Command\s3List</command>
 		<command>OCA\Files_Primary_S3\Command\createBucket</command>
-		<command>OCA\Files_Primary_S3\Command\EnableEncryption</command>
 	</commands>
 	<settings>
 		<admin>OCA\Files_Primary_S3\Panels\Admin</admin>
