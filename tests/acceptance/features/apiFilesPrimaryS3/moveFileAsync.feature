@@ -262,4 +262,4 @@ Feature: move (rename) file
       | OC-JobStatus-Location | /%base_path%\/remote\.php\/dav\/job-status\/%username%\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ |
     And the oc job status values of last request for user "Alice" should match these regular expressions
       | status | /^started$/ |
-    And wait for slowed-down DAV requests to finish
+    #And wait for slowed-down DAV requests to finish
