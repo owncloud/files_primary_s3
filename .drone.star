@@ -32,19 +32,6 @@ config = {
             "includeKeyInMatrixName": True,
             "coverage": True,
         },
-        "scality": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
         "scality-multibucket-cov": {
             "phpVersions": [
                 "7.4",
@@ -59,20 +46,6 @@ config = {
             "includeKeyInMatrixName": True,
             "coverage": True,
         },
-        "scality-multibucket": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "config": "multibucket",
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
         "ceph-cov": {
             "phpVersions": [
                 "7.4",
@@ -84,17 +57,6 @@ config = {
             "includeKeyInMatrixName": True,
             "coverage": True,
         },
-        "ceph": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "cephS3": True,
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
     },
     "acceptance": {
         "api": {
@@ -102,142 +64,6 @@ config = {
                 "apiFilesPrimaryS3": "apiFilesPriS3",
             },
             "cephS3": True,
-        },
-        "webUI": {
-            "suites": {
-                "webUIFilesPrimaryS3": "webUIFilesPriS3",
-            },
-            "cephS3": True,
-            "browsers": [
-                "chrome",
-                "firefox",
-            ],
-        },
-        "webUI-ceph": {
-            "suites": [
-                "webUICeph",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "cephS3": True,
-            "emailNeeded": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 25,
-        },
-        "webUI-ceph-latest-nightly": {
-            "suites": [
-                "webUICeph",
-            ],
-            "servers": [
-                "latest",
-            ],
-            "cephS3": True,
-            "emailNeeded": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 25,
-            "cron": "nightly",
-        },
-        "api-ceph": {
-            "suites": [
-                "apiCeph",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "cephS3": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 29,
-        },
-        "api-ceph-latest-nightly": {
-            "suites": [
-                "apiCeph",
-            ],
-            "servers": [
-                "latest",
-            ],
-            "cephS3": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 29,
-            "cron": "nightly",
-        },
-        "api-scality": {
-            "suites": [
-                "apiScality",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "scalityS3": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 29,
-        },
-        "api-scality8-remote-smoke": {
-            "suites": {
-                "apiAll": "api-scal8-remote",
-            },
-            "filterTags": "@smokeTest&&~@skip&&~@app-required",
-            "servers": [
-                "daily-master-qa",
-            ],
-            "externalScality": {
-                "secrets": {
-                    "scality_key": "scality_access_key_ring_8",
-                    "scality_secret": "scality_secret_access_key_ring_8",
-                    "scality_secret_escaped": "scality_secret_access_key_ring_8_escaped",
-                },
-                "externalServerUrl": "s3-b.isv.scality.com",
-            },
-            "extraEnvironment": {
-                "S3_TYPE": "scality",
-            },
-            "scalityS3": True,
-            "federatedServerNeeded": True,
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 8,
-            "cron": "nightly",
-        },
-        "api-scality-artesca-remote-smoke": {
-            "suites": {
-                "apiAll": "api-scal-art-remote",
-            },
-            "filterTags": "@smokeTest&&~@skip&&~@app-required",
-            "servers": [
-                "daily-master-qa",
-            ],
-            "externalScality": {
-                "secrets": {
-                    "scality_key": "scality_access_key_artesca",
-                    "scality_secret": "scality_secret_access_key_artesca",
-                    "scality_secret_escaped": "scality_secret_access_key_artesca_escaped",
-                },
-                "externalServerUrl": "artesca.isv.scality.com",
-            },
-            "extraEnvironment": {
-                "S3_TYPE": "scality",
-            },
-            "scalityS3": True,
-            "federatedServerNeeded": True,
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 8,
-            "cron": "nightly",
         },
     },
 }
