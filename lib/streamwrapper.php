@@ -661,11 +661,15 @@ class StreamWrapper {
 		$command = $client->getCommand('GetObject', $this->getOptions(true));
 		$command['@http']['stream'] = true;
 		$result = $client->execute($command);
-		$this->size = $result['ContentLength'];
+		$this->size = (int) $result['ContentLength'];
 		$this->body = $result['Body'];
 
 		// Wrap the body in a caching entity body if seeking is allowed
+		// Phan does not understand that Body can be a StreamInterface
+		// It thinks that body is just a string. Suppress the message.
+		/* @phan-suppress-next-line PhanNonClassMethodCall */
 		if ($this->getOption('seekable') && !$this->body->isSeekable()) {
+			/* @phan-suppress-next-line PhanTypeMismatchArgument */
 			$this->body = new CachingStream($this->body);
 		}
 
@@ -682,6 +686,9 @@ class StreamWrapper {
 			// Get the body of the object and seek to the end of the stream
 			$client = $this->getClient();
 			$this->body = $client->getObject($this->getOptions(true))['Body'];
+			// Phan does not understand that Body can be a StreamInterface
+			// It thinks that body is just a string. Suppress the message.
+			/* @phan-suppress-next-line PhanNonClassMethodCall */
 			$this->body->seek(0, SEEK_END);
 			return true;
 		} catch (S3Exception $e) {
@@ -818,6 +825,12 @@ class StreamWrapper {
 
 		// Check if the bucket contains keys other than the placeholder
 		if ($contents = $result['Contents']) {
+			// Note: In PHP 7 if $contents is just a string, not an array, then
+			// \count($contents) will return 1 OK. From PHP 8.0 a TypeError is
+			// returned. Phan detects this possibility. Suppress for now.
+			// Phan also thinks that $contents should have numeric keys in the
+			// sub-arrays. Suppress that as well.
+			/* @phan-suppress-next-line PhanTypeMismatchArgumentInternal, PhanTypeMismatchDimFetch */
 			return (\count($contents) > 1 || $prefix != $contents[0]['Key'])
 				? $this->triggerError('Subfolder is not empty')
 				: $this->unlink(\rtrim($path, '/') . '/');

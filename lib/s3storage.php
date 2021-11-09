@@ -208,6 +208,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				'Bucket' => $this->getBucket(),
 				'Prefix' => $urn
 			]);
+			// Phan does not understand that $list['Versions'] contains an array.
+			/* @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
 			$versions = \array_filter($list['Versions'], static function ($v) use ($urn) {
 				return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
 			});
@@ -242,6 +244,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				'Prefix' => $urn,
 				'VersionIdMarker' => $versionId
 			]);
+			// Phan does not understand that $list['Versions'] contains an array.
+			/* @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
 			$versions = \array_filter($list['Versions'], static function ($v) use ($urn, $versionId) {
 				return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
 			});
