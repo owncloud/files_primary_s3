@@ -212,7 +212,7 @@ config = {
             "federatedServerNeeded": True,
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 8,
+            "numberOfParts": 4,
             "cron": "nightly",
         },
         "api-scality-artesca-remote-smoke": {
@@ -238,7 +238,7 @@ config = {
             "federatedServerNeeded": True,
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 8,
+            "numberOfParts": 4,
             "cron": "nightly",
         },
     },
