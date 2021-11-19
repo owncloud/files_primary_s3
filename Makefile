@@ -64,6 +64,7 @@ appstore: vendor
 	l10n \
 	lib \
 	vendor \
+	templates \
 	LICENSE \
 	CHANGELOG.md \
 	$(appstore_package_name)
