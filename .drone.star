@@ -131,7 +131,7 @@ config = {
             "filterTags": "~@skip&&~@app-required",
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 25,
+            "numberOfParts": 20,
             "selUserNeeded": True,
         },
         "webUI-ceph-latest-nightly": {
@@ -147,7 +147,7 @@ config = {
             "filterTags": "~@skip&&~@app-required",
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 25,
+            "numberOfParts": 20,
             "selUserNeeded": True,
             "cron": "nightly",
         },
