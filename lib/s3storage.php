@@ -67,7 +67,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->params = $params;
 	}
 
-	protected function init() {
+	protected function init(): void {
 		if ($this->connection) {
 			return;
 		}
@@ -178,7 +178,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function readObject($urn) {
 		$this->init();
 		try {
-			return \fopen($this->getUrl($urn), 'r');
+			$context = stream_context_create([
+				's3' => ['seekable' => true]
+			]);
+			return \fopen($this->getUrl($urn), 'rb', false, $context);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}
@@ -275,7 +278,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
 		try {
-			return \fopen($this->getUrl($urn, $versionId), 'r');
+			$context = stream_context_create([
+				's3' => ['seekable' => true]
+			]);
+
+			return \fopen($this->getUrl($urn, $versionId), 'rb', false, $context);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}
