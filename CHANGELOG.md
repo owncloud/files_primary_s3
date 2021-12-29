@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.1.3] - 2021-11-09
+
+### Fixed
+
+- Prohibit enabling encryption when S3 Object Storage is configured [#487](https://github.com/owncloud/files_primary_s3/issues/487)
+
+
 ## [1.1.2] - 2020-04-22
 
 ### Fixed
@@ -65,7 +72,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.1.3...master
+[1.1.3]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/owncloud/files_primary_s3/compare/v1.0.4...v1.1.0

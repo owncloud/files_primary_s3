@@ -12,13 +12,14 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 - S3 Multi-part upload (enables uploading files > 5 GB)
 - S3 Versioning</description>
 	<category>storage</category>
+	<namespace>Files_Primary_S3</namespace>
 	<screenshot>https://raw.githubusercontent.com/owncloud/screenshots/master/objectstorage/ownCloud-app-s3-primary-objectstorage.jpg</screenshot>
 	<licence>GPLv2</licence>
 	<website>https://github.com/owncloud/files_primary_s3</website>
 	<bugs>https://github.com/owncloud/files_primary_s3/issues</bugs>
 	<repository type="git">https://github.com/owncloud/files_primary_s3.git</repository>
 	<author>ownCloud GmbH</author>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
 	<documentation>
 		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/s3_compatible_object_storage_as_primary.html</admin>
 	</documentation>

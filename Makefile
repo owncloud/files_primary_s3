@@ -61,9 +61,12 @@ appstore: vendor
 	mkdir -p $(appstore_package_name)
 	cp --parents -r \
 	appinfo \
+	css \
+	js \
 	l10n \
 	lib \
 	vendor \
+	templates \
 	LICENSE \
 	CHANGELOG.md \
 	$(appstore_package_name)
