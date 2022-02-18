@@ -244,7 +244,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 4,
-            "cron": "nightly",
         },
     },
 }
