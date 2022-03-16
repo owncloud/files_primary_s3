@@ -7,4 +7,3 @@ file_filter = <lang>/files_primary_s3.po
 source_file = templates/files_primary_s3.pot
 source_lang = en
 type = PO
-
