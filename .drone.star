@@ -132,6 +132,9 @@ config = {
                 "apiFilesPrimaryS3": "apiFilesPriS3",
             },
             "cephS3": True,
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "webUI": {
             "suites": {
@@ -142,6 +145,9 @@ config = {
                 "chrome",
                 "firefox",
             ],
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "webUI-ceph": {
             "suites": [
@@ -158,6 +164,9 @@ config = {
             "runAllSuites": True,
             "numberOfParts": 20,
             "selUserNeeded": True,
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "webUI-ceph-latest-nightly": {
             "suites": [
@@ -175,6 +184,9 @@ config = {
             "numberOfParts": 20,
             "selUserNeeded": True,
             "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "api-ceph": {
             "suites": [
@@ -189,6 +201,9 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "api-ceph-latest-nightly": {
             "suites": [
@@ -204,6 +219,9 @@ config = {
             "runAllSuites": True,
             "numberOfParts": 29,
             "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "api-scality": {
             "suites": [
@@ -218,6 +236,9 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "api-scality8-remote-smoke": {
             "suites": {
@@ -244,6 +265,9 @@ config = {
             "runAllSuites": True,
             "numberOfParts": 4,
             "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
         },
         "api-scality-artesca-remote-smoke": {
             "suites": {
@@ -270,6 +294,9 @@ config = {
             "runAllSuites": True,
             "numberOfParts": 4,
             "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
         },
     },
 }

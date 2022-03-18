@@ -4,7 +4,7 @@ Feature: Files Primary S3
   I want to run tests on s3 storage
   So that I can assert tests run the same on every storages
 
-  @issue-36803 @issue-files_primary_s3-351 @skipOnOcV10.6 @skipOnOcV10.7
+  @issue-36803 @issue-files_primary_s3-351 @skipOnOcV10.6 @skipOnOcV10.7 @files_external-app-required
   Scenario: applicable user is able to share top-level of read-only storage
     Given these users have been created with default attributes and without skeleton files:
       | username |
