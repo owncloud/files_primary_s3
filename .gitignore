@@ -25,3 +25,9 @@ composer
 
 # SonarCloud scanner
 .scannerwork
+
+# Generated from .drone.star
+.drone.yml
+
+# IDE Cache
+.idea/
