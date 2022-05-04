@@ -46,179 +46,15 @@ config = {
     "appInstallCommandPhp": "composer install",
     "codestyle": True,
     "javascript": False,
-    "phan": True,
-    "phpstan": True,
-    "phpunit": {
-        "scality-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": True,
-        },
-        "scality": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
-        "scality-multibucket-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "config": "multibucket",
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": True,
-        },
-        "scality-multibucket": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "config": "multibucket",
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
-        "ceph-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "cephS3": True,
-            "includeKeyInMatrixName": True,
-            "coverage": True,
-        },
-        "ceph": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "cephS3": True,
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-        },
-    },
+    "phan": False,
+    "phpstan": False,
+    "phpunit": False,
     "acceptance": {
         "api": {
             "suites": {
                 "apiFilesPrimaryS3": "apiFilesPriS3",
             },
             "cephS3": True,
-            "extraApps": {
-                "files_external": "",
-            },
-        },
-        "webUI": {
-            "suites": {
-                "webUIFilesPrimaryS3": "webUIFilesPriS3",
-            },
-            "cephS3": True,
-            "browsers": [
-                "chrome",
-                "firefox",
-            ],
-            "extraApps": {
-                "files_external": "",
-            },
-        },
-        "webUI-ceph": {
-            "suites": [
-                "webUICeph",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "cephS3": True,
-            "emailNeeded": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 20,
-            "selUserNeeded": True,
-            "extraApps": {
-                "files_external": "",
-            },
-        },
-        "webUI-ceph-latest-nightly": {
-            "suites": [
-                "webUICeph",
-            ],
-            "servers": [
-                "latest",
-            ],
-            "cephS3": True,
-            "emailNeeded": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 20,
-            "selUserNeeded": True,
-            "cron": "nightly",
-            "extraApps": {
-                "files_external": "",
-            },
-        },
-        "api-ceph": {
-            "suites": [
-                "apiCeph",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "cephS3": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 29,
-            "extraApps": {
-                "files_external": "",
-            },
-        },
-        "api-ceph-latest-nightly": {
-            "suites": [
-                "apiCeph",
-            ],
-            "servers": [
-                "latest",
-            ],
-            "cephS3": True,
-            "federatedServerNeeded": True,
-            "filterTags": "~@skip&&~@app-required",
-            "runCoreTests": True,
-            "runAllSuites": True,
-            "numberOfParts": 29,
-            "cron": "nightly",
             "extraApps": {
                 "files_external": "",
             },
@@ -1161,12 +997,12 @@ def acceptance(ctx):
                 continue
 
             # switch off earlyFail if the PR title contains full-ci
-            if ("full-ci" in ctx.build.title.lower()):
-                params["earlyFail"] = False
+            # if ("full-ci" in ctx.build.title.lower()):
+            #     params["earlyFail"] = False
 
             # switch off earlyFail when running cron builds (for example, nightly CI)
-            if (ctx.build.event == "cron"):
-                params["earlyFail"] = False
+            # if (ctx.build.event == "cron"):
+            #     params["earlyFail"] = False
 
             if "externalScality" in params and len(params["externalScality"]) != 0:
                 # We want to use an external scality server for this pipeline.
@@ -1327,6 +1163,8 @@ def acceptance(ctx):
                         environment["S3_TYPE"] = "scality"
                 federationDbSuffix = "-federated"
 
+                params["earlyFail"] = False
+
                 result = {
                     "kind": "pipeline",
                     "type": "docker",
@@ -1335,8 +1173,7 @@ def acceptance(ctx):
                         "base": dir["base"],
                         "path": "testrunner/apps/%s" % ctx.repo.name,
                     },
-                    "steps": skipIfUnchanged(ctx, "acceptance-tests") +
-                             installCore(ctx, testConfig["server"], testConfig["database"], testConfig["useBundledApp"]) +
+                    "steps": installCore(ctx, testConfig["server"], testConfig["database"], testConfig["useBundledApp"]) +
                              installTestrunner(ctx, DEFAULT_PHP_VERSION, testConfig["useBundledApp"]) +
                              (installFederated(testConfig["server"], testConfig["phpVersion"], testConfig["logLevel"], testConfig["database"], federationDbSuffix) + owncloudLog("federated") if testConfig["federatedServerNeeded"] else []) +
                              installAppPhp(ctx, testConfig["phpVersion"]) +
@@ -1869,7 +1706,7 @@ def installTestrunner(ctx, phpVersion, useBundledApp):
         "image": OC_CI_PHP % phpVersion,
         "commands": [
             "mkdir /tmp/testrunner",
-            "git clone -b master --depth=1 https://github.com/owncloud/core.git /tmp/testrunner",
+            "git clone -b updateToFileVersionFailureInFilesPrimaryS3 --depth=1 https://github.com/owncloud/core.git /tmp/testrunner",
             "rsync -aIX /tmp/testrunner %s" % dir["base"],
         ] + ([
             "cp -r %s/apps/%s %s/apps/" % (dir["testrunner"], ctx.repo.name, dir["server"]),
