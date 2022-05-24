@@ -6,4 +6,4 @@ OC.L10N.register(
     "Bucket <%s> does not exist." : "El bucket <%s> no existe.",
     "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Carga fallida. Por favor consulte a su administrador para revisar los logs para mas detalles."
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

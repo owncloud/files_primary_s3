@@ -7,4 +7,4 @@ OC.L10N.register(
     "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Falló la subida. Por favor pida a su administrador que verifique los archivos de registro para mas detalles.",
     "Storage encryption is not compatible with S3 Object Storage." : "El cifrado de almacenamiento no es compatible con S3 Object Storage."
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
