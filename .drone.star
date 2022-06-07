@@ -61,6 +61,11 @@ config = {
             },
             "includeKeyInMatrixName": True,
             "coverage": True,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
         "scality": {
             "phpVersions": [
@@ -74,6 +79,11 @@ config = {
             },
             "includeKeyInMatrixName": True,
             "coverage": False,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
         "scality-multibucket-cov": {
             "phpVersions": [
@@ -88,6 +98,11 @@ config = {
             },
             "includeKeyInMatrixName": True,
             "coverage": True,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
         "scality-multibucket": {
             "phpVersions": [
@@ -102,6 +117,11 @@ config = {
             },
             "includeKeyInMatrixName": True,
             "coverage": False,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
         "ceph-cov": {
             "phpVersions": [
@@ -113,6 +133,11 @@ config = {
             "cephS3": True,
             "includeKeyInMatrixName": True,
             "coverage": True,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
         "ceph": {
             "phpVersions": [
@@ -124,6 +149,11 @@ config = {
             "cephS3": True,
             "includeKeyInMatrixName": True,
             "coverage": False,
+            "extraCommandsBeforeTestRun": [
+                "cd %s" % dir["server"],
+                "php occ a:disable notifications",
+                "cd %s/apps/files_primary_s3" % dir["server"],
+            ],
         },
     },
     "acceptance": {
