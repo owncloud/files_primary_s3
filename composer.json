@@ -6,7 +6,8 @@
     "aws/aws-sdk-php": "^3.48"
   },
   "replace": {
-    "guzzlehttp/guzzle": "*"
+    "guzzlehttp/guzzle": "*",
+    "guzzlehttp/psr7": "*"
   },
   "license": "GPL-2.0",
   "config": {
