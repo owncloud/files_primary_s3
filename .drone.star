@@ -158,7 +158,6 @@ config = {
     },
     "acceptance": {
         "api": {
-            "servers": ["daily-master-qa"],
             "suites": {
                 "apiFilesPrimaryS3": "apiFilesPriS3",
             },
@@ -168,7 +167,6 @@ config = {
             },
         },
         "webUI": {
-            "servers": ["daily-master-qa"],
             "suites": {
                 "webUIFilesPrimaryS3": "webUIFilesPriS3",
             },
@@ -200,6 +198,26 @@ config = {
                 "files_external": "",
             },
         },
+        "webUI-ceph-latest-nightly": {
+            "suites": [
+                "webUICeph",
+            ],
+            "servers": [
+                "latest",
+            ],
+            "cephS3": True,
+            "emailNeeded": True,
+            "federatedServerNeeded": True,
+            "filterTags": "~@skip&&~@app-required",
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 20,
+            "selUserNeeded": True,
+            "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
+        },
         "api-ceph": {
             "suites": [
                 "apiCeph",
@@ -213,6 +231,24 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
+            "extraApps": {
+                "files_external": "",
+            },
+        },
+        "api-ceph-latest-nightly": {
+            "suites": [
+                "apiCeph",
+            ],
+            "servers": [
+                "latest",
+            ],
+            "cephS3": True,
+            "federatedServerNeeded": True,
+            "filterTags": "~@skip&&~@app-required",
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 29,
+            "cron": "nightly",
             "extraApps": {
                 "files_external": "",
             },
