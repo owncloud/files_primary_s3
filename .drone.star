@@ -1148,6 +1148,7 @@ def acceptance(ctx):
                             "sed -i -e \"s/verySecretKey1/$SCALITY_SECRET_ESCAPED/\" /var/www/owncloud/server/config/scality.config.php",
                             "sed -i -e \"s/http/https/\" /var/www/owncloud/server/config/scality.config.php",
                             "sed -i -e \"s/scality:8000/%s/\" /var/www/owncloud/server/config/scality.config.php" % params["externalScality"]["externalServerUrl"],
+                            "cat /var/www/owncloud/server/config/scality.config.php",
                             "cd /var/www/owncloud/server/",
                             "php occ s3:create-bucket owncloud-acceptance-tests-$DRONE_BUILD_NUMBER-$DRONE_STAGE_NUMBER --accept-warning",
                             "cd /var/www/owncloud/testrunner/apps/files_primary_s3",
