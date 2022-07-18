@@ -284,7 +284,36 @@ config = {
                     "scality_secret": "scality_secret_access_key_ring_8",
                     "scality_secret_escaped": "scality_secret_access_key_ring_8_escaped",
                 },
-                "externalServerUrl": "s3-b.isv.scality.com",
+                "externalServerUrl": "s3.isv.scality.com",
+            },
+            "extraEnvironment": {
+                "S3_TYPE": "scality",
+            },
+            "scalityS3": True,
+            "federatedServerNeeded": True,
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 4,
+            "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
+        },
+        "api-scality-artesca-remote-smoke": {
+            "suites": {
+                "apiAll": "api-scal-art-remote",
+            },
+            "filterTags": "@smokeTest&&~@skip&&~@app-required",
+            "servers": [
+                "daily-master-qa",
+            ],
+            "externalScality": {
+                "secrets": {
+                    "scality_key": "scality_access_key_artesca",
+                    "scality_secret": "scality_secret_access_key_artesca",
+                    "scality_secret_escaped": "scality_secret_access_key_artesca_escaped",
+                },
+                "externalServerUrl": "artesca.isv.scality.com",
             },
             "extraEnvironment": {
                 "S3_TYPE": "scality",
