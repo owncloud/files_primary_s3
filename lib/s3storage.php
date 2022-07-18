@@ -72,26 +72,68 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		if ($this->connection) {
 			return;
 		}
+		// \GuzzleHttp\Client::MAJOR_VERSION was only introduced recently.
+		// so first assume that we still need to use Guzzle major version 5
+		// that is in core releases up to 10.10.
+		$useGuzzle5 = true;
+		if (\defined('\GuzzleHttp\Client::MAJOR_VERSION')) {
+			if (\GuzzleHttp\Client::MAJOR_VERSION >= 7) {
+				// MAJOR_VERSION is defined and at least 7, so we don't want to
+				// do Guzzle5 code, we will execute code for later Guzzle major
+				// versions.
+				// Note: no versions of oC10 core or apps were ever released with
+				// Guzzle major version 6, so we do not need to try and detect that.
+				$useGuzzle5 = false;
+			}
+		}
 		$config = $this->params['options'];
-		// Create a handler stack that has all of the default middlewares attached
-		$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
-		// Push the handler onto the handler stack
-		$handler->push(Middleware::mapRequest(function (RequestInterface $request) {
-			if ($request->getMethod() !== 'PUT') {
-				return $request;
-			}
-			$body = $request->getBody();
-			if ($body !== null && $body->getSize() !== 0) {
-				return $request;
-			}
-			if ($request->hasHeader('Content-Length')) {
-				return $request;
-			}
-			// force content length header on empty body
-			return $request->withHeader('Content-Length', '0');
-		}));
-		// Inject the handler into the client
-		$client = new \GuzzleHttp\Client(['handler' => $handler]);
+		if ($useGuzzle5) {
+			/*
+			 * Note: phan runs in CI with the latest core, which has Guzzle7 or later.
+			 * So various things that phan reports for this Guzzle5 code have to be suppressed.
+			*/
+			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
+			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\StreamHandler()]);
+			/* @phan-suppress-next-line PhanDeprecatedFunction */
+			$emitter = $client->getEmitter();
+			/* @phan-suppress-next-line PhanUndeclaredTypeParameter */
+			$emitter->on('before', static function (\GuzzleHttp\Event\BeforeEvent $event) {
+				/* @phan-suppress-next-line PhanUndeclaredClassMethod */
+				$request = $event->getRequest();
+				if ($request->getMethod() !== 'PUT') {
+					return;
+				}
+				$body = $request->getBody();
+				if ($body !== null && $body->getSize() !== 0) {
+					return;
+				}
+				if ($request->hasHeader('Content-Length')) {
+					return;
+				}
+				// force content length header on empty body
+				$request->setHeader('Content-Length', '0');
+			});
+		} else {
+			// Create a handler stack that has all of the default middlewares attached
+			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
+			// Push the handler onto the handler stack
+			$handler->push(Middleware::mapRequest(function (RequestInterface $request) {
+				if ($request->getMethod() !== 'PUT') {
+					return $request;
+				}
+				$body = $request->getBody();
+				if ($body !== null && $body->getSize() !== 0) {
+					return $request;
+				}
+				if ($request->hasHeader('Content-Length')) {
+					return $request;
+				}
+				// force content length header on empty body
+				return $request->withHeader('Content-Length', '0');
+			}));
+			// Inject the handler into the client
+			$client = new \GuzzleHttp\Client(['handler' => $handler]);
+		}
 		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
 		/* @phan-suppress-next-line PhanDeprecatedFunction */
