@@ -158,7 +158,6 @@ config = {
     },
     "acceptance": {
         "api": {
-            "servers": ["daily-master-qa"],
             "suites": {
                 "apiFilesPrimaryS3": "apiFilesPriS3",
             },
@@ -168,7 +167,6 @@ config = {
             },
         },
         "webUI": {
-            "servers": ["daily-master-qa"],
             "suites": {
                 "webUIFilesPrimaryS3": "webUIFilesPriS3",
             },
@@ -200,6 +198,26 @@ config = {
                 "files_external": "",
             },
         },
+        "webUI-ceph-latest-nightly": {
+            "suites": [
+                "webUICeph",
+            ],
+            "servers": [
+                "latest",
+            ],
+            "cephS3": True,
+            "emailNeeded": True,
+            "federatedServerNeeded": True,
+            "filterTags": "~@skip&&~@app-required",
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 20,
+            "selUserNeeded": True,
+            "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
+        },
         "api-ceph": {
             "suites": [
                 "apiCeph",
@@ -213,6 +231,24 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
+            "extraApps": {
+                "files_external": "",
+            },
+        },
+        "api-ceph-latest-nightly": {
+            "suites": [
+                "apiCeph",
+            ],
+            "servers": [
+                "latest",
+            ],
+            "cephS3": True,
+            "federatedServerNeeded": True,
+            "filterTags": "~@skip&&~@app-required",
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 29,
+            "cron": "nightly",
             "extraApps": {
                 "files_external": "",
             },
@@ -248,7 +284,36 @@ config = {
                     "scality_secret": "scality_secret_access_key_ring_8",
                     "scality_secret_escaped": "scality_secret_access_key_ring_8_escaped",
                 },
-                "externalServerUrl": "s3-b.isv.scality.com",
+                "externalServerUrl": "s3.isv.scality.com",
+            },
+            "extraEnvironment": {
+                "S3_TYPE": "scality",
+            },
+            "scalityS3": True,
+            "federatedServerNeeded": True,
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 4,
+            "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
+        },
+        "api-scality-artesca-remote-smoke": {
+            "suites": {
+                "apiAll": "api-scal-art-remote",
+            },
+            "filterTags": "@smokeTest&&~@skip&&~@app-required",
+            "servers": [
+                "daily-master-qa",
+            ],
+            "externalScality": {
+                "secrets": {
+                    "scality_key": "scality_access_key_artesca",
+                    "scality_secret": "scality_secret_access_key_artesca",
+                    "scality_secret_escaped": "scality_secret_access_key_artesca_escaped",
+                },
+                "externalServerUrl": "artesca.isv.scality.com",
             },
             "extraEnvironment": {
                 "S3_TYPE": "scality",
