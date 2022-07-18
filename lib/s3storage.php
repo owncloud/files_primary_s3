@@ -113,6 +113,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				// force content length header on empty body
 				$request->setHeader('Content-Length', '0');
 			});
+			$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
 		} else {
 			// Create a handler stack that has all of the default middlewares attached
 			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
@@ -133,8 +134,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			}));
 			// Inject the handler into the client
 			$client = new \GuzzleHttp\Client(['handler' => $handler]);
+			$h = new GuzzleHandler($client);
 		}
-		$h = new GuzzleHandler($client);
 		$config['http_handler'] = $h;
 		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		$this->connection = S3Client::factory($config);
