@@ -213,7 +213,6 @@ config = {
             "runAllSuites": True,
             "numberOfParts": 20,
             "selUserNeeded": True,
-            "cron": "nightly",
             "extraApps": {
                 "files_external": "",
             },
@@ -248,7 +247,6 @@ config = {
             "runCoreTests": True,
             "runAllSuites": True,
             "numberOfParts": 29,
-            "cron": "nightly",
             "extraApps": {
                 "files_external": "",
             },
