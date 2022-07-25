@@ -53,6 +53,10 @@ config = {
             "phpVersions": [
                 DEFAULT_PHP_VERSION,
             ],
+            "servers": [
+                "daily-master-qa",
+                "10.10.0-qa",
+            ],
             "databases": [
                 "sqlite",
             ],
@@ -92,6 +96,10 @@ config = {
             "databases": [
                 "sqlite",
             ],
+            "servers": [
+                "daily-master-qa",
+                "10.10.0-qa",
+            ],
             "scalityS3": {
                 "config": "multibucket",
                 "createExtraBuckets": True,
@@ -129,6 +137,10 @@ config = {
             ],
             "databases": [
                 "sqlite",
+            ],
+            "servers": [
+                "daily-master-qa",
+                "10.10.0-qa",
             ],
             "cephS3": True,
             "includeKeyInMatrixName": True,
