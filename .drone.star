@@ -89,7 +89,7 @@ config = {
                 "cd %s/apps/files_primary_s3" % dir["server"],
             ],
         },
-        "scality-multibucket-cov": {
+        "scality-mbuck-cov": {
             "phpVersions": [
                 DEFAULT_PHP_VERSION,
             ],
@@ -112,7 +112,7 @@ config = {
                 "cd %s/apps/files_primary_s3" % dir["server"],
             ],
         },
-        "scality-multibucket": {
+        "scality-mbuck": {
             "phpVersions": [
                 "7.3",
             ],
