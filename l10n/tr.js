@@ -4,6 +4,7 @@ OC.L10N.register(
     "Connection options and bucket must be configured." : "Bağlantı seçenekleri ve veri kümesi yapılandırılmalıdır.",
     "No S3 ObjectStore available" : "S3 Nesne depolama bulunamadı",
     "Bucket <%s> does not exist." : "<%s> veri kümesi mevcut değil.",
-    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Karşıya yükleme başarısız. Daha fazla bilgi için lütfen yöneticinizden günlük dosyalarına bakmasını isteyin."
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Karşıya yükleme başarısız. Daha fazla bilgi için lütfen yöneticinizden günlük dosyalarına bakmasını isteyin.",
+    "Storage encryption is not compatible with S3 Object Storage." : "Depolama şifrelemesi, S3 Nesne Depolama ile uyumlu değildir."
 },
 "nplurals=2; plural=(n > 1);");
