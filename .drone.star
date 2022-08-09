@@ -204,7 +204,7 @@ config = {
             "filterTags": "~@skip&&~@app-required",
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 20,
+            "numberOfParts": 18,
             "selUserNeeded": True,
             "extraApps": {
                 "files_external": "",
@@ -223,7 +223,7 @@ config = {
             "filterTags": "~@skip&&~@app-required",
             "runCoreTests": True,
             "runAllSuites": True,
-            "numberOfParts": 20,
+            "numberOfParts": 18,
             "selUserNeeded": True,
             "cron": "nightly",
             "extraApps": {
