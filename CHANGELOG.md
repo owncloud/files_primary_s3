@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [Unreleased] 
+
+- 
+
+## [1.3.0] - 2022-08-10
+
+### Changed
+
+- [#39387](https://github.com/owncloud/core/issues/39387) - Update guzzle major version to 7
+- This version is compatible with both ownCloud 10.10 and ownCloud 10.11.0
 
 ## [1.2.0] - 2021-12-29
 
@@ -79,7 +88,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...master
+[1.3.0]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...v1.1.1
