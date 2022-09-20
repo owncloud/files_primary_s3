@@ -31,7 +31,7 @@ use Aws\Handler\GuzzleV6\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
-use GuzzleHttp\Handler\StreamHandler;
+use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Middleware;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
@@ -93,7 +93,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			 * So various things that phan reports for this Guzzle5 code have to be suppressed.
 			*/
 			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\StreamHandler()]);
+			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\CurlMultiHandler()]);
 			/* @phan-suppress-next-line PhanDeprecatedFunction */
 			$emitter = $client->getEmitter();
 			/* @phan-suppress-next-line PhanUndeclaredTypeParameter */
@@ -116,7 +116,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
 		} else {
 			// Create a handler stack that has all of the default middlewares attached
-			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
+			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
 			// Push the handler onto the handler stack
 			$handler->push(Middleware::mapRequest(function (RequestInterface $request) {
 				if ($request->getMethod() !== 'PUT') {
@@ -175,6 +175,9 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 		if (isset($this->params['part_size'])) {
 			$opt['part_size'] = $this->params['part_size'];
+		}
+		if (isset($this->params['concurrency'])) {
+			$opt['concurrency'] = $this->params['concurrency'];
 		}
 
 		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
