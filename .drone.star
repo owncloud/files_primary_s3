@@ -71,24 +71,6 @@ config = {
                 "cd %s/apps/files_primary_s3" % dir["server"],
             ],
         },
-        "scality": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
         "scality-mbuck-cov": {
             "phpVersions": [
                 DEFAULT_PHP_VERSION,
@@ -112,25 +94,6 @@ config = {
                 "cd %s/apps/files_primary_s3" % dir["server"],
             ],
         },
-        "scality-mbuck": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "config": "multibucket",
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
         "ceph-cov": {
             "phpVersions": [
                 DEFAULT_PHP_VERSION,
@@ -145,22 +108,6 @@ config = {
             "cephS3": True,
             "includeKeyInMatrixName": True,
             "coverage": True,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
-        "ceph": {
-            "phpVersions": [
-                "7.3",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "cephS3": True,
-            "includeKeyInMatrixName": True,
-            "coverage": False,
             "extraCommandsBeforeTestRun": [
                 "cd %s" % dir["server"],
                 "php occ a:disable notifications",
