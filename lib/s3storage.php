@@ -31,6 +31,7 @@ use Aws\Handler\GuzzleV6\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
+use GuzzleHttp\Handler\StreamHandler;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\Middleware;
 use OC\ServiceUnavailableException;
@@ -48,6 +49,9 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @var S3Client|null
 	 */
 	private $connection;
+
+	/** @var S3Client|null */
+	private $downConnection;
 
 	/**
 	 * @var array
@@ -88,57 +92,20 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 		$config = $this->params['options'];
 		if ($useGuzzle5) {
-			/*
-			 * Note: phan runs in CI with the latest core, which has Guzzle7 or later.
-			 * So various things that phan reports for this Guzzle5 code have to be suppressed.
-			*/
-			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\CurlMultiHandler()]);
-			/* @phan-suppress-next-line PhanDeprecatedFunction */
-			$emitter = $client->getEmitter();
-			/* @phan-suppress-next-line PhanUndeclaredTypeParameter */
-			$emitter->on('before', static function (\GuzzleHttp\Event\BeforeEvent $event) {
-				/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-				$request = $event->getRequest();
-				if ($request->getMethod() !== 'PUT') {
-					return;
-				}
-				$body = $request->getBody();
-				if ($body !== null && $body->getSize() !== 0) {
-					return;
-				}
-				if ($request->hasHeader('Content-Length')) {
-					return;
-				}
-				// force content length header on empty body
-				$request->setHeader('Content-Length', '0');
-			});
-			$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
+			$h = $this->getHandlerV5(false);  // curlMultiHandler
+			$dh = $this->getHandlerV5(true);  // streamHandler for downloads
 		} else {
-			// Create a handler stack that has all of the default middlewares attached
-			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
-			// Push the handler onto the handler stack
-			$handler->push(Middleware::mapRequest(function (RequestInterface $request) {
-				if ($request->getMethod() !== 'PUT') {
-					return $request;
-				}
-				$body = $request->getBody();
-				if ($body !== null && $body->getSize() !== 0) {
-					return $request;
-				}
-				if ($request->hasHeader('Content-Length')) {
-					return $request;
-				}
-				// force content length header on empty body
-				return $request->withHeader('Content-Length', '0');
-			}));
-			// Inject the handler into the client
-			$client = new \GuzzleHttp\Client(['handler' => $handler]);
-			$h = new GuzzleHandler($client);
+			$h = $this->getHandlerV7(false);  // curlMultiHandler
+			$dh = $this->getHandlerV7(true);  // streamHandler for downloads
 		}
 		$config['http_handler'] = $h;
 		/* @phan-suppress-next-line PhanDeprecatedFunction */
 		$this->connection = S3Client::factory($config);
+
+		// replace the http_handler for the download connection
+		$config['http_handler'] = $dh;
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
+		$this->downConnection = S3Client::factory($config);
 		try {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
@@ -154,6 +121,73 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
 			throw new \Exception($this->t('Bucket <%s> does not exist.', [$this->getBucket()]));
 		}
+	}
+
+	private function getHandlerV5($isStream) {
+		/*
+		 * Note: phan runs in CI with the latest core, which has Guzzle7 or later.
+		 * So various things that phan reports for this Guzzle5 code have to be suppressed.
+		 */
+		if ($isStream) {
+			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
+			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\StreamHandler()]);
+		} else {
+			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
+			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\CurlMultiHandler()]);
+		}
+
+		/* @phan-suppress-next-line PhanDeprecatedFunction */
+		$emitter = $client->getEmitter();
+		/* @phan-suppress-next-line PhanUndeclaredTypeParameter */
+		$beforeEventFunc = static function (\GuzzleHttp\Event\BeforeEvent $event) {
+			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
+			$request = $event->getRequest();
+			if ($request->getMethod() !== 'PUT') {
+				return;
+			}
+			$body = $request->getBody();
+			if ($body !== null && $body->getSize() !== 0) {
+				return;
+			}
+			if ($request->hasHeader('Content-Length')) {
+				return;
+			}
+			// force content length header on empty body
+			$request->setHeader('Content-Length', '0');
+		};
+		$emitter->on('before', $beforeEventFunc);
+		$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
+		return $h;
+	}
+
+	private function getHandlerV7($isStream) {
+		// Create a handler stack that has all of the default middlewares attached
+		if ($isStream) {
+			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
+		} else {
+			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
+		}
+
+		$requestFunc = function (RequestInterface $request) {
+			if ($request->getMethod() !== 'PUT') {
+				return $request;
+			}
+			$body = $request->getBody();
+			if ($body !== null && $body->getSize() !== 0) {
+				return $request;
+			}
+			if ($request->hasHeader('Content-Length')) {
+				return $request;
+			}
+			// force content length header on empty body
+			return $request->withHeader('Content-Length', '0');
+		};
+		// Push the handler onto the handler stack
+		$handler->push(Middleware::mapRequest($requestFunc));
+		// Inject the handler into the client
+		$client = new \GuzzleHttp\Client(['handler' => $handler]);
+		$h = new GuzzleHandler($client);
+		return $h;
 	}
 
 	/**
@@ -228,7 +262,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->init();
 		try {
 			$context = stream_context_create([
-				's3' => ['seekable' => true]
+				's3' => ['seekable' => true, 'client' => $this->downConnection]
 			]);
 			return \fopen($this->getUrl($urn), 'rb', false, $context);
 		} catch (AwsException $ex) {
