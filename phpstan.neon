@@ -6,6 +6,7 @@ parameters:
      - '#Method OCA\\Files_Primary_S3\\Panels\\Admin::getPanel\(\) should return OCP\\AppFramework\\Http\\TemplateResponse|OCP\\Template but returns null.#'
      - '#Comparison operation ">=" between 7 and 7 is always true.#'
      - '#Call to an undefined method GuzzleHttp\\Client::getEmitter\(\).#'
+     - '#Instantiated class GuzzleHttp\\Ring\\Client\\StreamHandler not found.#'
      - '#Instantiated class GuzzleHttp\\Ring\\Client\\CurlMultiHandler not found.#'
      - '#Parameter \$event of anonymous function has invalid typehint type GuzzleHttp\\Event\\BeforeEvent.#'
      - '#Call to method getRequest\(\) on an unknown class GuzzleHttp\\Event\\BeforeEvent.#'
