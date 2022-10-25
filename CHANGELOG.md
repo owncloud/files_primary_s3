@@ -4,10 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [1.4.0]  - 2022-10-06
+## [1.4.0]  - 2022-10-25
 
 ### Changed
+
 - [#605](https://github.com/owncloud/files_primary_s3/pull/605) - Allow configurable concurrent uploads
+
+### Fixed
+
+- [#618](https://github.com/owncloud/files_primary_s3/pull/618) - Fix stream download release
 
 
 ## [1.3.0] - 2022-08-10
