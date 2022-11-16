@@ -179,6 +179,26 @@ config = {
                 "files_external": "",
             },
         },
+        "webUI-ceph-latest-nightly": {
+            "suites": [
+                "webUICeph",
+            ],
+            "servers": [
+                "latest",
+            ],
+            "cephS3": True,
+            "emailNeeded": True,
+            "federatedServerNeeded": True,
+            "filterTags": "~@skip&&~@app-required",
+            "runCoreTests": True,
+            "runAllSuites": True,
+            "numberOfParts": 20,
+            "selUserNeeded": True,
+            "cron": "nightly",
+            "extraApps": {
+                "files_external": "",
+            },
+        },
         "api-ceph": {
             "suites": [
                 "apiCeph",
