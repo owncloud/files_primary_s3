@@ -48,7 +48,14 @@ config = {
     "appInstallCommandPhp": "composer install",
     "codestyle": True,
     "javascript": False,
-    "phan": True,
+    "phan": {
+        "multipleVersions": {
+            "phpVersions": [
+                DEFAULT_PHP_VERSION,
+                "7.3",
+            ],
+        },
+    },
     "phpstan": True,
     "phpunit": {
         "scality-cov": {
