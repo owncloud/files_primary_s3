@@ -8,5 +8,5 @@ parameters:
      - '#Call to an undefined method GuzzleHttp\\Client::getEmitter\(\).#'
      - '#Instantiated class GuzzleHttp\\Ring\\Client\\StreamHandler not found.#'
      - '#Instantiated class GuzzleHttp\\Ring\\Client\\CurlMultiHandler not found.#'
-     - '#Parameter \$event of anonymous function has invalid typehint type GuzzleHttp\\Event\\BeforeEvent.#'
+     - '#Parameter \$event of anonymous function has invalid type GuzzleHttp\\Event\\BeforeEvent.#'
      - '#Call to method getRequest\(\) on an unknown class GuzzleHttp\\Event\\BeforeEvent.#'
