@@ -25,6 +25,8 @@
 
 namespace OCA\Files_Primary_S3;
 
+use Aws\Credentials\CredentialProvider;
+use Aws\Credentials\Credentials;
 use Aws\Exception\AwsException;
 use Aws\Exception\MultipartUploadException;
 use Aws\Handler\GuzzleV6\GuzzleHandler;
@@ -72,6 +74,20 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		if ($this->connection) {
 			return;
 		}
+		# setup explicit credentials from config
+		$config = $this->params['options'];
+		if (!isset($config['credentials']['key'], $config['credentials']['secret'])) {
+			throw new \RuntimeException('S3 credentials are missing in configuration.');
+		}
+		$config['credentials'] = CredentialProvider::fromCredentials(
+			new Credentials(
+				$config['credentials']['key'],
+				$config['credentials']['secret'],
+				null,
+				null,
+			)
+		);
+
 		// \GuzzleHttp\Client::MAJOR_VERSION was only introduced recently.
 		// so first assume that we still need to use Guzzle major version 5
 		// that is in core releases up to 10.10.
@@ -86,7 +102,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				$useGuzzle5 = false;
 			}
 		}
-		$config = $this->params['options'];
 		if ($useGuzzle5) {
 			/*
 			 * Note: phan runs in CI with the latest core, which has Guzzle7 or later.
@@ -115,10 +130,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			});
 			$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
 		} else {
-			// Create a handler stack that has all of the default middlewares attached
+			// Create a handler stack that has all the default middlewares attached
 			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
 			// Push the handler onto the handler stack
-			$handler->push(Middleware::mapRequest(function (RequestInterface $request) {
+			$handler->push(Middleware::mapRequest(static function (RequestInterface $request) {
 				if ($request->getMethod() !== 'PUT') {
 					return $request;
 				}
@@ -137,8 +152,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$h = new GuzzleHandler($client);
 		}
 		$config['http_handler'] = $h;
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		$this->connection = S3Client::factory($config);
+
+		$this->connection = new S3Client($config);
 		try {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
