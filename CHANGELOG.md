@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Create a seekable stream when reading. Allows http range reques… - [#522](https://github.com/owncloud/files_primary_s3/issues/522)
+- Create a seekable stream when reading. Allows http range requests - [#522](https://github.com/owncloud/files_primary_s3/issues/522)
 - Update info.xml - [#495](https://github.com/owncloud/files_primary_s3/issues/495)
 
 ## [1.1.3] - 2021-11-09
@@ -100,8 +100,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - First marketplace release
 
 [Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...master
-[1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.1...v1.4.0
-[1.3.1]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.3.1
+[1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...v1.1.2
