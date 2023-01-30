@@ -24,6 +24,7 @@ SELENIUM_STANDALONE_CHROME_DEBUG = "selenium/standalone-chrome-debug:3.141.59-ox
 SELENIUM_STANDALONE_FIREFOX_DEBUG = "selenium/standalone-firefox-debug:3.8.1"
 SONARSOURCE_SONAR_SCANNER_CLI = "sonarsource/sonar-scanner-cli"
 THEGEEKLAB_DRONE_GITHUB_COMMENT = "thegeeklab/drone-github-comment:1"
+CORE_GIT_REF = "runCreationRelatedTestsOn10.12"
 
 DEFAULT_PHP_VERSION = "7.4"
 DEFAULT_NODEJS_VERSION = "14"
@@ -63,7 +64,7 @@ config = {
                 DEFAULT_PHP_VERSION,
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
                 "10.11.0-qa",
             ],
             "databases": [
@@ -88,7 +89,7 @@ config = {
                 "sqlite",
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
                 "10.11.0-qa",
             ],
             "scalityS3": {
@@ -111,7 +112,7 @@ config = {
                 "sqlite",
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
                 "10.11.0-qa",
             ],
             "cephS3": True,
@@ -152,7 +153,7 @@ config = {
                 "webUICeph",
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
             ],
             "cephS3": True,
             "emailNeeded": True,
@@ -191,7 +192,7 @@ config = {
                 "apiCeph",
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
             ],
             "cephS3": True,
             "federatedServerNeeded": True,
@@ -226,7 +227,7 @@ config = {
                 "apiScality",
             ],
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
             ],
             "scalityS3": True,
             "federatedServerNeeded": True,
@@ -244,7 +245,7 @@ config = {
             },
             "filterTags": "@smokeTest&&~@skip&&~@app-required",
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
             ],
             "externalScality": {
                 "secrets": {
@@ -273,7 +274,7 @@ config = {
             },
             "filterTags": "@smokeTest&&~@skip&&~@app-required",
             "servers": [
-                "daily-master-qa",
+                CORE_GIT_REF,
             ],
             "externalScality": {
                 "secrets": {
@@ -335,7 +336,7 @@ def main(ctx):
     return before + coverageTests + afterCoverageTests + nonCoverageTests + stages + after
 
 def beforePipelines(ctx):
-    return codestyle(ctx) + jscodestyle(ctx) + cancelPreviousBuilds() + phpstan(ctx) + phan(ctx) + phplint(ctx) + checkStarlark()
+    return codestyle(ctx) + jscodestyle(ctx) + cancelPreviousBuilds() + phpstan(ctx) + phan(ctx) + phplint(ctx)
 
 def coveragePipelines(ctx):
     # All unit test pipelines that have coverage or other test analysis reported
@@ -562,7 +563,7 @@ def phpstan(ctx):
                     "path": "server/apps/%s" % ctx.repo.name,
                 },
                 "steps": skipIfUnchanged(ctx, "lint") +
-                         installCore(ctx, "daily-master-qa", "sqlite", False) +
+                         installCore(ctx, CORE_GIT_REF, "sqlite", False) +
                          installAppPhp(ctx, phpVersion) +
                          installExtraApps(phpVersion, params["extraApps"]) +
                          setupServerAndApp(ctx, phpVersion, params["logLevel"], False, params["enableApp"]) +
@@ -637,7 +638,7 @@ def phan(ctx):
                     "path": "server/apps/%s" % ctx.repo.name,
                 },
                 "steps": skipIfUnchanged(ctx, "lint") +
-                         installCore(ctx, "daily-master-qa", "sqlite", False) +
+                         installCore(ctx, CORE_GIT_REF, "sqlite", False) +
                          installExtraApps(phpVersion, params["extraApps"], False) +
                          [
                              {
@@ -807,7 +808,7 @@ def javascript(ctx, withCoverage):
             "path": "server/apps/%s" % ctx.repo.name,
         },
         "steps": skipIfUnchanged(ctx, "unit-tests") +
-                 installCore(ctx, "daily-master-qa", "sqlite", False) +
+                 installCore(ctx, CORE_GIT_REF, "sqlite", False) +
                  installAppJavaScript(ctx) +
                  setupServerAndApp(ctx, DEFAULT_PHP_VERSION, params["logLevel"], False, params["enableApp"]) +
                  params["extraSetup"] +
@@ -870,7 +871,7 @@ def phpTests(ctx, testType, withCoverage):
     # Note: do not run Oracle by default in PRs.
     prDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
-        "servers": ["daily-master-qa"],
+        "servers": [CORE_GIT_REF],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -895,7 +896,7 @@ def phpTests(ctx, testType, withCoverage):
     # The default PHP unit test settings for the cron job (usually runs nightly).
     cronDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
-        "servers": ["daily-master-qa"],
+        "servers": [CORE_GIT_REF],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -1006,6 +1007,10 @@ def phpTests(ctx, testType, withCoverage):
                         serverString = "-%s" % server.replace("daily-", "").replace("-qa", "")
                     else:
                         serverString = ""
+
+                    serverString = 'git'
+                    if "10.11" in server or server == "latest":
+                        serverString = server
                     name = "%s%s-php%s%s-%s" % (testType, keyString, phpVersionForPipelineName, serverString, db.replace(":", ""))
                     maxLength = 50
                     nameLength = len(name)
@@ -1104,7 +1109,7 @@ def acceptance(ctx):
     errorFound = False
 
     default = {
-        "servers": ["daily-master-qa", "latest"],
+        "servers": [CORE_GIT_REF],
         "browsers": ["chrome"],
         "phpVersions": [DEFAULT_PHP_VERSION],
         "databases": ["mariadb:10.2"],
@@ -1290,7 +1295,11 @@ def acceptance(ctx):
                     browserString = "" if testConfig["browser"] == "" else "-" + testConfig["browser"]
                     keyString = "-" + category if testConfig["includeKeyInMatrixName"] else ""
                     partString = "" if testConfig["numberOfParts"] == 1 else "-%d-%d" % (testConfig["numberOfParts"], testConfig["runPart"])
-                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, testConfig["server"].replace("daily-", "").replace("-qa", ""), browserString, testConfig["database"].replace(":", ""), phpVersionForPipelineName, esString)
+
+                    server_str = 'git'
+                    if "10.11" in testConfig["server"] or testConfig["server"] == "latest":
+                        server_str = testConfig["server"]
+                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, server_str, browserString, testConfig["database"].replace(":", ""), phpVersionForPipelineName, esString)
                     maxLength = 50
                     nameLength = len(name)
                     if nameLength > maxLength:
@@ -1468,7 +1477,7 @@ def sonarAnalysis(ctx, phpVersion = DEFAULT_PHP_VERSION):
                  skipIfUnchanged(ctx, "unit-tests") +
                  cacheRestore() +
                  composerInstall(phpVersion) +
-                 installCore(ctx, "daily-master-qa", "sqlite", False) +
+                 installCore(ctx, CORE_GIT_REF, "sqlite", False) +
                  [
                      {
                          "name": "sync-from-cache",
@@ -1889,7 +1898,7 @@ def installCore(ctx, version, db, useBundledApp):
         "name": "install-core",
         "image": OC_CI_CORE,
         "settings": {
-            "version": version,
+            "git_reference": version,
             "core_path": dir["server"],
             "db_type": dbType,
             "db_name": database,
@@ -2156,7 +2165,7 @@ def installFederated(federatedServerVersion, phpVersion, logLevel, db, dbSuffix 
             "name": "install-federated",
             "image": OC_CI_CORE,
             "settings": {
-                "version": federatedServerVersion,
+                "git_reference": federatedServerVersion,
                 "core_path": dir["federated"],
                 "db_type": "mysql",
                 "db_name": database,
