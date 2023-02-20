@@ -90,11 +90,15 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				$useGuzzle5 = false;
 			}
 		}
+
+		$logger = \OC::$server->getLogger();
 		$config = $this->params['options'];
 		if ($useGuzzle5) {
+			$logger->debug('initializing s3 connection with handlers for guzzle5', ['app' => 'files_primary_s3']);
 			$h = $this->getHandlerV5(false);  // curlMultiHandler
 			$dh = $this->getHandlerV5(true);  // streamHandler for downloads
 		} else {
+			$logger->debug('initializing s3 connection with handlers for guzzle7', ['app' => 'files_primary_s3']);
 			$h = $this->getHandlerV7(false);  // curlMultiHandler
 			$dh = $this->getHandlerV7(true);  // streamHandler for downloads
 		}
@@ -109,7 +113,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		try {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
-			\OC::$server->getLogger()->logException($exception);
+			$logger->logException($exception);
 			$message = $this->t('No S3 ObjectStore available');
 			throw new ServiceUnavailableException($message);
 		}
