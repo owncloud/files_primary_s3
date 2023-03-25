@@ -4,6 +4,7 @@ OC.L10N.register(
     "Connection options and bucket must be configured." : "연결 옵션과 버킷은 반드시 구성되어야 합니다.",
     "No S3 ObjectStore available" : "사용 가능한 S3 ObjectStore 없음",
     "Bucket <%s> does not exist." : "<%s> 버킷이 존재하지 않습니다.",
-    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "업로드에 실패했습니다. 자세한 내용은 관리자에게 로그 파일을 살펴보도록 요청하세요."
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "업로드에 실패했습니다. 자세한 내용은 관리자에게 로그 파일을 살펴보도록 요청하세요.",
+    "Storage encryption is not compatible with S3 Object Storage." : "저장소 암호화는 S3 개체 저장소와 호환되지 않습니다."
 },
 "nplurals=1; plural=0;");
