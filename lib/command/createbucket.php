@@ -59,9 +59,9 @@ class createBucket extends Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 *
-	 * @return int|null|void
+	 * @return int
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		if (!$input->getOption('accept-warning')) {
 			$helper = new QuestionHelper();
 			$q = <<<EOS
@@ -108,6 +108,7 @@ EOS;
 				'Status' => 'Enabled',
 				'MFADelete' => 'Disabled']
 		]);
+		return 0;
 	}
 
 	private function getClient() {
