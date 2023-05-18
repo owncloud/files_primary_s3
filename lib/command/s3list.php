@@ -55,9 +55,9 @@ class s3List extends Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 *
-	 * @return int|null|void
+	 * @return int
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$client = $this->getClient();
 
 		$bucketName = $input->getArgument('bucket');
@@ -100,6 +100,7 @@ class s3List extends Command {
 				$this->printValue($output, $markers, ['Key', 'LastModified', 'VersionId', 'IsLatest']);
 			}
 		}
+		return 0;
 	}
 
 	private function getClient() {
