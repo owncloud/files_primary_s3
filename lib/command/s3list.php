@@ -32,7 +32,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 class s3List extends Command {
-
 	/** @var IConfig */
 	private $config;
 
