@@ -35,7 +35,6 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 class createBucket extends Command {
-
 	/** @var IConfig */
 	private $config;
 

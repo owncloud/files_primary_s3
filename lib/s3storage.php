@@ -44,7 +44,6 @@ use Psr\Http\Message\RequestInterface;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 class S3Storage implements IObjectStore, IVersionedObjectStorage {
-
 	/**
 	 * @var S3Client|null
 	 */
