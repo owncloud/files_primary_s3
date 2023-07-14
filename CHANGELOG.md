@@ -8,8 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
--  [#664](https://github.com/owncloud/files_primary_s3/pull/664) - Always return an int from Symfony Command execute method
--  Deprecate support for php-7.3
+- [#664](https://github.com/owncloud/files_primary_s3/pull/664) - Always return an int from Symfony Command execute method
+- Minimum core version 10.11, minimum php version 7.4
 
 
 ## [1.4.0]  - 2022-10-25
