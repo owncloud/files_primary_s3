@@ -76,9 +76,7 @@ config = {
                 DEFAULT_PHP_VERSION,
             ],
             "servers": [
-                "daily-master-qa",
-                "10.12.0-qa",
-                "10.13.0-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "databases": [
                 "sqlite",
@@ -102,9 +100,7 @@ config = {
                 "sqlite",
             ],
             "servers": [
-                "daily-master-qa",
-                "10.12.0-qa",
-                "10.13.0-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "scalityS3": {
                 "config": "multibucket",
@@ -126,9 +122,7 @@ config = {
                 "sqlite",
             ],
             "servers": [
-                "daily-master-qa",
-                "10.12.0-qa",
-                "10.13.0-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "cephS3": True,
             "includeKeyInMatrixName": True,
@@ -168,7 +162,7 @@ config = {
                 "webUICeph",
             ],
             "servers": [
-                "daily-master-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "cephS3": True,
             "emailNeeded": True,
@@ -207,7 +201,7 @@ config = {
                 "apiCeph",
             ],
             "servers": [
-                "daily-master-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "cephS3": True,
             "federatedServerNeeded": True,
@@ -242,7 +236,7 @@ config = {
                 "apiScality",
             ],
             "servers": [
-                "daily-master-qa",
+                "fix/delete-files-s3-on-user-delete",
             ],
             "scalityS3": True,
             "federatedServerNeeded": True,
@@ -495,7 +489,7 @@ def phpstan(ctx):
                     "path": "server/apps/%s" % ctx.repo.name,
                 },
                 "steps": skipIfUnchanged(ctx, "lint") +
-                         installCore(ctx, "daily-master-qa", "sqlite", False) +
+                         installCore(ctx, "fix/delete-files-s3-on-user-delete", "sqlite", False) +
                          installAppPhp(ctx, phpVersion) +
                          installExtraApps(phpVersion, params["extraApps"]) +
                          setupServerAndApp(ctx, phpVersion, params["logLevel"], False, params["enableApp"]) +
@@ -570,7 +564,7 @@ def phan(ctx):
                     "path": "server/apps/%s" % ctx.repo.name,
                 },
                 "steps": skipIfUnchanged(ctx, "lint") +
-                         installCore(ctx, "daily-master-qa", "sqlite", False) +
+                         installCore(ctx, "fix/delete-files-s3-on-user-delete", "sqlite", False) +
                          installExtraApps(phpVersion, params["extraApps"], False) +
                          [
                              {
@@ -740,7 +734,7 @@ def javascript(ctx, withCoverage):
             "path": "server/apps/%s" % ctx.repo.name,
         },
         "steps": skipIfUnchanged(ctx, "unit-tests") +
-                 installCore(ctx, "daily-master-qa", "sqlite", False) +
+                 installCore(ctx, "fix/delete-files-s3-on-user-delete", "sqlite", False) +
                  installAppJavaScript(ctx) +
                  setupServerAndApp(ctx, DEFAULT_PHP_VERSION, params["logLevel"], False, params["enableApp"]) +
                  params["extraSetup"] +
@@ -803,7 +797,7 @@ def phpTests(ctx, testType, withCoverage):
     # Note: do not run Oracle by default in PRs.
     prDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
-        "servers": ["daily-master-qa"],
+        "servers": ["fix/delete-files-s3-on-user-delete"],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -828,7 +822,7 @@ def phpTests(ctx, testType, withCoverage):
     # The default PHP unit test settings for the cron job (usually runs nightly).
     cronDefault = {
         "phpVersions": [DEFAULT_PHP_VERSION],
-        "servers": ["daily-master-qa"],
+        "servers": ["fix/delete-files-s3-on-user-delete"],
         "databases": [
             "sqlite",
             "mariadb:10.2",
@@ -935,10 +929,7 @@ def phpTests(ctx, testType, withCoverage):
             for server in params["servers"]:
                 for db in params["databases"]:
                     keyString = "-" + category if params["includeKeyInMatrixName"] else ""
-                    if len(params["servers"]) > 1:
-                        serverString = "-%s" % server.replace("daily-", "").replace("-qa", "")
-                    else:
-                        serverString = ""
+                    serverString = ""
                     name = "%s%s-php%s%s-%s" % (testType, keyString, phpVersionForPipelineName, serverString, db.replace(":", ""))
                     maxLength = 50
                     nameLength = len(name)
@@ -1037,7 +1028,7 @@ def acceptance(ctx):
     errorFound = False
 
     default = {
-        "servers": ["daily-master-qa", "latest"],
+        "servers": ["fix/delete-files-s3-on-user-delete", "latest"],
         "browsers": ["chrome"],
         "phpVersions": [DEFAULT_PHP_VERSION],
         "databases": ["mariadb:10.2"],
@@ -1215,7 +1206,7 @@ def acceptance(ctx):
                     browserString = "" if testConfig["browser"] == "" else "-" + testConfig["browser"]
                     keyString = "-" + category if testConfig["includeKeyInMatrixName"] else ""
                     partString = "" if testConfig["numberOfParts"] == 1 else "-%d-%d" % (testConfig["numberOfParts"], testConfig["runPart"])
-                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, testConfig["server"].replace("daily-", "").replace("-qa", ""), browserString, testConfig["database"].replace(":", ""), phpVersionForPipelineName, esString)
+                    name = "%s%s%s-%s%s-%s-php%s%s" % (alternateSuiteName, keyString, partString, "", browserString, testConfig["database"].replace(":", ""), phpVersionForPipelineName, esString)
                     maxLength = 50
                     nameLength = len(name)
                     if nameLength > maxLength:
@@ -1397,7 +1388,7 @@ def sonarAnalysis(ctx, phpVersion = DEFAULT_PHP_VERSION):
                  skipIfUnchanged(ctx, "unit-tests") +
                  cacheRestore() +
                  composerInstall(phpVersion) +
-                 installCore(ctx, "daily-master-qa", "sqlite", False) +
+                 installCore(ctx, "fix/delete-files-s3-on-user-delete", "sqlite", False) +
                  [
                      {
                          "name": "sync-from-cache",
@@ -1812,7 +1803,7 @@ def installCore(ctx, version, db, useBundledApp):
         "name": "install-core",
         "image": OC_CI_CORE,
         "settings": {
-            "version": version,
+            "git_reference": version,
             "core_path": dir["server"],
             "db_type": dbType,
             "db_name": database,
