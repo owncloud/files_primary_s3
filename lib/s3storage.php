@@ -40,6 +40,7 @@ use OCP\Files\ObjectStore\IVersionedObjectStorage;
 use OCP\Files\ObjectStore\ObjectStoreOperationException;
 use OCP\Files\ObjectStore\ObjectStoreWriteException;
 use Psr\Http\Message\RequestInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -56,6 +57,18 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @var array
 	 */
 	private $params;
+	/**
+	 * @var mixed
+	 */
+	private $range_file_id;
+	/**
+	 * @var mixed
+	 */
+	private $range_start;
+	/**
+	 * @var mixed
+	 */
+	private $range_end;
 
 	/**
 	 * S3Storage constructor.
@@ -69,6 +82,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 
 		$this->params = $params;
+
+		\OC::$server->getEventDispatcher()->addListener('file.:beforeRangeRequest', function (GenericEvent $event) {
+			$this->range_start = $event->getArgument('range_start');
+			$this->range_end = $event->getArgument('range_end');
+			$this->range_file_id = $event->getArgument('file_id');
+			$event->setArgument('storage.support.range', true);
+		});
 	}
 
 	protected function init(): void {
@@ -113,8 +133,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			throw new ServiceUnavailableException($message);
 		}
 
-		// TODO: update aws sdk once https://github.com/aws/aws-sdk-php/pull/1424 is merged
-//		$this->connection->registerStreamWrapper();
 		StreamWrapper::register($this->connection);
 
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
@@ -260,8 +278,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function readObject($urn) {
 		$this->init();
 		try {
+			# TODO: respect configurable urn prefix
+			$oc_context = [];
+			if ($urn === "urn:oid:$this->range_file_id") {
+				$oc_context = ['Range' => "bytes=$this->range_start-$this->range_end"];
+			}
+
 			$context = stream_context_create([
-				's3' => ['seekable' => true, 'client' => $this->downConnection]
+				's3' => ['seekable' => true, 'client' => $this->downConnection] + $oc_context,
 			]);
 			return \fopen($this->getUrl($urn), 'rb', false, $context);
 		} catch (AwsException $ex) {

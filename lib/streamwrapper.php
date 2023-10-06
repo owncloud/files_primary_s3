@@ -582,15 +582,11 @@ class StreamWrapper {
 			$options = [];
 		} else {
 			$options = \stream_context_get_options($this->context);
-			$options = isset($options[$this->protocol])
-				? $options[$this->protocol]
-				: [];
+			$options = $options[$this->protocol] ?? [];
 		}
 
 		$default = \stream_context_get_options(\stream_context_get_default());
-		$default = isset($default[$this->protocol])
-			? $default[$this->protocol]
-			: [];
+		$default = $default[$this->protocol] ?? [];
 		$result = $this->params + $options + $default;
 
 		if ($removeContextData) {
@@ -610,7 +606,7 @@ class StreamWrapper {
 	private function getOption($name) {
 		$options = $this->getOptions();
 
-		return isset($options[$name]) ? $options[$name] : null;
+		return $options[$name] ?? null;
 	}
 
 	/**
@@ -657,12 +653,18 @@ class StreamWrapper {
 	}
 
 	private function openReadStream() {
+		# TODO: for range requests we would need to spec them here ....
 		$client = $this->getClient();
-		$command = $client->getCommand('GetObject', $this->getOptions(true));
+		$options = $this->getOptions(true);
+		$command = $client->getCommand('GetObject', $options);
 		$command['@http']['stream'] = true;
 		$result = $client->execute($command);
 		$this->size = (int) $result['ContentLength'];
 		$this->body = $result['Body'];
+		if ($range = $options['Range'] ?? null) {
+			$content_range = $result['ContentRange'];
+			\OC::$server->getLogger()->error("S3 Range request: $range - content-range: $content_range");
+		}
 
 		// Wrap the body in a caching entity body if seeking is allowed
 		// Phan does not understand that Body can be a StreamInterface
