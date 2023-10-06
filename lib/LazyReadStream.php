@@ -14,6 +14,7 @@ class LazyReadStream implements StreamInterface {
 	private string $bucket;
 	private string $key;
 	private ?string $versionId;
+	private int $size;
 
 	public function __construct(S3Client $client, string $bucket, string $key, ?string $versionId = null) {
 		$this->client = $client;
@@ -36,12 +37,17 @@ class LazyReadStream implements StreamInterface {
 		$command = $this->client->getCommand('GetObject', $options);
 		$command['@http']['stream'] = true;
 		$result = $this->client->execute($command);
-
+		$this->size = (int) $result['ContentLength'];
+		
 		// Wrap the body in a caching entity body if seeking is allowed
 		// Phan does not understand that Body can be a StreamInterface
 		// It thinks that body is just a string. Suppress the message.
 		/* @phan-suppress-next-line PhanNonClassMethodCall */
 		/* @phan-suppress-next-line PhanTypeMismatchArgument */
 		return new CachingStream($result['Body']);
+	}
+
+	public function getSize(): ?int {
+		return $this->size;
 	}
 }
