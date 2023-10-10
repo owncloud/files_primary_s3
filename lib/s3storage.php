@@ -98,13 +98,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$dh = $this->getHandlerV7(true);  // streamHandler for downloads
 		}
 		$config['http_handler'] = $h;
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		$this->connection = S3Client::factory($config);
+		$this->connection = new S3Client($config);
 
 		// replace the http_handler for the download connection
 		$config['http_handler'] = $dh;
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		$this->downConnection = S3Client::factory($config);
+		$this->downConnection = new S3Client($config);
 		try {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
@@ -112,10 +110,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$message = $this->t('No S3 ObjectStore available');
 			throw new ServiceUnavailableException($message);
 		}
-
-		// TODO: update aws sdk once https://github.com/aws/aws-sdk-php/pull/1424 is merged
-//		$this->connection->registerStreamWrapper();
-		StreamWrapper::register($this->connection);
 
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
 			throw new \Exception($this->t('Bucket <%s> does not exist.', [$this->getBucket()]));
@@ -155,19 +149,18 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			$request->setHeader('Content-Length', '0');
 		};
 		$emitter->on('before', $beforeEventFunc);
-		$h = new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
-		return $h;
+		return new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
 	}
 
 	private function getHandlerV7($isStream) {
-		// Create a handler stack that has all of the default middlewares attached
+		// Create a handler stack that has all the default middlewares attached
 		if ($isStream) {
 			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
 		} else {
 			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
 		}
 
-		$requestFunc = function (RequestInterface $request) {
+		$requestFunc = static function (RequestInterface $request) {
 			if ($request->getMethod() !== 'PUT') {
 				return $request;
 			}
@@ -185,8 +178,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$handler->push(Middleware::mapRequest($requestFunc));
 		// Inject the handler into the client
 		$client = new \GuzzleHttp\Client(['handler' => $handler]);
-		$h = new GuzzleHandler($client);
-		return $h;
+		return new GuzzleHandler($client);
 	}
 
 	/**
@@ -260,18 +252,11 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function readObject($urn) {
 		$this->init();
 		try {
-			$context = stream_context_create([
-				's3' => ['seekable' => true, 'client' => $this->downConnection]
-			]);
-			return \fopen($this->getUrl($urn), 'rb', false, $context);
+			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn);
+			return \GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}
-	}
-
-	public function getUrl($urn, $versionId = null) {
-		$v = ($versionId !== null) ?  "?versionId=$versionId": '';
-		return 's3://'.$this->getBucket().'/'.$urn.$v;
 	}
 
 	private function getBucket() {
@@ -360,11 +345,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
 		try {
-			$context = stream_context_create([
-				's3' => ['seekable' => true]
-			]);
-
-			return \fopen($this->getUrl($urn, $versionId), 'rb', false, $context);
+			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn, $versionId);
+			return \GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}

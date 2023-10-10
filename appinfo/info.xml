@@ -24,8 +24,8 @@ This extension is the successor of the [ownCloud Objectstore App](https://market
 		<admin>https://doc.owncloud.com/server/latest/admin_manual/configuration/files/external_storage/s3_compatible_object_storage_as_primary.html</admin>
 	</documentation>
 	<dependencies>
-		<php min-version="7.3" />
-		<owncloud min-version="10.3" max-version="10" />
+		<php min-version="7.4" />
+		<owncloud min-version="10.12" max-version="10" />
 	</dependencies>
 	<types>
 		<filesystem/>
