@@ -259,11 +259,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		}
 	}
 
-	public function getUrl($urn, $versionId = null) {
-		$v = ($versionId !== null) ?  "?versionId=$versionId": '';
-		return 's3+read://'.$this->getBucket().'/'.$urn.$v;
-	}
-
 	private function getBucket() {
 		return $this->params['bucket'];
 	}
