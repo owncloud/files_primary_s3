@@ -31,72 +31,59 @@ use Aws\Handler\GuzzleV6\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
+use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Handler\StreamHandler;
 use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\StreamWrapper;
+use OC;
 use OC\ServiceUnavailableException;
 use OCP\Files\ObjectStore\IObjectStore;
 use OCP\Files\ObjectStore\IVersionedObjectStorage;
 use OCP\Files\ObjectStore\ObjectStoreOperationException;
 use OCP\Files\ObjectStore\ObjectStoreWriteException;
 use Psr\Http\Message\RequestInterface;
+use function array_filter;
+use function array_map;
+use function array_values;
+use function fclose;
+use function rawurlencode;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 class S3Storage implements IObjectStore, IVersionedObjectStorage {
-	/**
-	 * @var S3Client|null
-	 */
-	private $connection;
-
-	/** @var S3Client|null */
-	private $downConnection;
-
-	/**
-	 * @var array
-	 */
-	private $params;
+	private ?S3Client $connection = null;
+	private ?S3Client $downConnection= null;
+	private array $params;
 
 	/**
 	 * S3Storage constructor.
 	 *
 	 * @param array $params
-	 * @throws \Exception
+	 * @throws Exception
 	 */
-	public function __construct($params) {
+	public function __construct(array $params) {
 		if (!isset($params['options'], $params['bucket'])) {
-			throw new \Exception($this->t('Connection options and bucket must be configured.'));
+			throw new Exception($this->t('Connection options and bucket must be configured.'));
 		}
 
 		$this->params = $params;
 	}
 
+	/**
+	 * @throws ServiceUnavailableException
+	 * @throws Exception
+	 */
 	protected function init(): void {
 		if ($this->connection) {
 			return;
 		}
-		// \GuzzleHttp\Client::MAJOR_VERSION was only introduced recently.
-		// so first assume that we still need to use Guzzle major version 5
-		// that is in core releases up to 10.10.
-		$useGuzzle5 = true;
-		if (\defined('\GuzzleHttp\Client::MAJOR_VERSION')) {
-			if (\GuzzleHttp\Client::MAJOR_VERSION >= 7) {
-				// MAJOR_VERSION is defined and at least 7, so we don't want to
-				// do Guzzle5 code, we will execute code for later Guzzle major
-				// versions.
-				// Note: no versions of oC10 core or apps were ever released with
-				// Guzzle major version 6, so we do not need to try and detect that.
-				$useGuzzle5 = false;
-			}
-		}
 		$config = $this->params['options'];
-		if ($useGuzzle5) {
-			$h = $this->getHandlerV5(false);  // curlMultiHandler
-			$dh = $this->getHandlerV5(true);  // streamHandler for downloads
-		} else {
-			$h = $this->getHandlerV7(false);  // curlMultiHandler
-			$dh = $this->getHandlerV7(true);  // streamHandler for downloads
-		}
+		$h = $this->getHandlerV7(false);  // curlMultiHandler
+		$dh = $this->getHandlerV7(true);  // streamHandler for downloads
+
 		$config['http_handler'] = $h;
 		$this->connection = new S3Client($config);
 
@@ -106,58 +93,22 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		try {
 			$this->connection->listBuckets();
 		} catch (S3Exception $exception) {
-			\OC::$server->getLogger()->logException($exception);
+			OC::$server->getLogger()->logException($exception);
 			$message = $this->t('No S3 ObjectStore available');
 			throw new ServiceUnavailableException($message);
 		}
 
 		if (!$this->connection->doesBucketExist($this->getBucket())) {
-			throw new \Exception($this->t('Bucket <%s> does not exist.', [$this->getBucket()]));
+			throw new Exception($this->t('Bucket <%s> does not exist.', [$this->getBucket()]));
 		}
 	}
 
-	private function getHandlerV5($isStream) {
-		/*
-		 * Note: phan runs in CI with the latest core, which has Guzzle7 or later.
-		 * So various things that phan reports for this Guzzle5 code have to be suppressed.
-		 */
-		if ($isStream) {
-			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\StreamHandler()]);
-		} else {
-			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-			$client = new \GuzzleHttp\Client(['handler' => new \GuzzleHttp\Ring\Client\CurlMultiHandler()]);
-		}
-
-		/* @phan-suppress-next-line PhanDeprecatedFunction */
-		$emitter = $client->getEmitter();
-		/* @phan-suppress-next-line PhanUndeclaredTypeParameter */
-		$beforeEventFunc = static function (\GuzzleHttp\Event\BeforeEvent $event) {
-			/* @phan-suppress-next-line PhanUndeclaredClassMethod */
-			$request = $event->getRequest();
-			if ($request->getMethod() !== 'PUT') {
-				return;
-			}
-			$body = $request->getBody();
-			if ($body !== null && $body->getSize() !== 0) {
-				return;
-			}
-			if ($request->hasHeader('Content-Length')) {
-				return;
-			}
-			// force content length header on empty body
-			$request->setHeader('Content-Length', '0');
-		};
-		$emitter->on('before', $beforeEventFunc);
-		return new \Aws\Handler\GuzzleV5\GuzzleHandler($client);
-	}
-
-	private function getHandlerV7($isStream) {
+	private function getHandlerV7($isStream): GuzzleHandler {
 		// Create a handler stack that has all the default middlewares attached
 		if ($isStream) {
-			$handler = \GuzzleHttp\HandlerStack::create(new StreamHandler());
+			$handler = HandlerStack::create(new StreamHandler());
 		} else {
-			$handler = \GuzzleHttp\HandlerStack::create(new CurlMultiHandler());
+			$handler = HandlerStack::create(new CurlMultiHandler());
 		}
 
 		$requestFunc = static function (RequestInterface $request) {
@@ -165,7 +116,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 				return $request;
 			}
 			$body = $request->getBody();
-			if ($body !== null && $body->getSize() !== 0) {
+			if ($body->getSize() !== 0) {
 				return $request;
 			}
 			if ($request->hasHeader('Content-Length')) {
@@ -177,7 +128,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		// Push the handler onto the handler stack
 		$handler->push(Middleware::mapRequest($requestFunc));
 		// Inject the handler into the client
-		$client = new \GuzzleHttp\Client(['handler' => $handler]);
+		$client = new Client(['handler' => $handler]);
 		return new GuzzleHandler($client);
 	}
 
@@ -188,9 +139,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		return $this->params['bucket'];
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public function writeObject($urn, $stream) {
 		$this->init();
 
@@ -221,19 +169,16 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			 * better to have a custom message here. The getMessage throws all the parts which
 			 * are failed.
 			 */
-			\OC::$server->getLogger()->logException($e);
+			OC::$server->getLogger()->logException($e);
 			$message = $this->t('Upload failed. Please ask you administrator to have a look at the log files for more details.');
 			throw new ObjectStoreWriteException($message, $e->getCode(), $e);
 		}
 
 		if (\is_resource($stream)) {
-			\fclose($stream);
+			fclose($stream);
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public function deleteObject($urn) {
 		$this->init();
 		try {
@@ -253,7 +198,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		$this->init();
 		try {
 			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn);
-			return \GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
+			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}
@@ -269,9 +214,9 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $urn the unified resource name used to identify the object
 	 * @return array
 	 * @throws ObjectStoreOperationException
-	 * @since 10.0.5
+	 * @throws ServiceUnavailableException
 	 */
-	public function getVersions($urn) {
+	public function getVersions($urn): array {
 		$this->init();
 		try {
 			$list = $this->connection->listObjectVersions([
@@ -280,10 +225,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			]);
 			// Phan does not understand that $list['Versions'] contains an array.
 			/* @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
-			$versions = \array_filter($list['Versions'], static function ($v) use ($urn) {
+			$versions = array_filter($list['Versions'], static function ($v) use ($urn) {
 				return ($v['Key'] === $urn) && $v['IsLatest'] !== true;
 			});
-			return \array_map(static function ($version) {
+			return array_map(static function ($version) {
 				return [
 					'version' => $version['VersionId'],
 					'timestamp' => $version['LastModified']->getTimestamp(),
@@ -304,9 +249,9 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @param string $versionId
 	 * @return array
 	 * @throws ObjectStoreOperationException
-	 * @since 10.0.5
+	 * @throws ServiceUnavailableException
 	 */
-	public function getVersion($urn, $versionId) {
+	public function getVersion($urn, $versionId): array {
 		$this->init();
 		try {
 			$list = $this->connection->listObjectVersions([
@@ -316,10 +261,10 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 			]);
 			// Phan does not understand that $list['Versions'] contains an array.
 			/* @phan-suppress-next-line PhanTypeMismatchArgumentInternal */
-			$versions = \array_filter($list['Versions'], static function ($v) use ($urn, $versionId) {
+			$versions = array_filter($list['Versions'], static function ($v) use ($urn, $versionId) {
 				return ($v['Key'] === $urn) && $v['VersionId'] === $versionId;
 			});
-			$version = \array_values($versions)[0];
+			$version = array_values($versions)[0];
 			return [
 				'version' => $version['VersionId'],
 				'timestamp' => $version['LastModified']->getTimestamp(),
@@ -340,13 +285,12 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @return resource
 	 * @throws ObjectStoreOperationException
 	 * @throws ServiceUnavailableException
-	 * @since 10.0.5
 	 */
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
 		try {
 			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn, $versionId);
-			return \GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
+			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
 		}
@@ -360,15 +304,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 * @return boolean
 	 * @throws ObjectStoreOperationException
 	 * @throws ServiceUnavailableException
-	 * @since 10.0.5
 	 */
-	public function restoreVersion($urn, $versionId) {
+	public function restoreVersion($urn, $versionId): bool {
 		$this->init();
 		try {
 			$this->connection->copyObject([
 				'Bucket' => $this->getBucket(),
 				'Key' => $urn,
-				'CopySource' => "/{$this->getBucket()}/" . \rawurlencode($urn) . "?versionId=$versionId"
+				'CopySource' => "/{$this->getBucket()}/" . rawurlencode($urn) . "?versionId=$versionId"
 			]);
 
 			return true;
@@ -382,7 +325,6 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	 *
 	 * @param string $internalPath
 	 * @return bool
-	 * @since 10.0.5
 	 */
 	public function saveVersion($internalPath): bool {
 		// There is no need in any explicit operations.
@@ -390,8 +332,8 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 		return true;
 	}
 
-	private function t(string $text, array $parameters = []) {
-		return \OC::$server->getL10N('files_primary_s3')
+	private function t(string $text, array $parameters = []): string {
+		return (string)OC::$server->getL10N('files_primary_s3')
 			->t($text, $parameters);
 	}
 }
