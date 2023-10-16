@@ -3,7 +3,7 @@
   "description": "ownCloud primary storage integration using S3 protocol",
   "require": {
     "php": ">=8.3",
-    "aws/aws-sdk-php": "^3.93"
+    "aws/aws-sdk-php": "^3.388"
   },
   "replace": {
     "guzzlehttp/guzzle": "^7.14",
