@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] 
+## [1.5.0]  - 2023-07-27
 
---
+### Changed
+
+- [#664](https://github.com/owncloud/files_primary_s3/pull/664) - Always return an int from Symfony Command execute method
+- Minimum core version 10.11, minimum php version 7.4
+
 
 ## [1.4.0]  - 2022-10-25
 
@@ -99,7 +103,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...master
+[1.5.0]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...v1.2.0
