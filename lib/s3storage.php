@@ -142,41 +142,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function writeObject($urn, $stream) {
 		$this->init();
 
-		$opt = [];
-		if (isset($this->params['serversideencryption'])) {
-			$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
-		}
-		if (isset($this->params['part_size'])) {
-			$opt['part_size'] = $this->params['part_size'];
-		}
-		if (isset($this->params['concurrency'])) {
-			$opt['concurrency'] = $this->params['concurrency'];
-		}
-
-		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
-
-		try {
-			$uploader->upload();
-		} catch (AwsException $e) {
-			/**
-			 * If the error is from AwsException then just wrap the aws error message
-			 * to our exception.
-			 */
-			throw new ObjectStoreWriteException($e->getAwsErrorMessage(), $e->getStatusCode(), $e);
-		} catch (MultipartUploadException $e) {
-			/**
-			 * There can be multiple parts that might have failed to upload. So it would be
-			 * better to have a custom message here. The getMessage throws all the parts which
-			 * are failed.
-			 */
-			OC::$server->getLogger()->logException($e);
-			$message = $this->t('Upload failed. Please ask you administrator to have a look at the log files for more details.');
-			throw new ObjectStoreWriteException($message, $e->getCode(), $e);
-		}
-
-		if (\is_resource($stream)) {
-			fclose($stream);
-		}
+		$this->upload($urn, $stream);
 	}
 
 	public function deleteObject($urn) {
@@ -335,5 +301,59 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	private function t(string $text, array $parameters = []): string {
 		return (string)OC::$server->getL10N('files_primary_s3')
 			->t($text, $parameters);
+	}
+
+	/**
+	 * @param string $urn
+	 * @param $stream
+	 * @return void
+	 * @throws ObjectStoreWriteException
+	 */
+	private function upload(string $urn, $stream, bool $retry = true): void {
+		$opt = [];
+		if (isset($this->params['serversideencryption'])) {
+			$opt['ServerSideEncryption'] = $this->params['serversideencryption'];
+		}
+		if (isset($this->params['part_size'])) {
+			$opt['part_size'] = $this->params['part_size'];
+		}
+		if (isset($this->params['concurrency'])) {
+			$opt['concurrency'] = $this->params['concurrency'];
+		}
+
+		$uploader = new ObjectUploader($this->connection, $this->getBucket(), $urn, $stream, 'private', $opt);
+
+		try {
+			$uploader->upload();
+		} catch (AwsException $e) {
+			/**
+			 * If the error is from AwsException then just wrap the aws error message
+			 * to our exception.
+			 */
+			throw new ObjectStoreWriteException($e->getAwsErrorMessage(), $e->getStatusCode(), $e);
+		} catch (MultipartUploadException $e) {
+			# BackBlaze B2 - re-try to upload - https://www.backblaze.com/blog/b2-503-500-server-error/
+			# We do not explicitly get the http status code - we need to match for the error message.
+			# Far from perfect .....
+			if ($retry && str_contains($e->getMessage(), 'Please retry your upload')) {
+				OC::$server->getLogger()->logException($e, [
+					'message' => "B2 retrying upload."
+				]);
+				$this->upload($urn, $stream, false);
+				return;
+			}
+			/**
+			 * There can be multiple parts that might have failed to upload. So it would be
+			 * better to have a custom message here. The getMessage throws all the parts which
+			 * are failed.
+			 */
+			OC::$server->getLogger()->logException($e);
+			$message = $this->t('Upload failed. Please ask you administrator to have a look at the log files for more details.');
+			throw new ObjectStoreWriteException($message, $e->getCode(), $e);
+		}
+
+		if (\is_resource($stream)) {
+			fclose($stream);
+		}
 	}
 }
