@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.0]  - 2024-10-25
+
+### Added
+
+- [#679](https://github.com/owncloud/files_primary_s3/pull/679) - feat: BackBlaze B2 upload retry logic
+- [#674](https://github.com/owncloud/files_primary_s3/pull/674) - feat: support seeking on LazyReadStream
+
+
 ## [1.5.0]  - 2023-07-27
 
 ### Changed
@@ -103,7 +111,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0...master
+[1.6.0]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...v1.3.0
