@@ -4,5 +4,5 @@
     "Bucket <%s> does not exist." : "מאגר נתונים <%s> אינו קיים.",
     "Upload failed. Please ask you administrator to have a look at the log files for more details." : "העלאה נכשלה. יש לבקש מההנהלה שלך לבדוק את קובצי היומנים לפרטים נוספים.",
     "Storage encryption is not compatible with S3 Object Storage." : "הצפנת תוכן אינה תואמת לאחסון עצמים ב־S3."
-},"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
+},"pluralForm" :"nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;"
 }
