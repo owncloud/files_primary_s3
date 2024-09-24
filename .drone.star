@@ -76,7 +76,7 @@ config = {
             ],
             "servers": [
                 "daily-master-qa",
-                "10.13.4-qa",
+                "latest",
             ],
             "databases": [
                 "sqlite",
@@ -101,7 +101,7 @@ config = {
             ],
             "servers": [
                 "daily-master-qa",
-                "10.13.4-qa",
+                "latest",
             ],
             "scalityS3": {
                 "config": "multibucket",
@@ -124,7 +124,7 @@ config = {
             ],
             "servers": [
                 "daily-master-qa",
-                "10.13.4-qa",
+                "latest",
             ],
             "cephS3": True,
             "includeKeyInMatrixName": True,
