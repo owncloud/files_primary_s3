@@ -59,7 +59,7 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	private array $params;
 
 	/**
-	 * S3Storage constructor.
+	 * S3Storage constructor. Make a change to trigger CI.
 	 *
 	 * @param array $params
 	 * @throws Exception
