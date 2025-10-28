@@ -1,13 +1,15 @@
 {
-  "name": "owncloud/files_external_s3",
+  "name": "owncloud/files_primary_s3",
   "description": "ownCloud primary storage integration using S3 protocol",
   "require": {
     "dg/composer-cleaner": "^2.0",
-    "aws/aws-sdk-php": "3.226.*"
+    "aws/aws-sdk-php": "3.283.*"
   },
   "replace": {
     "guzzlehttp/guzzle": "*",
-    "guzzlehttp/psr7": "*"
+    "guzzlehttp/promises": "*",
+    "guzzlehttp/psr7": "*",
+    "psr/http-message": "*"
   },
   "license": "GPL-2.0",
   "config": {
