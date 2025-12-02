@@ -1,0 +1,8 @@
+{ "translations": {
+    "Connection options and bucket must be configured." : "必须配置连接选项和存储桶。",
+    "No S3 ObjectStore available" : "没有可用的 S3 对象存储",
+    "Bucket <%s> does not exist." : "桶 <%s> 不存在。",
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "上传失败。 请让您的管理员查看日志文件以获取更多详细信息。",
+    "Storage encryption is not compatible with S3 Object Storage." : "存储加密与 S3 对象存储不兼容。"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
