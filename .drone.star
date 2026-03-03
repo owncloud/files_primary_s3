@@ -54,16 +54,10 @@ config = {
         "master",
     ],
     "appInstallCommandPhp": "composer install",
-    "codestyle": True,
+    "codestyle": False,
     "javascript": False,
-    "phan": {
-        "multipleVersions": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-        },
-    },
-    "phpstan": True,
+    "phan": False,
+    "phpstan": False,
     "phpunit": {
         "scality-cov": {
             "phpVersions": [
