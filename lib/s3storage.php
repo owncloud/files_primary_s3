@@ -27,7 +27,7 @@ namespace OCA\Files_Primary_S3;
 
 use Aws\Exception\AwsException;
 use Aws\Exception\MultipartUploadException;
-use Aws\Handler\GuzzleV6\GuzzleHandler;
+use Aws\Handler\Guzzle\GuzzleHandler;
 use Aws\S3\Exception\S3Exception;
 use Aws\S3\ObjectUploader;
 use Aws\S3\S3Client;
