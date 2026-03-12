@@ -16,6 +16,9 @@ class LazyReadStream implements StreamInterface {
 	private int $size;
 	private int $offset = 0;
 
+	/** @phpstan-ignore-next-line */
+	private StreamInterface $stream;
+
 	public function __construct(S3Client $client, string $bucket, string $key, ?string $versionId = null) {
 		$this->client = $client;
 		$this->bucket = $bucket;

@@ -2,27 +2,28 @@
   "name": "owncloud/files_external_s3",
   "description": "ownCloud primary storage integration using S3 protocol",
   "require": {
-    "dg/composer-cleaner": "^2.0",
-    "aws/aws-sdk-php": "3.226.*"
+    "php": ">=8.3",
+    "aws/aws-sdk-php": "^3.93"
   },
   "replace": {
-    "guzzlehttp/guzzle": "*",
-    "guzzlehttp/psr7": "*"
+    "guzzlehttp/guzzle": "^7.7",
+    "guzzlehttp/psr7": "^2.5",
+    "psr/http-message": "^1.1"
   },
   "license": "GPL-2.0",
   "config": {
     "optimize-autoloader": true,
     "classmap-authoritative": false,
     "platform": {
-      "php": "7.4"
+      "php": "8.3"
     },
     "allow-plugins": {
-      "bamarni/composer-bin-plugin": true,
-      "dg/composer-cleaner": true
+      "bamarni/composer-bin-plugin": true
     }
   },
   "require-dev": {
-    "bamarni/composer-bin-plugin": "^1.8"
+    "bamarni/composer-bin-plugin": "^1.8",
+    "roave/security-advisories": "dev-latest"
   },
   "extra": {
     "bamarni-bin": {
