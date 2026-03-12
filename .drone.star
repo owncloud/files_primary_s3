@@ -1221,6 +1221,7 @@ def acceptance(ctx):
                         "path": "testrunner/apps/%s" % ctx.repo.name,
                     },
                     "steps": skipIfUnchanged(ctx, "acceptance-tests") +
+                             waitForServer(testConfig["federatedServerNeeded"]) +
                              installCore(ctx, testConfig["server"], testConfig["database"], testConfig["useBundledApp"]) +
                              installTestrunner(ctx, DEFAULT_PHP_VERSION, testConfig["useBundledApp"]) +
                              (installFederated(testConfig["federatedServerVersion"], phpVersionForDocker, testConfig["logLevel"], testConfig["database"], federationDbSuffix) + owncloudLog("federated") if testConfig["federatedServerNeeded"] else []) +
@@ -1233,7 +1234,6 @@ def acceptance(ctx):
                              setupScality(testConfig["scalityS3"]) +
                              setupElasticSearch(testConfig["esVersion"]) +
                              testConfig["extraSetup"] +
-                             waitForServer(testConfig["federatedServerNeeded"]) +
                              waitForEmailService(testConfig["emailNeeded"]) +
                              waitForSamba(testConfig["extraServices"]) +
                              fixPermissions(phpVersionForDocker, testConfig["federatedServerNeeded"], params["selUserNeeded"]) +
