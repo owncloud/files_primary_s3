@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - XXXX-XX-XX
+
+### Changed
+
+- [#697](https://github.com/owncloud/files_primary_s3/pull/697) - update aws-sdk-php to 3.337.3
+
+
 ## [1.6.0]  - 2024-10-25
 
 ### Added
