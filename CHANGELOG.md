@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.1] - 2026-04-07
+
+### Changed
+
+- [#697](https://github.com/owncloud/files_primary_s3/pull/697) - update aws-sdk-php to 3.337.3
+
+
+## [1.6.0]  - 2024-10-25
+
+### Added
+
+- [#679](https://github.com/owncloud/files_primary_s3/pull/679) - feat: BackBlaze B2 upload retry logic
+- [#674](https://github.com/owncloud/files_primary_s3/pull/674) - feat: support seeking on LazyReadStream
+
 ## [1.5.0]  - 2023-07-27
 
 ### Changed
