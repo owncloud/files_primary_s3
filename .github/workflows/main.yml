@@ -55,4 +55,4 @@ jobs:
       app-name: ${{ needs.get-vars.outputs.app-name }}
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
       use-scality-s3: true
-      do-all-databases: false
+      do-all-databases: true

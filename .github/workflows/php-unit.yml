@@ -107,7 +107,7 @@ jobs:
         ports:
           - 5432:5432
 
-    if: ${{ inputs.do-all-databases || matrix.database == 'sqlite' }}
+    if: ${{ inputs.do-all-databases }}
     steps:
       - name: Validate app-repository
         if: ${{ inputs.app-repository != '' }}
