@@ -165,7 +165,7 @@ jobs:
         if: ${{ inputs.use-ceph-s3 }}
         env:
           NETWORK_AUTO_DETECT: 4
-          RGW_NAME: ceph
+          RGW_NAME: localhost
           CEPH_DEMO_UID: owncloud
           CEPH_DEMO_RGW_PORT: 8000
           CEPH_DEMO_ACCESS_KEY: owncloud123456
