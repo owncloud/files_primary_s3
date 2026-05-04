@@ -17,7 +17,7 @@ $CONFIG = [
 					'secret' => 'verySecretKey1',
 				],
 				'use_path_style_endpoint' => true,
-				'endpoint' => 'http://scality:8000/',
+				'endpoint' => 'http://localhost:8000/',
 			],
 		],
 	],

@@ -45,3 +45,25 @@ jobs:
     with:
       app-name: ${{ needs.get-vars.outputs.app-name }}
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
+
+  php-unit-scality:
+    name: PHP Unit with Scality S3
+    needs:
+      - get-vars
+    uses: ./.github/workflows/php-unit.yml
+    with:
+      app-name: ${{ needs.get-vars.outputs.app-name }}
+      php-versions: ${{ needs.get-vars.outputs.php-versions }}
+      use-scality-s3: true
+      additional-packages: imagemagick
+
+  php-unit-ceph:
+    name: PHP Unit with Ceph S3
+    needs:
+      - get-vars
+    uses: ./.github/workflows/php-unit.yml
+    with:
+      app-name: ${{ needs.get-vars.outputs.app-name }}
+      php-versions: ${{ needs.get-vars.outputs.php-versions }}
+      use-ceph-s3: true
+      additional-packages: imagemagick

@@ -17,7 +17,7 @@ $CONFIG = [
 					'secret' => 'secret123456',
 				],
 				'use_path_style_endpoint' => true,
-				'endpoint' => 'http://ceph:80/',
+				'endpoint' => 'http://localhost:8080/',
 			],
 		],
 	],
