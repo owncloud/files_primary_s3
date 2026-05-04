@@ -59,49 +59,6 @@ config = {
     "phan": False,
     "phpstan": False,
     "phpunit": {
-        "scality-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "scalityS3": {
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
-        "scality-mbuck-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "scalityS3": {
-                "config": "multibucket",
-                "createExtraBuckets": True,
-            },
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
         "ceph-cov": {
             "phpVersions": [
                 DEFAULT_PHP_VERSION,
