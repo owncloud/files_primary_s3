@@ -56,3 +56,4 @@ jobs:
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
       use-scality-s3: true
       do-all-databases: true
+      additional-packages: imagemagick
