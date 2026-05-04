@@ -47,7 +47,7 @@ jobs:
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
 
   php-unit-scality:
-    name: PHP Unit
+    name: PHP Unit with Scality S3
     needs:
       - get-vars
     uses: ./.github/workflows/php-unit.yml
@@ -58,7 +58,7 @@ jobs:
       additional-packages: imagemagick
 
   php-unit-ceph:
-    name: PHP Unit
+    name: PHP Unit with Ceph S3
     needs:
       - get-vars
     uses: ./.github/workflows/php-unit.yml
