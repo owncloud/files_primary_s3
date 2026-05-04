@@ -46,7 +46,7 @@ jobs:
       app-name: ${{ needs.get-vars.outputs.app-name }}
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
 
-  php-unit:
+  php-unit-scality:
     name: PHP Unit
     needs:
       - get-vars
@@ -55,5 +55,15 @@ jobs:
       app-name: ${{ needs.get-vars.outputs.app-name }}
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
       use-scality-s3: true
-      do-all-databases: true
+      additional-packages: imagemagick
+
+  php-unit-ceph:
+    name: PHP Unit
+    needs:
+      - get-vars
+    uses: ./.github/workflows/php-unit.yml
+    with:
+      app-name: ${{ needs.get-vars.outputs.app-name }}
+      php-versions: ${{ needs.get-vars.outputs.php-versions }}
+      use-ceph-s3: true
       additional-packages: imagemagick
