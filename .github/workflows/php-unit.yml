@@ -165,15 +165,14 @@ jobs:
         if: ${{ inputs.use-ceph-s3 }}
         env:
           NETWORK_AUTO_DETECT: 4
-          RGW_NAME: localhost
-          MON_NAME: localhost
+          RGW_NAME: ceph
           CEPH_DEMO_UID: owncloud
           CEPH_DEMO_RGW_PORT: 8000
           CEPH_DEMO_ACCESS_KEY: owncloud123456
           CEPH_DEMO_SECRET_KEY: secret123456
         run: |
           docker run -d --rm --network host \
-            --name scality \
+            --name ceph \
             owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
 
       - name: Install Core Dependencies
