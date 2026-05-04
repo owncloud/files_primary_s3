@@ -167,7 +167,7 @@ jobs:
           NETWORK_AUTO_DETECT: 4
           RGW_NAME: localhost
           CEPH_DEMO_UID: owncloud
-          CEPH_DEMO_RGW_PORT: 8000
+          CEPH_DEMO_RGW_PORT: 8080
           CEPH_DEMO_ACCESS_KEY: owncloud123456
           CEPH_DEMO_SECRET_KEY: secret123456
         run: |

@@ -17,7 +17,7 @@ $CONFIG = [
 					'secret' => 'secret123456',
 				],
 				'use_path_style_endpoint' => true,
-				'endpoint' => 'http://localhost:8000/',
+				'endpoint' => 'http://localhost:8080/',
 			],
 		],
 	],
