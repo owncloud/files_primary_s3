@@ -29,7 +29,7 @@ endif
 endif
 
 # bin file definitions
-PHPUNIT=php -d memory_limit=8G -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
+PHPUNIT=php -d memory_limit=16G -d zend.enable_gc=0  "$(PWD)/../../lib/composer/bin/phpunit"
 PHPUNITDBG=phpdbg -qrr -d memory_limit=16G -d zend.enable_gc=0 "$(PWD)/../../lib/composer/bin/phpunit"
 PHP_CS_FIXER=php -d zend.enable_gc=0 vendor-bin/owncloud-codestyle/vendor/bin/php-cs-fixer
 PHAN=php -d zend.enable_gc=0 vendor-bin/phan/vendor/bin/phan
