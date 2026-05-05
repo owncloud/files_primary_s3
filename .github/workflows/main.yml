@@ -56,3 +56,15 @@ jobs:
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
       use-scality-s3: true
       additional-packages: imagemagick
+
+  php-unit-scality-multibucket:
+    name: PHP Unit with Scality S3 Multibucket
+    needs:
+      - get-vars
+    uses: ./.github/workflows/php-unit.yml
+    with:
+      app-name: ${{ needs.get-vars.outputs.app-name }}
+      php-versions: ${{ needs.get-vars.outputs.php-versions }}
+      use-scality-s3: true
+      scality-s3-test-config: scality.multibucket
+      additional-packages: imagemagick

@@ -49,6 +49,11 @@ on:
         required: false
         type: boolean
         default: false
+      scality-s3-test-config:
+        description: Name of the scality config.php for the test code to use
+        required: false
+        type: string
+        default: 'scality'
 
 permissions:
   contents: read
@@ -216,8 +221,9 @@ jobs:
         if: ${{ inputs.use-scality-s3 }}
         env:
           APP_NAME: ${{ inputs.app-name }}
+          TEST_CONFIG_FILE: ${{ inputs.scality-s3-test-config }}
         run: |
-          cp "apps/${APP_NAME}/tests/drone/scality.config.php" config
+          cp "apps/${APP_NAME}/tests/drone/${TEST_CONFIG_FILE}.config.php" config
           php occ a:d notifications
           php occ s3:create-bucket owncloud --accept-warning
           for I in $(seq 1 9); do php occ s3:create-bucket owncloud$I --accept-warning; done
