@@ -161,6 +161,11 @@ jobs:
             --name scality \
             owncloudci/scality-s3server
 
+      - name: Wait for Scality S3 Server
+        if: ${{ inputs.use-scality-s3 }}
+        run: |
+          timeout 120 bash -c 'until (exec 3<>/dev/tcp/localhost/8000) 2>/dev/null; do sleep 2; done'
+
       - name: Ceph S3 Server
         if: ${{ inputs.use-ceph-s3 }}
         env:
@@ -180,6 +185,11 @@ jobs:
             -e CEPH_DEMO_ACCESS_KEY \
             -e CEPH_DEMO_SECRET_KEY \
             owncloudci/ceph:tag-build-master-jewel-ubuntu-16.04
+
+      - name: Wait for Ceph S3 Server
+        if: ${{ inputs.use-ceph-s3 }}
+        run: |
+          timeout 600 bash -c 'until (exec 3<>/dev/tcp/localhost/8080) 2>/dev/null; do sleep 2; done'
 
       - name: Install Core Dependencies
         run: |
