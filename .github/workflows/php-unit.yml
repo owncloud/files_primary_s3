@@ -176,7 +176,7 @@ jobs:
           CEPH_DEMO_ACCESS_KEY: owncloud123456
           CEPH_DEMO_SECRET_KEY: secret123456
         run: |
-          docker run -d --rm --network host \
+          docker run -d --network host \
             --name ceph \
             -e NETWORK_AUTO_DETECT \
             -e RGW_NAME \
@@ -189,7 +189,23 @@ jobs:
       - name: Wait for Ceph S3 Server
         if: ${{ inputs.use-ceph-s3 }}
         run: |
-          timeout 600 bash -c 'until (exec 3<>/dev/tcp/localhost/8080) 2>/dev/null; do sleep 2; done'
+          timeout 180 bash -c 'until (exec 3<>/dev/tcp/localhost/8080) 2>/dev/null; do sleep 2; done'
+
+      - name: Ceph diagnostics
+        if: ${{ always() && inputs.use-ceph-s3 }}
+        run: |
+          echo "=== docker ps -a ==="
+          docker ps -a
+          echo "=== host interfaces (ip) ==="
+          ip -brief addr || ip addr
+          echo "=== /proc/net/dev (what NETWORK_AUTO_DETECT ranks) ==="
+          cat /proc/net/dev
+          echo "=== ceph.conf (resolved mon host / public network) ==="
+          docker exec ceph cat /etc/ceph/ceph.conf 2>&1 || echo "no ceph container / exec failed"
+          echo "=== listening ports inside ceph container ==="
+          docker exec ceph ss -tlnp 2>&1 || echo "no ceph container / exec failed"
+          echo "=== ceph container logs ==="
+          docker logs ceph 2>&1 || echo "no ceph container"
 
       - name: Install Core Dependencies
         run: |
