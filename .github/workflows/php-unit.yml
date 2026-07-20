@@ -149,7 +149,7 @@ jobs:
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2.37.0
         with:
           php-version: ${{ matrix.php }}
-          extensions: apcu, ctype, curl, exif, fileinfo, gd, iconv, imagick, intl, json, mbstring, memcached, pdo, posix, simplexml, xml, zip, smbclient, ldap${{ inputs.additional-php-extensions != '' && format(', {0}', inputs.additional-php-extensions) || '' }}
+          extensions: apcu, ctype, curl, exif, fileinfo, gd, iconv, imagick, intl, json, mbstring, memcached, pdo, posix, simplexml, xml, zip, smbclient, ldap${{ case(inputs.additional-php-extensions != '', format(', {0}', inputs.additional-php-extensions), '') }}
           ini-values: "memory_limit=1024M"
         env:
           fail-fast: true
