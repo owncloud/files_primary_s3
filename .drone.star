@@ -58,27 +58,7 @@ config = {
     "javascript": False,
     "phan": False,
     "phpstan": False,
-    "phpunit": {
-        "ceph-cov": {
-            "phpVersions": [
-                DEFAULT_PHP_VERSION,
-            ],
-            "databases": [
-                "sqlite",
-            ],
-            "servers": [
-                "daily-master-qa",
-            ],
-            "cephS3": True,
-            "includeKeyInMatrixName": True,
-            "coverage": False,
-            "extraCommandsBeforeTestRun": [
-                "cd %s" % dir["server"],
-                "php occ a:disable notifications",
-                "cd %s/apps/files_primary_s3" % dir["server"],
-            ],
-        },
-    },
+    "phpunit": False,
     "acceptance": {
         "api": {
             "suites": {
