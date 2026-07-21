@@ -73,7 +73,7 @@ jobs:
     name: PHP Unit with Ceph S3
     needs:
       - get-vars
-    uses: ./.github/workflows/php-unit.yml
+    uses: owncloud/reusable-workflows/.github/workflows/php-unit.yml@main
     with:
       app-name: ${{ needs.get-vars.outputs.app-name }}
       php-versions: ${{ needs.get-vars.outputs.php-versions }}
