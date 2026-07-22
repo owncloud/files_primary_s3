@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.1] - 2026-07-22
+
+### Changed
+- Maintenance release re-signed with the ownCloud G2 code-signing certificate for the ownCloud 11.0.0 release.
+
+## [1.7.0] - 2026-06-29
+
+### Changed
+- ownCloud 11 compatible release (oc 11.0.0-rc1).
+
+
 ## [1.6.1] - 2026-04-07
 
 ### Changed
@@ -117,11 +128,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.7.1..master
+[1.7.1]: https://github.com/owncloud/files_primary_s3/compare/v1.7.0..v1.7.1
+[1.7.0]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1..v1.7.0
+[1.6.1]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0..v1.6.1
+[1.6.0]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0..v1.6.0
 [1.5.0]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/owncloud/files_primary_s3/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2...v1.2.0
+[1.1.3]: https://github.com/owncloud/files_primary_s3/compare/v1.1.2..v1.1.3
 [1.1.2]: https://github.com/owncloud/files_primary_s3/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/owncloud/files_primary_s3/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/owncloud/files_primary_s3/compare/v1.0.4...v1.1.0
