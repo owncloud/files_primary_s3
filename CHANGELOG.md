@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.2] - 2026-08-21
+
+### Security
+
+- Update mtdowling/jmespath.php to 2.9.2, fixing CVE-2026-54133 (critical)
+
+### Changed
+
+- aws-sdk-php stays at 3.337.3: it is the last release that supports PHP 7.4, which
+  this release line requires. GHSA-27qh-8cxx-2cr5 and CVE-2025-14761 therefore remain
+  open on the 1.6.x line and are fixed only in 1.7.x, which requires ownCloud 11.
+
+
 ## [1.6.1] - 2026-04-07
 
 ### Changed
@@ -118,7 +131,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.2...master
+[1.6.2]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1...v1.6.2
+[1.6.1]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/owncloud/files_primary_s3/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/owncloud/files_primary_s3/compare/v1.3.0...v1.4.0
