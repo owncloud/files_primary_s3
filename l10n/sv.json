@@ -1,0 +1,8 @@
+{ "translations": {
+    "Connection options and bucket must be configured." : "Anslutningsinställningar och hink måste konfigureras.",
+    "No S3 ObjectStore available" : "Ingen S3-objektlagring är tillgänglig",
+    "Bucket <%s> does not exist." : "Hink <%s> existerar inte.",
+    "Upload failed. Please ask you administrator to have a look at the log files for more details." : "Uppladdningen misslyckades. Vänligen kontakta din administrator för att kolla på loggfilen för mer detaljer.",
+    "Storage encryption is not compatible with S3 Object Storage." : "Lagringskryptering är inte kompatibel med S3-objektlagring."
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
