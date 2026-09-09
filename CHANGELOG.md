@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.2] - 2026-09-09
+
+### Changed
+- Repackaged so the release artifact contains only the app payload. The previous
+  release was published from the build working tree, so it shipped `.git/`,
+  `.github/`, `tests/`, `vendor-bin/` and `build/artifacts/` as part of the signed
+  app ([#41824](https://github.com/owncloud/core/issues/41824))
+
 ## [1.7.1] - 2026-07-22
 
 ### Changed
