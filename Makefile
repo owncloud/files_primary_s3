@@ -54,9 +54,19 @@ dist: ## Builds the appstore package
 	make appstore
 
 # Builds the package for the app store, ignores php and js tests
+#
+# aws-sdk-php lists src/data/ in its autoload.exclude-from-classmap, which makes
+# dg/composer-cleaner delete the API models, endpoints and manifest that the SDK loads at
+# runtime. That shipped in v1.6.1 and v1.6.2 and broke S3 entirely (#712), so the build
+# refuses to package a vendor tree without them - see extra.cleaner-ignore in composer.json.
+# The dist archives carry the compiled manifest.json.php, an install from source carries
+# manifest.json, so either one proves the directory survived.
 .PHONY: appstore
 appstore: ## Builds the package for app store
 appstore: vendor
+	@test -f vendor/aws/aws-sdk-php/src/data/manifest.json.php \
+		|| test -f vendor/aws/aws-sdk-php/src/data/manifest.json \
+		|| { echo "ERROR: vendor/aws/aws-sdk-php/src/data is missing - refusing to package, see #712"; exit 1; }
 	rm -rf $(appstore_build_directory)
 	mkdir -p $(appstore_package_name)
 	cp --parents -r \
