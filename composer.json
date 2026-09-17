@@ -27,6 +27,9 @@
   "extra": {
     "bamarni-bin": {
       "bin-links": false
+    },
+    "cleaner-ignore": {
+      "aws/aws-sdk-php": ["src/data*"]
     }
   }
 }

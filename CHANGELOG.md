@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.3] - 2026-09-17
+
+### Fixed
+
+- [#712](https://github.com/owncloud/files_primary_s3/issues/712) - restore the bundled
+  aws-sdk-php `src/data` directory in the release artifact. aws-sdk-php 3.337.3 lists
+  `src/data/` in `autoload.exclude-from-classmap`, which made `dg/composer-cleaner` delete
+  the SDK's manifest, endpoints and per-service API models while building the app package.
+  Without them every S3 client construction failed with
+  `File not found: .../aws-sdk-php/src/data/manifest.json`, so S3 primary object storage was
+  unusable in v1.6.1 and v1.6.2. The directory is now protected with `extra.cleaner-ignore`,
+  and `make appstore` refuses to package a tree that is missing it.
+
+
 ## [1.6.2] - 2026-08-21
 
 ### Security
@@ -131,7 +145,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.2...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.3...master
+[1.6.3]: https://github.com/owncloud/files_primary_s3/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/owncloud/files_primary_s3/compare/v1.5.0...v1.6.0
