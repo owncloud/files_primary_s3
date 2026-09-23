@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.4] - 2026-09-23
+
+### Fixed
+
+- [#736](https://github.com/owncloud/files_primary_s3/pull/736) - ship an artifact whose code
+  signature ownCloud 10 can verify. The v1.6.3 package was signed in the current signature
+  format, which ownCloud 10's integrity checker does not understand: it reads a single
+  `certificate` field and only RSA/PSS signatures, so the app failed
+  `occ integrity:check-app files_primary_s3` with *App Certificate is not valid* on every
+  ownCloud 10 install, and the code-integrity warning appeared in admin settings. v1.6.4 is
+  the same code as v1.6.3, signed in the format this release line requires. The release
+  workflow is removed from this branch, since it can only produce the newer format.
+
+### Changed
+
+- Nothing. The only difference from v1.6.3 is the signature and this changelog entry.
+
+
 ## [1.6.3] - 2026-09-17
 
 ### Fixed
