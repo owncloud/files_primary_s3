@@ -15,11 +15,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
   `occ integrity:check-app files_primary_s3` with *App Certificate is not valid* on every
   ownCloud 10 install, and the code-integrity warning appeared in admin settings. v1.6.4 is
   the same code as v1.6.3, signed in the format this release line requires. The release
-  workflow is removed from this branch, since it can only produce the newer format.
-
-### Changed
-
-- Nothing. The only difference from v1.6.3 is the signature and this changelog entry.
+  workflow is removed from this branch, since it can only produce the newer format; this
+  release line is built and signed locally instead.
 
 
 ## [1.6.3] - 2026-09-17
@@ -163,7 +160,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.3...master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.4...release-1.6.2
+[1.6.4]: https://github.com/owncloud/files_primary_s3/compare/v1.6.3...v1.6.4
 [1.6.3]: https://github.com/owncloud/files_primary_s3/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0...v1.6.1
