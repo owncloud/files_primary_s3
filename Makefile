@@ -49,9 +49,22 @@ clean: ## Remove appstore build
 	rm -rf ./vendor
 	rm -Rf vendor-bin/**/vendor vendor-bin/**/composer.lock
 
+# dist is the release path, so unlike a bare appstore build it refuses to hand back
+# an unsigned package. ownCloud 10 rejects an unsigned app with
+# MissingSignatureException, and the signing step below is conditional on the key,
+# the certificate and occ all being present - so a build from a standalone clone
+# silently produces an unsigned tarball and exits 0. That is how a broken artifact
+# gets published; see the 1.6.4 entry in CHANGELOG.md.
 .PHONY: dist
-dist: ## Builds the appstore package
-	make appstore
+dist: ## Builds the appstore package, and fails unless it was signed
+dist: appstore
+	@test -n "$(CAN_SIGN)" \
+		|| { echo "ERROR: refusing to call an unsigned package a dist."; \
+		     echo "       $(sign_skip_msg)"; exit 1; }
+	@test -f $(appstore_package_name)/appinfo/signature.json \
+		|| { echo "ERROR: signing reported success but wrote no appinfo/signature.json."; \
+		     echo "       Check the --path handed to the signer."; exit 1; }
+	@echo "signed package: $(appstore_package_name).tar.gz"
 
 # Builds the package for the app store, ignores php and js tests
 #
@@ -80,6 +93,11 @@ appstore: vendor
 	LICENSE \
 	CHANGELOG.md \
 	$(appstore_package_name)
+
+# appinfo/ is copied wholesale, so a signature.json left in the source tree - by a
+# stray `integrity:sign-app --path=.`, or by one getting committed - would travel
+# into the package and make it look signed while its hashes match nothing.
+	rm -f $(appstore_package_name)/appinfo/signature.json
 
 ifdef CAN_SIGN
 	$(sign) --path="$(appstore_package_name)"
