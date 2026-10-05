@@ -10,6 +10,11 @@ class LazyReadStream implements StreamInterface {
 	use StreamDecoratorTrait;
 
 	private S3Client $client;
+	/**
+	 * Used for every operation that is not a streamed download - see the note on
+	 * the constructor.
+	 */
+	private S3Client $metaClient;
 	private string $bucket;
 	private string $key;
 	private ?string $versionId;
@@ -19,15 +24,35 @@ class LazyReadStream implements StreamInterface {
 	/** @phpstan-ignore-next-line */
 	private StreamInterface $stream;
 
-	public function __construct(S3Client $client, string $bucket, string $key, ?string $versionId = null) {
+	/**
+	 * @param S3Client $client streams the object body; built on guzzle's
+	 *        StreamHandler, so its response bodies are not seekable
+	 * @param S3Client|null $metaClient issues the non-streaming operations. Pass a
+	 *        client whose bodies ARE seekable - aws-sdk-php inspects non-streaming
+	 *        S3 responses for S3's "HTTP 200 carrying an error document" case by
+	 *        reading the first bytes of the body and rewinding it. Before 3.342.5
+	 *        it did so without checking that the body can be rewound, so a
+	 *        HeadObject issued on $client threw "Stream is not seekable" and every
+	 *        download failed. Later releases skip non-seekable bodies, but only by
+	 *        also skipping the check. Defaults to $client to stay compatible with
+	 *        callers that pass only one.
+	 */
+	public function __construct(
+		S3Client $client,
+		string $bucket,
+		string $key,
+		?string $versionId = null,
+		?S3Client $metaClient = null
+	) {
 		$this->client = $client;
+		$this->metaClient = $metaClient ?? $client;
 		$this->bucket = $bucket;
 		$this->key = $key;
 		$this->versionId = $versionId;
 		$this->resetStream();
 
 		// get size
-		$result = $this->client->headObject([
+		$result = $this->metaClient->headObject([
 			'Bucket'    => $this->bucket,
 			'Key'       => $this->key,
 			'VersionId' => $this->versionId,
