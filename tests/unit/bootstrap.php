@@ -15,13 +15,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $coreAutoload = \getenv('OC_CORE_AUTOLOAD')
 	?: __DIR__ . '/../../../../lib/composer/autoload.php';
 if (!\is_file($coreAutoload)) {
-	\fwrite(
-		\STDERR,
-		"Cannot find the server's composer autoloader (guzzle/psr7 live there).\n"
-		. "Looked at: $coreAutoload\n"
-		. "Set OC_CORE_AUTOLOAD to <core>/lib/composer/autoload.php.\n"
+	// Must not exit(): core's tests/apps.php require_once's this file while
+	// collecting tests, so exiting here would abort the server's whole unit-test
+	// run with no output instead of failing this app's tests.
+	throw new \RuntimeException(
+		"Cannot find the server's composer autoloader (guzzle/psr7 live there). "
+		. "Looked at: $coreAutoload - set OC_CORE_AUTOLOAD to "
+		. '<core>/lib/composer/autoload.php.'
 	);
-	exit(1);
 }
 require_once $coreAutoload;
 
@@ -32,9 +33,15 @@ require_once $coreAutoload;
 	if (\strpos($class, $prefix) !== 0) {
 		return;
 	}
-	$relative = \substr($class, \strlen($prefix));
-	$file = __DIR__ . '/../../lib/' . \str_replace('\\', '/', $relative) . '.php';
-	if (\is_file($file)) {
-		require_once $file;
+	$relative = \str_replace('\\', '/', \substr($class, \strlen($prefix)));
+	// Class and file names do not match case here - S3Storage lives in
+	// lib/s3storage.php, Command\s3List in lib/command/s3list.php - and the
+	// server's own autoloader tries the lower-cased path too.
+	foreach ([$relative, \strtolower($relative)] as $candidate) {
+		$file = __DIR__ . '/../../lib/' . $candidate . '.php';
+		if (\is_file($file)) {
+			require_once $file;
+			return;
+		}
 	}
 });

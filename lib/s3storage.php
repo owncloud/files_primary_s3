@@ -89,6 +89,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 		// replace the http_handler for the download connection
 		$config['http_handler'] = $dh;
+		// The download connection streams the object body, so its response bodies
+		// are not seekable. Response checksum validation hashes the whole body,
+		// which both rewinds it - throwing "Stream is not seekable" - and buffers
+		// the entire object in memory, defeating the streamed read. The default is
+		// `when_supported`, i.e. whenever the backend volunteers an
+		// x-amz-checksum-* header. This app never requests validation
+		// (`ChecksumMode` is never set to enabled), so `when_required` disables it.
+		$config['response_checksum_validation'] = 'when_required';
 		$this->downConnection = new S3Client($config);
 		try {
 			$this->connection->listBuckets();

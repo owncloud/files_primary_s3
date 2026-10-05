@@ -19,6 +19,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
   `PutObject`/`GetObject` round-trip against a bucket still passed. The non-streaming operations
   are now issued on the buffering client, and the object body is still streamed.
 
+  The download connection also opts out of response checksum validation
+  (`response_checksum_validation` is set to `when_required`). It defaults to `when_supported`,
+  so whenever a backend volunteers an `x-amz-checksum-*` header on `GetObject` the SDK hashes
+  the whole response body: that rewinds the non-seekable body, failing the download the same
+  way, and buffers the entire object in memory even when the body can be rewound, which
+  defeats the streamed read. This app never sets `ChecksumMode` to enabled, so `when_required`
+  disables it.
+
 
 ## [1.6.4] - 2026-09-23
 
@@ -176,7 +184,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.4...release-1.6.2
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.6.5...release-1.6.2
+[1.6.5]: https://github.com/owncloud/files_primary_s3/compare/v1.6.4...v1.6.5
 [1.6.4]: https://github.com/owncloud/files_primary_s3/compare/v1.6.3...v1.6.4
 [1.6.3]: https://github.com/owncloud/files_primary_s3/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1...v1.6.2

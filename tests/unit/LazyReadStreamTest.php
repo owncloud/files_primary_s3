@@ -33,18 +33,22 @@ class LazyReadStreamTest extends TestCase {
 	/**
 	 * A client that behaves like one built on guzzle's StreamHandler: response
 	 * bodies cannot be rewound.
+	 *
+	 * @param array<string,string> $extraHeaders
+	 * @param array<string,mixed> $extraOptions client options S3Storage::init() sets
 	 */
-	private function streamingClient(int $size): S3Client {
+	private function streamingClient(int $size, array $extraHeaders = [], array $extraOptions = []): S3Client {
 		return $this->client(
 			$this->streamingClientCalls,
-			static function (string $body, int $size): Response {
+			static function (string $body, int $size) use ($extraHeaders): Response {
 				return new Response(
 					200,
-					['Content-Length' => (string)$size],
+					['Content-Length' => (string)$size] + $extraHeaders,
 					new NoSeekStream(Utils::streamFor($body))
 				);
 			},
-			$size
+			$size,
+			$extraOptions
 		);
 	}
 
@@ -59,15 +63,20 @@ class LazyReadStreamTest extends TestCase {
 					Utils::streamFor($body)
 				);
 			},
-			$size
+			$size,
+			[]
 		);
 	}
 
-	private function client(array &$calls, callable $responseFactory, int $size): S3Client {
-		return new S3Client([
+	private function client(array &$calls, callable $responseFactory, int $size, array $extraOptions = []): S3Client {
+		return new S3Client($extraOptions + [
 			'region' => 'us-east-1',
 			'version' => '2006-03-01',
 			'credentials' => ['key' => 'k', 'secret' => 's'],
+			// On PHP < 8.1 the SDK raises E_USER_DEPRECATED per client
+			// construction. Core's phpunit config turns deprecations into
+			// exceptions, which would fail these tests for an unrelated reason.
+			'suppress_php_deprecation_warning' => true,
 			'http_handler' => static function (RequestInterface $request) use (&$calls, $responseFactory, $size) {
 				$calls[] = $request->getMethod();
 				$body = $request->getMethod() === 'GET' ? \str_repeat('x', $size) : '';
@@ -119,5 +128,32 @@ class LazyReadStreamTest extends TestCase {
 			'the body has to be streamed from the streaming client, not buffered by the metadata client'
 		);
 		$this->assertSame(['HEAD'], $this->metadataClientCalls);
+	}
+
+	/**
+	 * A backend may volunteer x-amz-checksum-* on GetObject. aws-sdk-php then runs
+	 * ValidateResponseChecksumResultMutator, which hashes the whole response body -
+	 * rewinding it, and buffering the entire object in a string even when the body
+	 * is seekable. Both defeat a streamed download, so the download client has to
+	 * opt out of response checksum validation.
+	 */
+	public function testStreamsTheBodyWhenTheResponseCarriesAChecksum(): void {
+		$size = 1024;
+
+		$stream = new LazyReadStream(
+			$this->streamingClient(
+				$size,
+				['x-amz-checksum-crc32' => 'AAAAAA=='],
+				// what S3Storage::init() sets on the download connection
+				['response_checksum_validation' => 'when_required']
+			),
+			'a-bucket',
+			'urn:oid:42',
+			null,
+			$this->metadataClient($size)
+		);
+		$content = $stream->read($size);
+
+		$this->assertSame(\str_repeat('x', $size), $content);
 	}
 }
