@@ -163,7 +163,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function readObject($urn) {
 		$this->init();
 		try {
-			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn);
+			$stream = new LazyReadStream(
+				$this->downConnection,
+				$this->getBucket(),
+				$urn,
+				null,
+				$this->connection
+			);
 			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
@@ -255,7 +261,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
 		try {
-			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn, $versionId);
+			$stream = new LazyReadStream(
+				$this->downConnection,
+				$this->getBucket(),
+				$urn,
+				$versionId,
+				$this->connection
+			);
 			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);

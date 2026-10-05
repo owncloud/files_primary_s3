@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.6.5] - 2026-10-05
+
+### Fixed
+
+- [#738](https://github.com/owncloud/files_primary_s3/issues/738) - restore downloads from S3
+  primary storage. `LazyReadStream` issued its `headObject` size lookup on the client that
+  streams the object body. That client is built on guzzle's `StreamHandler`, whose response
+  bodies are not seekable, and aws-sdk-php 3.337.3 inspects every non-streaming S3 response for
+  S3's "HTTP 200 carrying an error document" case by reading the first bytes of the body and
+  rewinding it. The rewind threw `Stream is not seekable`, so every download failed; the
+  ownCloud 10 server reported HTTP 503. `GetObject` was never affected, because its output shape
+  has a streaming member and is skipped by that check - which is why a direct
+  `PutObject`/`GetObject` round-trip against a bucket still passed. The non-streaming operations
+  are now issued on the buffering client, and the object body is still streamed.
+
+
 ## [1.6.4] - 2026-09-23
 
 ### Fixed
