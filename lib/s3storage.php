@@ -89,6 +89,14 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 
 		// replace the http_handler for the download connection
 		$config['http_handler'] = $dh;
+		// The download connection streams the object body, so its response bodies
+		// are not seekable. Response checksum validation hashes the whole body,
+		// which both rewinds it - throwing "Stream is not seekable" - and buffers
+		// the entire object in memory, defeating the streamed read. The default is
+		// `when_supported`, i.e. whenever the backend volunteers an
+		// x-amz-checksum-* header. This app never requests validation
+		// (`ChecksumMode` is never set to enabled), so `when_required` disables it.
+		$config['response_checksum_validation'] = 'when_required';
 		$this->downConnection = new S3Client($config);
 		try {
 			$this->connection->listBuckets();
@@ -163,7 +171,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function readObject($urn) {
 		$this->init();
 		try {
-			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn);
+			$stream = new LazyReadStream(
+				$this->downConnection,
+				$this->getBucket(),
+				$urn,
+				null,
+				$this->connection
+			);
 			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
@@ -255,7 +269,13 @@ class S3Storage implements IObjectStore, IVersionedObjectStorage {
 	public function getContentOfVersion($urn, $versionId) {
 		$this->init();
 		try {
-			$stream = new LazyReadStream($this->downConnection, $this->getBucket(), $urn, $versionId);
+			$stream = new LazyReadStream(
+				$this->downConnection,
+				$this->getBucket(),
+				$urn,
+				$versionId,
+				$this->connection
+			);
 			return StreamWrapper::getResource($stream);
 		} catch (AwsException $ex) {
 			throw new ObjectStoreOperationException($ex->getAwsErrorMessage(), $ex->getStatusCode(), $ex);
