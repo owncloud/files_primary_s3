@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [1.7.3] - 2026-11-02
+
+### Fixed
+- [#740](https://github.com/owncloud/files_primary_s3/pull/740) - Downloads from S3 primary
+  storage no longer fail when the backend sends an `x-amz-checksum-*` header on `GetObject`.
+  aws-sdk-php validated the checksum by hashing the streamed body and then rewinding it, which
+  the download connection cannot do
+
+### Changed
+- Updated aws/aws-sdk-php to 3.402.5
+
 ## [1.7.2] - 2026-09-09
 
 ### Changed
@@ -136,7 +147,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - First marketplace release
 
-[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.7.1..master
+[Unreleased]: https://github.com/owncloud/files_primary_s3/compare/v1.7.3..master
+[1.7.3]: https://github.com/owncloud/files_primary_s3/compare/v1.7.2..v1.7.3
+[1.7.2]: https://github.com/owncloud/files_primary_s3/compare/v1.7.1..v1.7.2
 [1.7.1]: https://github.com/owncloud/files_primary_s3/compare/v1.7.0..v1.7.1
 [1.7.0]: https://github.com/owncloud/files_primary_s3/compare/v1.6.1..v1.7.0
 [1.6.1]: https://github.com/owncloud/files_primary_s3/compare/v1.6.0..v1.6.1
